@@ -5,32 +5,32 @@ std::string getPath();
 
 Path::Path()
 {
-    m_font.loadFromFile(getPath() + "\\resources\\font\\comic.ttf");
-}
 
-Path::~Path()
-{
-    for each (PathNode* currentNode in m_pathNodes)
-    {
-        delete currentNode;
-    }
 }
 
 void Path::addNode(sf::Vector2f position)
 {
-    m_pathNodes.push_back(new PathNode(position, &m_font, nodeCount));
+    m_pathNodes.push_back(std::make_shared<PathNode>(position, nodeCount));
     nodeCount++;
 }
 
-PathNode* Path::getNode(int index)
+void Path::addEdge(std::shared_ptr<PathNode> firstNode, std::shared_ptr<PathNode> secondNode)
+{
+    std::shared_ptr<Edge> newEdge = std::make_shared<Edge>(firstNode, secondNode);
+    firstNode->addEdge(newEdge);
+    secondNode->addEdge(newEdge);
+}
+
+std::shared_ptr<PathNode> Path::getNode(int index)
 {
     return m_pathNodes[index];
 }
 
 void Path::draw()
 {
-    for each (PathNode* currentNode in m_pathNodes)
+    for(std::vector<std::shared_ptr<PathNode>>::iterator iter = m_pathNodes.begin(); iter != m_pathNodes.end(); iter++)
     {
-        currentNode->draw();
+        iter->get()->draw();
     }
+    
 }

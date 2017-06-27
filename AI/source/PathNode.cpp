@@ -1,21 +1,27 @@
 #include "Renderer.h"
 #include "PathNode.h"
+#include "GlobalFont.h"
 
-PathNode::PathNode(sf::Vector2f newPosition, sf::Font* newFont, unsigned int newNumber)
+PathNode::PathNode(sf::Vector2f newPosition, unsigned int newNumber)
 {
     position = newPosition;
-    nodeText.setFont(*newFont);
+    nodeText.setFont(GlobalFont::getInstance());
     nodeText.setString(std::to_string(newNumber));
     setUp();
+}
+
+void PathNode::addEdge(std::shared_ptr<Edge> newEdge)
+{
+    edges.push_back(newEdge);
 }
 
 void PathNode::draw()
 {
     Renderer::getInstance()->Draw(&nodeGraphic);
     Renderer::getInstance()->Draw(&nodeText);
-    for each (Edge* currentEdge in edges)
+    for (std::vector<std::shared_ptr<Edge>>::iterator iter = edges.begin(); iter != edges.end(); iter++)
     {
-        currentEdge->draw();
+        iter->get()->draw();
     }
 }
 
@@ -33,7 +39,7 @@ void PathNode::setUp()
     nodeGraphic.setFillColor(fillColor);
     nodeGraphic.setOutlineColor(outlineColor);
 
-    nodeGraphic.setOrigin(nodeGraphic.getLocalBounds().width / 2, nodeGraphic.getLocalBounds().height / 2);
+    nodeGraphic.setOrigin(nodeGraphic.getLocalBounds().width / 2 - 2.5f, nodeGraphic.getLocalBounds().height / 2 - 2.5f);
     nodeGraphic.setPosition(position);
 
     // text

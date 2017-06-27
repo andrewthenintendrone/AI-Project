@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Path">
       <UniqueIdentifier>{fb089334-049b-486f-9765-671a759247a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Path\UI">
+      <UniqueIdentifier>{3cccb130-29b6-4ae7-b014-a18ba916b897}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\WinMain.cpp">
@@ -66,6 +69,15 @@
     <ClCompile Include="source\Edge.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
+    <ClCompile Include="source\PathMenu.cpp">
+      <Filter>Source Files\Path</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Button.cpp">
+      <Filter>Source Files\Path\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GlobalFont.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
@@ -112,6 +124,15 @@
     </ClInclude>
     <ClInclude Include="source\Edge.h">
       <Filter>Source Files\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PathMenu.h">
+      <Filter>Source Files\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Button.h">
+      <Filter>Source Files\Path\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GlobalFont.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

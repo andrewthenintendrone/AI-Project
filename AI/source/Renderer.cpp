@@ -9,7 +9,9 @@ Renderer* Renderer::getInstance()
 
 bool Renderer::createWindow(int width, int height)
 {
-    window.create(sf::VideoMode(width, height), "AI demo", sf::Style::Titlebar | sf::Style::Close);
+    sf::ContextSettings contextSettings;
+    contextSettings.antialiasingLevel = 16;
+    window.create(sf::VideoMode(width, height), "AI demo", sf::Style::Titlebar | sf::Style::Close, contextSettings);
     return true;
 }
 
@@ -25,7 +27,7 @@ void Renderer::closeWindow()
 
 void Renderer::clearWindow()
 {
-    window.clear(sf::Color::Black);
+    window.clear(backgroundColor);
 }
 
 void Renderer::Draw(sf::Drawable* objectToDraw)

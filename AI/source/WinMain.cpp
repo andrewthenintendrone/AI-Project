@@ -11,6 +11,8 @@
 #include "Path.h"
 #include "Edge.h"
 
+sf::Font g_font;
+
 // returns path to the executable
 std::string getPath()
 {
@@ -26,16 +28,16 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     srand(unsigned(time(NULL)));
 
+    g_font.loadFromFile(getPath() + "\\resources\\font\\comic.ttf");
+
     Path path;
 
-    for (unsigned int i = 0; i < 10; i++)
-    {
-        path.addNode(sf::Vector2f(rand() % Renderer::getInstance()->getWindow().getSize().x, rand() % Renderer::getInstance()->getWindow().getSize().y));
-    }
-
-    Edge testEdge;
-    testEdge.firstNode = path.getNode(0);
-    testEdge.secondNode = path.getNode(1);
+    path.addNode(sf::Vector2f(100, 100));
+    path.addNode(sf::Vector2f(300, 100));
+    path.addNode(sf::Vector2f(300, 275));
+    path.addNode(sf::Vector2f(300, 400));
+    path.addNode(sf::Vector2f(200, 510));
+    path.addNode(sf::Vector2f(100, 400));
 
     while (Renderer::getInstance()->getWindow().isOpen())
     {
@@ -55,7 +57,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         TIMEMANAGER->update();
         Renderer::getInstance()->clearWindow();
         path.draw();
-        testEdge.draw();
         Renderer::getInstance()->updateWindow();
     }
 

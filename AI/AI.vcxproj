@@ -97,14 +97,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\Agent.cpp" />
+    <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\Edge.cpp" />
     <ClCompile Include="source\Flock.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GlobalFont.cpp" />
     <ClCompile Include="source\IBehaviour.cpp" />
     <ClCompile Include="source\keyBoardControl.cpp" />
     <ClCompile Include="source\moveToMouse.cpp" />
     <ClCompile Include="source\ObjectPool.cpp" />
     <ClCompile Include="source\Path.cpp" />
+    <ClCompile Include="source\PathMenu.cpp" />
     <ClCompile Include="source\PathNode.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\Seek.cpp" />
@@ -115,14 +118,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h" />
+    <ClInclude Include="source\Button.h" />
     <ClInclude Include="source\Edge.h" />
     <ClInclude Include="source\Flock.h" />
     <ClInclude Include="source\GameObject.h" />
+    <ClInclude Include="source\GlobalFont.h" />
     <ClInclude Include="source\IBehavior.h" />
     <ClInclude Include="source\keyBoardControl.h" />
     <ClInclude Include="source\moveToMouse.h" />
     <ClInclude Include="source\ObjectPool.h" />
     <ClInclude Include="source\Path.h" />
+    <ClInclude Include="source\PathMenu.h" />
     <ClInclude Include="source\PathNode.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Seek.h" />

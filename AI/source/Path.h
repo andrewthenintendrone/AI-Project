@@ -1,23 +1,19 @@
 #pragma once
 #include "PathNode.h"
 #include <vector>
-
-namespace sf
-{
-    class Font;
-}
+#include <memory>
 
 class Path
 {
 public:
     Path();
-    ~Path();
 
     void addNode(sf::Vector2f position);
-    PathNode* getNode(int index);
+    void addEdge(std::shared_ptr<PathNode> firstNode, std::shared_ptr<PathNode> secondNode);
+    std::shared_ptr<PathNode> getNode(int index);
     void draw();
 private:
-    std::vector<PathNode*> m_pathNodes;
-    sf::Font m_font;
+    std::vector<std::shared_ptr<PathNode>> m_pathNodes;
     unsigned int nodeCount = 0;
+    sf::Text t_addNode;
 };

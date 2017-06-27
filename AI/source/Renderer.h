@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+const sf::Color backgroundColor = sf::Color(28, 32, 44);
+
 class Renderer
 {
 public:
