@@ -1,12 +1,11 @@
 #include "PathMenu.h"
 #include "Renderer.h"
-#include "GlobalFont.h"
 
 
-PathMenu::PathMenu()
+PathMenu::PathMenu(sf::Font& newFont)
 {
     sf::Text addNodeText;
-    addNodeText.setFont(GlobalFont::getInstance());
+    addNodeText.setFont(newFont);
     addNodeText.setPosition(25, 695);
     addNodeText.setFillColor(sf::Color::White);
     addNodeText.setCharacterSize(16);

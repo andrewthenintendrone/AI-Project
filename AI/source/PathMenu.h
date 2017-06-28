@@ -5,7 +5,7 @@
 class PathMenu
 {
 public:
-    PathMenu();
+    PathMenu(sf::Font& newFont);
     void draw();
 private:
     std::vector<sf::Text> m_texts;

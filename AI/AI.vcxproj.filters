@@ -39,9 +39,6 @@
     <ClCompile Include="source\TimeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\IBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
     <ClCompile Include="source\Button.cpp">
       <Filter>Source Files\Path\UI</Filter>
     </ClCompile>
-    <ClCompile Include="source\GlobalFont.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
@@ -99,9 +93,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\TimeManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Vector2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IBehavior.h">
@@ -130,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="source\Button.h">
       <Filter>Source Files\Path\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GlobalFont.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

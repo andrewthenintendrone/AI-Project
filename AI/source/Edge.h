@@ -12,6 +12,7 @@ public:
     std::shared_ptr<PathNode> firstNode;
     std::shared_ptr<PathNode> secondNode;
 
+    void recalculate();
     void draw();
 
 private:

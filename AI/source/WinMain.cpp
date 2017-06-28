@@ -11,8 +11,6 @@
 #include "Path.h"
 #include "Edge.h"
 
-sf::Font g_font;
-
 // returns path to the executable
 std::string getPath()
 {
@@ -28,16 +26,26 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     srand(unsigned(time(NULL)));
 
-    g_font.loadFromFile(getPath() + "\\resources\\font\\comic.ttf");
+    sf::Font pathFont;
+    pathFont.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
 
-    Path path;
+    Path path(pathFont);
 
-    path.addNode(sf::Vector2f(100, 100));
-    path.addNode(sf::Vector2f(300, 100));
-    path.addNode(sf::Vector2f(300, 275));
-    path.addNode(sf::Vector2f(300, 400));
-    path.addNode(sf::Vector2f(200, 510));
-    path.addNode(sf::Vector2f(100, 400));
+    for (unsigned int i = 0; i < 10; i++)
+    {
+        path.addNode(sf::Vector2f((float)(rand() % Renderer::getInstance()->getWindow().getSize().x), (float)(rand() % Renderer::getInstance()->getWindow().getSize().y)));
+    }
+
+    for (unsigned int i = 0; i < 10; i++)
+    {
+        std::shared_ptr<PathNode> firstNode = path.getNode(rand() % 10);
+        std::shared_ptr<PathNode> secondNode = path.getNode(rand() % 10);
+        while (firstNode == secondNode)
+        {
+            secondNode = path.getNode(rand() % 10);
+        }
+        path.addEdge(firstNode, secondNode);
+    }
 
     while (Renderer::getInstance()->getWindow().isOpen())
     {
@@ -56,6 +64,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
         TIMEMANAGER->update();
         Renderer::getInstance()->clearWindow();
+        path.update(event);
         path.draw();
         Renderer::getInstance()->updateWindow();
     }
