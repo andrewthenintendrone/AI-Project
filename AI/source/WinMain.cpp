@@ -38,8 +38,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     for (unsigned int i = 0; i < 10; i++)
     {
-        std::shared_ptr<PathNode> firstNode = path.getNode(rand() % 10);
-        std::shared_ptr<PathNode> secondNode = path.getNode(rand() % 10);
+        PathNode* firstNode = path.getNode(rand() % 10);
+        PathNode* secondNode = path.getNode(rand() % 10);
         while (firstNode == secondNode)
         {
             secondNode = path.getNode(rand() % 10);

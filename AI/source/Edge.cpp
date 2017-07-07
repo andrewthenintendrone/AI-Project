@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "VectorMaths.h"
 
-Edge::Edge(std::shared_ptr<PathNode>newFirstNode, std::shared_ptr<PathNode>newSecondNode)
+Edge::Edge(PathNode* newFirstNode, PathNode* newSecondNode)
 {
     firstNode = newFirstNode;
     secondNode = newSecondNode;

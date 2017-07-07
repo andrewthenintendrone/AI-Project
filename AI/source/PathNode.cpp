@@ -9,7 +9,7 @@ PathNode::PathNode(sf::Vector2f newPosition, sf::Font& newFont, unsigned int new
     setUp();
 }
 
-void PathNode::addEdge(std::shared_ptr<Edge> newEdge)
+void PathNode::addEdge(Edge* newEdge)
 {
     edges.push_back(newEdge);
 }
@@ -18,10 +18,6 @@ void PathNode::update()
 {
     nodeGraphic.setFillColor(fillColor);
     nodeGraphic.setOutlineColor(outlineColor);
-    if (selected)
-    {
-        dragWithMouse(sf::Vector2f(sf::Mouse::getPosition(Renderer::getInstance()->getWindow())));
-    }
 }
 
 void PathNode::dragWithMouse(sf::Vector2f mousePos)
@@ -31,9 +27,9 @@ void PathNode::dragWithMouse(sf::Vector2f mousePos)
     position = mousePos;
     nodeGraphic.setPosition(position);
     nodeText.setPosition(position);
-    for (std::vector<std::shared_ptr<Edge>>::iterator iter = edges.begin(); iter != edges.end(); iter++)
+    for (std::vector<Edge*>::iterator iter = edges.begin(); iter != edges.end(); iter++)
     {
-        iter->get()->recalculate();
+        (*iter)->recalculate();
     }
 }
 
@@ -41,9 +37,9 @@ void PathNode::draw()
 {
     Renderer::getInstance()->Draw(&nodeGraphic);
     Renderer::getInstance()->Draw(&nodeText);
-    for (std::vector<std::shared_ptr<Edge>>::iterator iter = edges.begin(); iter != edges.end(); iter++)
+    for (std::vector<Edge*>::iterator iter = edges.begin(); iter != edges.end(); iter++)
     {
-        iter->get()->draw();
+        (*iter)->draw();
     }
 }
 

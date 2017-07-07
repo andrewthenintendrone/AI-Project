@@ -2,7 +2,6 @@
 #include "SFML\Graphics.hpp"
 #include <vector>
 #include "Edge.h"
-#include <memory>
 
 const sf::Color fillColor = sf::Color(79, 129, 189);
 const sf::Color fillColorSelected = sf::Color(128, 100, 162);
@@ -13,17 +12,15 @@ class PathNode
 {
 public:
     PathNode(sf::Vector2f newPosition, sf::Font& newFont, unsigned int newNumber);
-    void addEdge(std::shared_ptr<Edge> newEdge);
+    void addEdge(Edge* newEdge);
     void update();
     void dragWithMouse(sf::Vector2f mousePos);
     void draw();
 
-    bool selected = false;
-
     sf::Vector2f getPosition();
     sf::FloatRect getBounds();
 private:
-    std::vector<std::shared_ptr<Edge>> edges;
+    std::vector<Edge*> edges;
     float Gscore;
     float Hscore;
     float Fscore;

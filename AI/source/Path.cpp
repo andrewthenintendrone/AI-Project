@@ -11,18 +11,19 @@ Path::Path(sf::Font& newFont)
 
 void Path::addNode(sf::Vector2f position)
 {
-    m_pathNodes.push_back(std::make_shared<PathNode>(position, m_font, nodeCount));
+    m_pathNodes.push_back(new PathNode(position, m_font, nodeCount));
+    m_drawOrder.push_back(nodeCount);
     nodeCount++;
 }
 
-void Path::addEdge(std::shared_ptr<PathNode> firstNode, std::shared_ptr<PathNode> secondNode)
+void Path::addEdge(PathNode* firstNode, PathNode* secondNode)
 {
-    std::shared_ptr<Edge> newEdge = std::make_shared<Edge>(firstNode, secondNode);
+    Edge* newEdge = new Edge(firstNode, secondNode);
     firstNode->addEdge(newEdge);
     secondNode->addEdge(newEdge);
 }
 
-std::shared_ptr<PathNode> Path::getNode(int index)
+PathNode* Path::getNode(int index)
 {
     return m_pathNodes[index];
 }
@@ -30,24 +31,34 @@ std::shared_ptr<PathNode> Path::getNode(int index)
 void Path::update(sf::Event& currentEvent)
 {
     sf::Vector2f mousePos(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
-    for(unsigned int i = 0; i < m_pathNodes.size(); i++)
+    bool doneSwap = false;
+    for (unsigned int i = 0; i < m_pathNodes.size(); i++)
     {
-        if (m_pathNodes[i].get()->getBounds().contains(mousePos))
-        {
-            m_pathNodes[i].get()->selected = true;
-        }
-        else
-        {
-            m_pathNodes[i].get()->selected = false;
-        }
         m_pathNodes[i]->update();
+        if (m_pathNodes[i]->getBounds().contains(mousePos))
+        {
+            if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left && m_selectedPathNode == nullptr && doneSwap == false)
+            {
+                m_selectedPathNode = m_pathNodes[i];
+                std::swap(m_drawOrder[i], m_drawOrder.back());
+                doneSwap = true;
+            }
+            if (currentEvent.type == sf::Event::EventType::MouseButtonReleased && currentEvent.mouseButton.button == sf::Mouse::Left && m_selectedPathNode != nullptr)
+            {
+                m_selectedPathNode = nullptr;
+            }
+        }
+        if (m_selectedPathNode != nullptr)
+        {
+            m_selectedPathNode->dragWithMouse(mousePos);
+        }
     }
 }
 
 void Path::draw()
 {
-    for (std::vector<std::shared_ptr<PathNode>>::iterator iter = m_pathNodes.begin(); iter != m_pathNodes.end(); iter++)
+    for (std::vector<unsigned int>::iterator iter = m_drawOrder.begin(); iter != m_drawOrder.end(); iter++)
     {
-        iter->get()->draw();
+        m_pathNodes[*iter]->draw();
     }
 }
