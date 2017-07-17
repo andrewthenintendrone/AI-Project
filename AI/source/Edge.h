@@ -10,6 +10,7 @@ public:
     Edge(PathNode* newFirstNode, PathNode* newSecondNode);
     PathNode* firstNode;
     PathNode* secondNode;
+    ~Edge();
 
     void recalculate();
     void draw();

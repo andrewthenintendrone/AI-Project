@@ -38,22 +38,30 @@ void UI::update(PathNode* selectedNode, bool clicking)
     sf::Vector2f mousePos(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
 
     // light up the selection based on the mouse
+    // create node
     if (m_optionCreateIconSprite.getGlobalBounds().contains(mousePos))
     {
         m_optionCreateIconSprite.setColor(sf::Color::Green);
         if (clicking)
         {
             m_path->addNode(mousePos);
+            isVisible = false;
         }
     }
+    // delete node
     if (m_optionDeleteIconSprite.getGlobalBounds().contains(mousePos))
     {
         m_optionDeleteIconSprite.setColor(sf::Color::Red);
         if (clicking)
         {
-            int x = 0;
+            if (selectedNode != nullptr)
+            {
+                m_path->removeNode(selectedNode);
+            }
+            isVisible = false;
         }
     }
+    // link nodes
     if (m_optionLinkIconSprite.getGlobalBounds().contains(mousePos))
     {
         m_optionLinkIconSprite.setColor(sf::Color(128, 128, 128, 255));

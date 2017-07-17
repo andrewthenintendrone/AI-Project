@@ -17,6 +17,12 @@ Edge::Edge(PathNode* newFirstNode, PathNode* newSecondNode)
     recalculate();
 }
 
+Edge::~Edge()
+{
+    firstNode->getEdges().remove(this);
+    secondNode->getEdges().remove(this);
+}
+
 void Edge::draw()
 {
     Renderer::getInstance()->getWindow().draw(graphic);

@@ -17,6 +17,15 @@ void PathNode::addEdge(Edge* newEdge)
     edges.push_back(newEdge);
 }
 
+void PathNode::remove()
+{
+    for (auto iter = edges.begin(); iter != edges.end(); iter++)
+    {
+        delete(*iter);
+    }
+    edges.clear();
+}
+
 void PathNode::update(bool selected)
 {
     if (selected)
@@ -36,7 +45,7 @@ void PathNode::dragWithMouse(sf::Vector2f mousePos)
     position = mousePos;
     nodeGraphic.setPosition(position);
     nodeText.setPosition(position);
-    for (std::vector<Edge*>::iterator iter = edges.begin(); iter != edges.end(); iter++)
+    for (std::list<Edge*>::iterator iter = edges.begin(); iter != edges.end(); iter++)
     {
         (*iter)->recalculate();
     }
@@ -46,7 +55,7 @@ void PathNode::draw()
 {
     Renderer::getInstance()->Draw(&nodeGraphic);
     Renderer::getInstance()->Draw(&nodeText);
-    for (std::vector<Edge*>::iterator iter = edges.begin(); iter != edges.end(); iter++)
+    for (auto iter = edges.begin(); iter != edges.end(); iter++)
     {
         (*iter)->draw();
     }
@@ -60,6 +69,11 @@ sf::Vector2f PathNode::getPosition()
 sf::FloatRect PathNode::getBounds()
 {
     return nodeGraphic.getGlobalBounds();
+}
+
+std::list<Edge*>& PathNode::getEdges()
+{
+    return edges;
 }
 
 void PathNode::setUp()

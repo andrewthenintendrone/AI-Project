@@ -16,6 +16,12 @@ void Path::addNode(sf::Vector2f position)
     nodeCount++;
 }
 
+void Path::removeNode(PathNode* nodeToRemove)
+{
+    nodeToRemove->remove();
+    m_pathNodes.remove(nodeToRemove);
+}
+
 void Path::addEdge(PathNode* firstNode, PathNode* secondNode)
 {
     Edge* newEdge = new Edge(firstNode, secondNode);
@@ -25,7 +31,9 @@ void Path::addEdge(PathNode* firstNode, PathNode* secondNode)
 
 PathNode* Path::getNode(int index)
 {
-    return m_pathNodes[index];
+    auto iter = m_pathNodes.begin();
+    std::advance(iter, index);
+    return (*iter);
 }
 
 void Path::update(sf::Event currentEvent)
@@ -36,14 +44,14 @@ void Path::update(sf::Event currentEvent)
     sf::Vector2f mousePos(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
 
     // deal with dragging nodes
-    for (unsigned int i = 0; i < m_pathNodes.size(); i++)
+    for (auto iter = m_pathNodes.begin(); iter != m_pathNodes.end(); iter++)
     {
-        if (m_pathNodes[i]->getBounds().contains(mousePos))
+        if ((*iter)->getBounds().contains(mousePos))
         {
-            m_selectedPathNode = m_pathNodes[i];
+            m_selectedPathNode = (*iter);
             if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left && m_draggingNode == nullptr)
             {
-                m_draggingNode = m_pathNodes[i];
+                m_draggingNode = (*iter);
             }
             if (currentEvent.type == sf::Event::EventType::MouseButtonReleased && currentEvent.mouseButton.button == sf::Mouse::Left && m_draggingNode != nullptr)
             {
@@ -54,7 +62,7 @@ void Path::update(sf::Event currentEvent)
         {
             m_draggingNode->dragWithMouse(mousePos);
         }
-        m_pathNodes[i]->update(m_pathNodes[i] == m_selectedPathNode);
+        (*iter)->update((*iter) == m_selectedPathNode);
     }
 
     // deal with dropdown box
@@ -75,9 +83,9 @@ void Path::update(sf::Event currentEvent)
 
 void Path::draw()
 {
-    for(unsigned int i = 0; i < nodeCount; i++)
+    for(auto iter = m_pathNodes.begin(); iter != m_pathNodes.end(); iter++)
     {
-        m_pathNodes[i]->draw();
+        (*iter)->draw();
     }
     if (m_gui.isVisible)
     {

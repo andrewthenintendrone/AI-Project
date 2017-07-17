@@ -10,6 +10,7 @@
 #include "Flock.h"
 #include "Path.h"
 #include "Edge.h"
+#include "Pi.h"
 
 // returns path to the executable
 std::string getPath()
@@ -22,6 +23,7 @@ std::string getPath()
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
+    float pi = Pi();
     Renderer::getInstance()->createWindow(1280, 720);
 
     srand(unsigned(time(NULL)));

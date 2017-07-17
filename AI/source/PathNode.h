@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML\Graphics.hpp"
-#include <vector>
+#include <list>
 #include "Edge.h"
 
 const sf::Color fillColor = sf::Color(79, 129, 189);
@@ -13,14 +13,16 @@ class PathNode
 public:
     PathNode(sf::Vector2f newPosition, sf::Font& newFont, unsigned int newNumber);
     void addEdge(Edge* newEdge);
+    void remove();
     void update(bool selected);
     void dragWithMouse(sf::Vector2f mousePos);
     void draw();
 
     sf::Vector2f getPosition();
     sf::FloatRect getBounds();
+    std::list<Edge*>& getEdges();
 private:
-    std::vector<Edge*> edges;
+    std::list<Edge*> edges;
     float Gscore;
     float Hscore;
     float Fscore;

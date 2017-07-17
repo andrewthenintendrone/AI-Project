@@ -126,6 +126,7 @@
     <ClInclude Include="source\Path.h" />
     <ClInclude Include="source\PathMenu.h" />
     <ClInclude Include="source\PathNode.h" />
+    <ClInclude Include="source\Pi.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Seek.h" />
     <ClInclude Include="source\TimeManager.h" />

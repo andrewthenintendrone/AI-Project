@@ -122,5 +122,8 @@
     <ClInclude Include="source\UI.h">
       <Filter>Source Files\Path\UI</Filter>
     </ClInclude>
+    <ClInclude Include="source\Pi.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
