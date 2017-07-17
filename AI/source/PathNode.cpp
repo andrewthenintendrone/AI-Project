@@ -1,9 +1,12 @@
 #include "Renderer.h"
 #include "PathNode.h"
 
+std::string getPath();
+
 PathNode::PathNode(sf::Vector2f newPosition, sf::Font& newFont, unsigned int newNumber)
 {
     position = newPosition;
+    m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
     nodeText.setFont(newFont);
     nodeText.setString(std::to_string(newNumber));
     setUp();
@@ -14,16 +17,22 @@ void PathNode::addEdge(Edge* newEdge)
     edges.push_back(newEdge);
 }
 
-void PathNode::update()
+void PathNode::update(bool selected)
 {
-    nodeGraphic.setFillColor(fillColor);
-    nodeGraphic.setOutlineColor(outlineColor);
+    if (selected)
+    {
+        nodeGraphic.setFillColor(fillColorSelected);
+        nodeGraphic.setOutlineColor(outlineColorSelected);
+    }
+    else
+    {
+        nodeGraphic.setFillColor(fillColor);
+        nodeGraphic.setOutlineColor(outlineColor);
+    }
 }
 
 void PathNode::dragWithMouse(sf::Vector2f mousePos)
 {
-    nodeGraphic.setFillColor(fillColorSelected);
-    nodeGraphic.setOutlineColor(outlineColorSelected);
     position = mousePos;
     nodeGraphic.setPosition(position);
     nodeText.setPosition(position);

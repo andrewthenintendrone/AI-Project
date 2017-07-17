@@ -3,16 +3,24 @@
 #include "Renderer.h"
 #include "VectorMaths.h"
 
+std::string getPath();
+
 Edge::Edge(PathNode* newFirstNode, PathNode* newSecondNode)
 {
     firstNode = newFirstNode;
     secondNode = newSecondNode;
+    m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
+    distanceText.setFont(m_font);
+    distanceText.setCharacterSize(40);
+    distanceText.setFillColor(sf::Color::White);
+
     recalculate();
 }
 
 void Edge::draw()
 {
     Renderer::getInstance()->getWindow().draw(graphic);
+    Renderer::getInstance()->getWindow().draw(distanceText);
 }
 
 void Edge::recalculate()
@@ -26,4 +34,8 @@ void Edge::recalculate()
     graphic.setPosition(centerOfNodes);
     graphic.setRotation(rotationAngle);
     graphic.setFillColor(edgeColor);
+
+    distanceText.setString(std::to_string((int)lineLength));
+    distanceText.setOrigin(distanceText.getLocalBounds().width / 2, distanceText.getLocalBounds().height);
+    distanceText.setPosition(centerOfNodes);
 }

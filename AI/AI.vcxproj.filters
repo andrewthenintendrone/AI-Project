@@ -69,7 +69,7 @@
     <ClCompile Include="source\PathMenu.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
-    <ClCompile Include="source\Button.cpp">
+    <ClCompile Include="source\UI.cpp">
       <Filter>Source Files\Path\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,7 +119,7 @@
     <ClInclude Include="source\PathMenu.h">
       <Filter>Source Files\Path</Filter>
     </ClInclude>
-    <ClInclude Include="source\Button.h">
+    <ClInclude Include="source\UI.h">
       <Filter>Source Files\Path\UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,4 +16,6 @@ public:
 
 private:
     sf::RectangleShape graphic;
+    sf::Font m_font;
+    sf::Text distanceText;
 };

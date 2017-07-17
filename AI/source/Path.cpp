@@ -4,15 +4,15 @@
 
 std::string getPath();
 
-Path::Path(sf::Font& newFont)
+Path::Path()
 {
-    m_font = newFont;
+    m_gui.setPath(this);
+    m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
 }
 
 void Path::addNode(sf::Vector2f position)
 {
     m_pathNodes.push_back(new PathNode(position, m_font, nodeCount));
-    m_drawOrder.push_back(nodeCount);
     nodeCount++;
 }
 
@@ -28,37 +28,59 @@ PathNode* Path::getNode(int index)
     return m_pathNodes[index];
 }
 
-void Path::update(sf::Event& currentEvent)
+void Path::update(sf::Event currentEvent)
 {
+    m_selectedPathNode = nullptr;
+
+    // store mouse position
     sf::Vector2f mousePos(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
-    bool doneSwap = false;
+
+    // deal with dragging nodes
     for (unsigned int i = 0; i < m_pathNodes.size(); i++)
     {
-        m_pathNodes[i]->update();
         if (m_pathNodes[i]->getBounds().contains(mousePos))
         {
-            if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left && m_selectedPathNode == nullptr && doneSwap == false)
+            m_selectedPathNode = m_pathNodes[i];
+            if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left && m_draggingNode == nullptr)
             {
-                m_selectedPathNode = m_pathNodes[i];
-                std::swap(m_drawOrder[i], m_drawOrder.back());
-                doneSwap = true;
+                m_draggingNode = m_pathNodes[i];
             }
-            if (currentEvent.type == sf::Event::EventType::MouseButtonReleased && currentEvent.mouseButton.button == sf::Mouse::Left && m_selectedPathNode != nullptr)
+            if (currentEvent.type == sf::Event::EventType::MouseButtonReleased && currentEvent.mouseButton.button == sf::Mouse::Left && m_draggingNode != nullptr)
             {
-                m_selectedPathNode = nullptr;
+                m_draggingNode = nullptr;
             }
         }
-        if (m_selectedPathNode != nullptr)
+        if (m_draggingNode != nullptr)
         {
-            m_selectedPathNode->dragWithMouse(mousePos);
+            m_draggingNode->dragWithMouse(mousePos);
         }
+        m_pathNodes[i]->update(m_pathNodes[i] == m_selectedPathNode);
+    }
+
+    // deal with dropdown box
+    if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Right)
+    {
+        m_gui.setPosition(mousePos);
+        m_gui.isVisible = true;
+    }
+    if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left && !m_gui.getBounds().contains(mousePos))
+    {
+        m_gui.isVisible = false;
+    }
+    if (m_gui.isVisible)
+    {
+        m_gui.update(m_selectedPathNode, currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left);
     }
 }
 
 void Path::draw()
 {
-    for (std::vector<unsigned int>::iterator iter = m_drawOrder.begin(); iter != m_drawOrder.end(); iter++)
+    for(unsigned int i = 0; i < nodeCount; i++)
     {
-        m_pathNodes[*iter]->draw();
+        m_pathNodes[i]->draw();
+    }
+    if (m_gui.isVisible)
+    {
+        m_gui.draw();
     }
 }

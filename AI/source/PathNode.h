@@ -13,7 +13,7 @@ class PathNode
 public:
     PathNode(sf::Vector2f newPosition, sf::Font& newFont, unsigned int newNumber);
     void addEdge(Edge* newEdge);
-    void update();
+    void update(bool selected);
     void dragWithMouse(sf::Vector2f mousePos);
     void draw();
 
@@ -26,6 +26,7 @@ private:
     float Fscore;
     sf::Vector2f position;
     sf::CircleShape nodeGraphic;
+    sf::Font m_font;
     sf::Text nodeText;
 
     void setUp();

@@ -26,10 +26,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     srand(unsigned(time(NULL)));
 
-    sf::Font pathFont;
-    pathFont.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
-
-    Path path(pathFont);
+    Path path;
 
     for (unsigned int i = 0; i < 10; i++)
     {
