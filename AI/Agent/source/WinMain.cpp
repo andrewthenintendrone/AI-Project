@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include "GameObject.h"
 #include "keyBoardControl.h"
-#include "Seek.h"
+#include "Flock.h"
 #include "TimeManager.h"
 
 // returns path to the executable
@@ -20,10 +20,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     Renderer::getInstance()->createWindow(1280, 720);
 
     ObjectPool::getInstance()->createObject("player")->setSprite("olimar")->addBehavior(new keyBoardControl);
-    ObjectPool::getInstance()->createObject("follower0")->setSprite("pikmin")->addBehavior(new Seek(ObjectPool::getInstance()->getObject("player")));
-    for (int i = 1; i < 20; i++)
+    ObjectPool::getInstance()->createObject("follower0")->setSprite("pikmin")->addBehavior(new Flock(ObjectPool::getInstance()->getObject("player")));
+    for (int i = 1; i < 25; i++)
     {
-        ObjectPool::getInstance()->createObject("follower" + std::to_string(i))->setSprite("pikmin")->addBehavior(new Seek(ObjectPool::getInstance()->getObject("follower" + std::to_string(i - 1))));
+        ObjectPool::getInstance()->createObject("follower" + std::to_string(i))->setSprite("pikmin")->addBehavior(new Flock(ObjectPool::getInstance()->getObject("player")));
     }
 
     srand(unsigned(time(NULL)));

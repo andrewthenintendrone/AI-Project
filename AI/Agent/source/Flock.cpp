@@ -18,38 +18,41 @@ void Flock::Update(Agent* pAgent)
     sf::Vector2f cohesion = computeCohesion(pAgent, objects);
     sf::Vector2f seperation = computeSeperation(pAgent, objects);
 
-    sf::Vector2f finalForce = (movement + alignment + cohesion + seperation);
-    finalForce = (finalForce / magnitude(finalForce));
+    sf::Vector2f finalForce = (movement * 0.1f + alignment * 0.25f + cohesion * 0.6f + seperation * 0.85f);
+    normalize(finalForce);
     finalForce *= m_flockSpeed;
 
-    pAgent->setVelocity((movement + alignment + cohesion + seperation) * m_flockSpeed);
+    pAgent->setVelocity(finalForce * powf(magnitude(m_target->getAgent()->getPosition() - pAgent->getPosition()), 0.1f));
 }
 
 sf::Vector2f Flock::computeMovement(Agent* pAgent)
 {
     sf::Vector2f forceVector = (m_target->getAgent()->getPosition() - pAgent->getPosition());
-    forceVector /= magnitude(forceVector);
+    normalize(forceVector);
     return forceVector;
 }
 
 sf::Vector2f Flock::computeAlignment(Agent* pAgent, std::vector<GameObject*> objects)
 {
-    sf::Vector2f forceVector;
+    sf::Vector2f forceVector = sf::Vector2f(0, 0);
     float numNeighbors = 0;
 
     for each(GameObject* gameobject in objects)
     {
         if (gameobject->getAgent() != pAgent && gameobject != m_target)
         {
-            forceVector += gameobject->getAgent()->getVelocity();
-            numNeighbors++;
+            if (magnitude(pAgent->getPosition() - gameobject->getAgent()->getPosition()) < 100)
+            {
+                forceVector += gameobject->getAgent()->getVelocity();
+                numNeighbors++;
+            }
         }
     }
 
     if (numNeighbors > 0)
     {
         forceVector /= numNeighbors;
-        forceVector /= magnitude(forceVector);
+        normalize(forceVector);
     }
 
     return forceVector;
@@ -57,28 +60,29 @@ sf::Vector2f Flock::computeAlignment(Agent* pAgent, std::vector<GameObject*> obj
 
 sf::Vector2f Flock::computeCohesion(Agent* pAgent, std::vector<GameObject*> objects)
 {
-    sf::Vector2f forceVector;
-    sf::Vector2f centerOfMass;
+    sf::Vector2f forceVector = sf::Vector2f(0, 0);
     float numNeighbors = 0;
 
     for each(GameObject* gameobject in objects)
     {
         if (gameobject->getAgent() != pAgent && gameobject != m_target)
         {
-            centerOfMass += gameobject->getAgent()->getPosition();
-            numNeighbors++;
+            if (magnitude(gameobject->getAgent()->getPosition() - pAgent->getPosition()) < 200)
+            {
+                forceVector += gameobject->getAgent()->getPosition();
+                numNeighbors++;
+            }
         }
     }
 
     if (numNeighbors > 0)
     {
-        centerOfMass /= numNeighbors;
+        forceVector /= numNeighbors;
 
-        forceVector = centerOfMass - pAgent->getPosition();
+        forceVector = forceVector - pAgent->getPosition();
 
-        forceVector /= magnitude(forceVector);
+        normalize(forceVector);
     }
-
 
     return forceVector;
 }
@@ -91,12 +95,14 @@ sf::Vector2f Flock::computeSeperation(Agent* pAgent, std::vector<GameObject*> ob
     {
         if (gameobject->getAgent() != pAgent && gameobject != m_target)
         {
-            if (magnitude(gameobject->getAgent()->getPosition() - pAgent->getPosition()) < 64)
+            if (magnitude(gameobject->getAgent()->getPosition() - pAgent->getPosition()) < 32)
             {
-                sf::Vector2f headingVector = (pAgent->getPosition() - gameobject->getAgent()->getPosition());
+                forceVector += gameobject->getAgent()->getPosition() - pAgent->getPosition();
             }
         }
     }
 
+    forceVector *= -1.0f;
+    normalize(forceVector);
     return forceVector;
 }

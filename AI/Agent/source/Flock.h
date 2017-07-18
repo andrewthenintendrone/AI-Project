@@ -16,5 +16,5 @@ protected:
     sf::Vector2f computeSeperation(Agent* pAgent, std::vector<GameObject*> objects);
 private:
     GameObject* m_target;
-    float m_flockSpeed = 200;
+    float m_flockSpeed = 200.0f;
 };
