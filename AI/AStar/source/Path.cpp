@@ -7,19 +7,19 @@ std::string getPath();
 Path::Path()
 {
     m_gui.setPath(this);
-    m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
 }
 
-void Path::addNode(sf::Vector2f position)
+PathNode* Path::addNode(sf::Vector2f position)
 {
-    m_pathNodes.push_back(new PathNode(position, m_font, nodeCount));
-    nodeCount++;
+    m_pathNodes.push_back(new PathNode(position, m_pathNodes.size()));
+    return m_pathNodes.back();
 }
 
 void Path::removeNode(PathNode* nodeToRemove)
 {
-    nodeToRemove->remove();
+    m_draggingNode = nullptr;
     m_pathNodes.remove(nodeToRemove);
+    delete nodeToRemove;
 }
 
 void Path::addEdge(PathNode* firstNode, PathNode* secondNode)

@@ -66,9 +66,6 @@
     <ClCompile Include="source\Edge.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
-    <ClCompile Include="source\PathMenu.cpp">
-      <Filter>Source Files\Path</Filter>
-    </ClCompile>
     <ClCompile Include="source\UI.cpp">
       <Filter>Source Files\Path\UI</Filter>
     </ClCompile>
@@ -116,14 +113,8 @@
     <ClInclude Include="source\Edge.h">
       <Filter>Source Files\Path</Filter>
     </ClInclude>
-    <ClInclude Include="source\PathMenu.h">
-      <Filter>Source Files\Path</Filter>
-    </ClInclude>
     <ClInclude Include="source\UI.h">
       <Filter>Source Files\Path\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Pi.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

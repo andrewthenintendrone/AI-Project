@@ -15,6 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>AI</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>AStar</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -44,14 +45,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)\bin\</OutDir>
-    <IntDir>$(SolutionDir)\build\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)\bin\</OutDir>
+    <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_DEBUG</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\bin\</OutDir>
-    <IntDir>$(SolutionDir)\build\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)\bin\</OutDir>
+    <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -105,7 +106,6 @@
     <ClCompile Include="source\moveToMouse.cpp" />
     <ClCompile Include="source\ObjectPool.cpp" />
     <ClCompile Include="source\Path.cpp" />
-    <ClCompile Include="source\PathMenu.cpp" />
     <ClCompile Include="source\PathNode.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\Seek.cpp" />
@@ -124,9 +124,7 @@
     <ClInclude Include="source\moveToMouse.h" />
     <ClInclude Include="source\ObjectPool.h" />
     <ClInclude Include="source\Path.h" />
-    <ClInclude Include="source\PathMenu.h" />
     <ClInclude Include="source\PathNode.h" />
-    <ClInclude Include="source\Pi.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Seek.h" />
     <ClInclude Include="source\TimeManager.h" />

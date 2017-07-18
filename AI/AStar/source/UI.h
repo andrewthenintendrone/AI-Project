@@ -35,5 +35,7 @@ private:
 
 
     Path* m_path = nullptr;
-    PathNode* selectedNode = nullptr;
+    PathNode* m_selectedNode = nullptr;
+    PathNode* m_linkNode = nullptr;
+    bool linking = false;
 };

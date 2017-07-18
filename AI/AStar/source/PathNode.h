@@ -11,16 +11,16 @@ const sf::Color outlineColorSelected = sf::Color(92, 71, 118);
 class PathNode
 {
 public:
-    PathNode(sf::Vector2f newPosition, sf::Font& newFont, unsigned int newNumber);
+    PathNode(sf::Vector2f newPosition, unsigned int newNumber);
+    ~PathNode();
     void addEdge(Edge* newEdge);
-    void remove();
     void update(bool selected);
     void dragWithMouse(sf::Vector2f mousePos);
     void draw();
 
     sf::Vector2f getPosition();
     sf::FloatRect getBounds();
-    std::list<Edge*>& getEdges();
+    std::list<Edge*>* getEdges();
 private:
     std::list<Edge*> edges;
     float Gscore;

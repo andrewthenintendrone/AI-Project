@@ -10,7 +10,6 @@
 #include "Flock.h"
 #include "Path.h"
 #include "Edge.h"
-#include "Pi.h"
 
 // returns path to the executable
 std::string getPath()
@@ -23,27 +22,31 @@ std::string getPath()
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine, int cmdShow)
 {
-    float pi = Pi();
     Renderer::getInstance()->createWindow(1280, 720);
 
     srand(unsigned(time(NULL)));
 
     Path path;
 
-    for (unsigned int i = 0; i < 10; i++)
+    for (unsigned int y = 0; y < 5; y++)
     {
-        path.addNode(sf::Vector2f((float)(rand() % Renderer::getInstance()->getWindow().getSize().x), (float)(rand() % Renderer::getInstance()->getWindow().getSize().y)));
+        for (unsigned int x = 0; x < 10; x++)
+        {
+            path.addNode(sf::Vector2f(100 + x * 100, 100 + y * 100));
+        }
     }
 
-    for (unsigned int i = 0; i < 10; i++)
+    for (unsigned int y = 0; y < 5; y++)
     {
-        PathNode* firstNode = path.getNode(rand() % 10);
-        PathNode* secondNode = path.getNode(rand() % 10);
-        while (firstNode == secondNode)
+        for (unsigned int x = 0; x < 10; x++)
         {
-            secondNode = path.getNode(rand() % 10);
+            if ((x * 5 + y + 1) % 10 != 0)
+            {
+                PathNode* firstNode = path.getNode(x * 5 + y);
+                PathNode* secondNode = path.getNode(x * 5 + y + 1);
+                path.addEdge(firstNode, secondNode);
+            }
         }
-        path.addEdge(firstNode, secondNode);
     }
 
     while (Renderer::getInstance()->getWindow().isOpen())

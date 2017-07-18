@@ -29,7 +29,12 @@ UI::UI()
 
 void UI::update(PathNode* selectedNode, bool clicking)
 {
-    // claer all selections to white
+    if (selectedNode != nullptr)
+    {
+        m_selectedNode = selectedNode;
+    }
+
+    // clear all selections to white
     m_optionCreateIconSprite.setColor(sf::Color::White);
     m_optionDeleteIconSprite.setColor(sf::Color::White);
     m_optionLinkIconSprite.setColor(sf::Color::White);
@@ -37,38 +42,58 @@ void UI::update(PathNode* selectedNode, bool clicking)
     // store mouse position
     sf::Vector2f mousePos(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
 
-    // light up the selection based on the mouse
-    // create node
-    if (m_optionCreateIconSprite.getGlobalBounds().contains(mousePos))
+    if (!linking)
     {
-        m_optionCreateIconSprite.setColor(sf::Color::Green);
-        if (clicking)
+        // create node
+        if (m_optionCreateIconSprite.getGlobalBounds().contains(mousePos))
         {
-            m_path->addNode(mousePos);
-            isVisible = false;
-        }
-    }
-    // delete node
-    if (m_optionDeleteIconSprite.getGlobalBounds().contains(mousePos))
-    {
-        m_optionDeleteIconSprite.setColor(sf::Color::Red);
-        if (clicking)
-        {
-            if (selectedNode != nullptr)
+            m_optionCreateIconSprite.setColor(sf::Color::Green);
+            if (clicking)
             {
-                m_path->removeNode(selectedNode);
+                m_path->addNode(mousePos);
+                isVisible = false;
             }
-            isVisible = false;
+        }
+
+        // delete node
+        if (m_optionDeleteIconSprite.getGlobalBounds().contains(mousePos))
+        {
+            m_optionDeleteIconSprite.setColor(sf::Color::Red);
+            if (clicking)
+            {
+                if (m_selectedNode != nullptr)
+                {
+                    m_path->removeNode(m_selectedNode);
+                    m_selectedNode = nullptr;
+                }
+                isVisible = false;
+            }
+        }
+
+        // link nodes
+        if (m_optionLinkIconSprite.getGlobalBounds().contains(mousePos))
+        {
+            m_optionLinkIconSprite.setColor(sf::Color(128, 128, 128, 255));
+            if (clicking)
+            {
+                if (m_selectedNode != nullptr)
+                {
+                    linking = true;
+                    m_linkNode = m_selectedNode;
+                }
+                isVisible = false;
+            }
         }
     }
-    // link nodes
-    if (m_optionLinkIconSprite.getGlobalBounds().contains(mousePos))
+
+    if (linking && clicking && m_linkNode != m_selectedNode)
     {
-        m_optionLinkIconSprite.setColor(sf::Color(128, 128, 128, 255));
-        if (clicking)
+        if (m_linkNode != nullptr && m_selectedNode != nullptr)
         {
-            int x = 0;
+            m_path->addEdge(m_linkNode, m_selectedNode);
+            linking = false;
         }
+        isVisible = false;
     }
 }
 

@@ -3,27 +3,26 @@
 
 std::string getPath();
 
-PathNode::PathNode(sf::Vector2f newPosition, sf::Font& newFont, unsigned int newNumber)
+PathNode::PathNode(sf::Vector2f newPosition, unsigned int newNumber)
 {
     position = newPosition;
     m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
-    nodeText.setFont(newFont);
+    nodeText.setFont(m_font);
     nodeText.setString(std::to_string(newNumber));
     setUp();
+}
+
+PathNode::~PathNode()
+{
+    while (!edges.empty())
+    {
+        delete edges.back();
+    }
 }
 
 void PathNode::addEdge(Edge* newEdge)
 {
     edges.push_back(newEdge);
-}
-
-void PathNode::remove()
-{
-    for (auto iter = edges.begin(); iter != edges.end(); iter++)
-    {
-        delete(*iter);
-    }
-    edges.clear();
 }
 
 void PathNode::update(bool selected)
@@ -71,9 +70,9 @@ sf::FloatRect PathNode::getBounds()
     return nodeGraphic.getGlobalBounds();
 }
 
-std::list<Edge*>& PathNode::getEdges()
+std::list<Edge*>* PathNode::getEdges()
 {
-    return edges;
+    return &edges;
 }
 
 void PathNode::setUp()
