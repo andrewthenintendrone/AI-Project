@@ -1,5 +1,7 @@
 #include "Agent.h"
-#include "ObjectPool.h"
+#include "GameObject.h"
+#include "IBehavior.h"
+#include "TimeManager.h"
 
 Agent::Agent(GameObject* parent)
 {

@@ -11,11 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8A14C7D2-B61F-4E2F-B1F8-E608B81CCF11}</ProjectGuid>
+    <ProjectGuid>{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>AI</RootNamespace>
+    <RootNamespace>Agent</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>AStar</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,20 +96,30 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\Edge.cpp" />
-    <ClCompile Include="source\Path.cpp" />
-    <ClCompile Include="source\PathNode.cpp" />
+    <ClCompile Include="source\Agent.cpp" />
+    <ClCompile Include="source\Flock.cpp" />
+    <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\IBehaviour.cpp" />
+    <ClCompile Include="source\keyBoardControl.cpp" />
+    <ClCompile Include="source\moveToMouse.cpp" />
+    <ClCompile Include="source\ObjectPool.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
-    <ClCompile Include="source\UI.cpp" />
+    <ClCompile Include="source\Seek.cpp" />
+    <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\VectorMaths.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Edge.h" />
-    <ClInclude Include="source\Path.h" />
-    <ClInclude Include="source\PathNode.h" />
+    <ClInclude Include="source\Agent.h" />
+    <ClInclude Include="source\Flock.h" />
+    <ClInclude Include="source\GameObject.h" />
+    <ClInclude Include="source\IBehavior.h" />
+    <ClInclude Include="source\keyBoardControl.h" />
+    <ClInclude Include="source\moveToMouse.h" />
+    <ClInclude Include="source\ObjectPool.h" />
     <ClInclude Include="source\Renderer.h" />
-    <ClInclude Include="source\UI.h" />
+    <ClInclude Include="source\Seek.h" />
+    <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\VectorMaths.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

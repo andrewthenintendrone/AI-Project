@@ -1,6 +1,6 @@
 #pragma once
 #include "IBehavior.h"
-#include "TimeManager.h"
+#include "Agent.h"
 
 class moveToMouse : public IBehavior
 {

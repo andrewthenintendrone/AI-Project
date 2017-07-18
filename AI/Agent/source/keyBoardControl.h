@@ -1,6 +1,5 @@
 #pragma once
 #include "IBehavior.h"
-#include "GameObject.h"
 
 class keyBoardControl : public IBehavior
 {

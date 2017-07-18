@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AStar", "AStar\AStar.vcxproj", "{8A14C7D2-B61F-4E2F-B1F8-E608B81CCF11}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Agent", "Agent\Agent.vcxproj", "{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{8A14C7D2-B61F-4E2F-B1F8-E608B81CCF11}.Debug|x86.Build.0 = Debug|Win32
 		{8A14C7D2-B61F-4E2F-B1F8-E608B81CCF11}.Release|x86.ActiveCfg = Release|Win32
 		{8A14C7D2-B61F-4E2F-B1F8-E608B81CCF11}.Release|x86.Build.0 = Release|Win32
+		{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}.Debug|x86.ActiveCfg = Debug|Win32
+		{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}.Debug|x86.Build.0 = Debug|Win32
+		{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}.Release|x86.ActiveCfg = Release|Win32
+		{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,7 @@
 #include "Flock.h"
+#include "Agent.h"
 #include "ObjectPool.h"
+#include "GameObject.h"
 #include "VectorMaths.h"
 
 Flock::Flock(GameObject* newTarget)

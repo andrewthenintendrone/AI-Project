@@ -1,8 +1,6 @@
 #pragma once
-#include <vector>
+#include <string>
 #include "GameObject.h"
-#include <map>
-#include <vector>
 
 class ObjectPool
 {

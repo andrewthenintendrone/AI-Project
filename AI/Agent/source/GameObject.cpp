@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Renderer.h"
+
 std::string getPath();
 
 GameObject::GameObject()
@@ -31,7 +32,9 @@ GameObject* GameObject::setSprite(std::string fileName)
 {
     delete m_texture;
     m_texture = new sf::Texture;
-    m_texture->loadFromFile(getPath() + "\\resources\\graphics\\" + fileName + ".png");
+    m_texture->loadFromFile(std::string(getPath() + "\\resources\\graphics\\" + fileName + ".png"));
+    delete m_sprite;
+    m_sprite = new sf::Sprite;
     m_sprite->setTexture(*m_texture);
     m_sprite->setOrigin((float)(m_texture->getSize().x / 2), (float)(m_texture->getSize().y / 2));
     return this;
@@ -95,7 +98,7 @@ void GameObject::Draw()
     }
 }
 
-// sets a 
+// adds a new behavior to this GameObjects Agent
 void GameObject::addBehavior(IBehavior* newBehavior)
 {
     m_agent->addBehaviour(newBehavior);

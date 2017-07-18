@@ -1,32 +1,42 @@
 #include "keyBoardControl.h"
+#include "IBehavior.h"
+#include "GameObject.h"
 #include "SFML\Graphics.hpp"
 #include "Agent.h"
+#include "VectorMaths.h"
 
 void keyBoardControl::Update(Agent* pAgent)
 {
     // reset force
     pAgent->setVelocity(sf::Vector2f(0, 0));
 
+    sf::Vector2f desiredVelocity = sf::Vector2f(0, 0);
+
     // check keys
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        pAgent->addVelocity(sf::Vector2f(-moveSpeed, 0));
+        desiredVelocity += (sf::Vector2f(-moveSpeed, 0));
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        pAgent->addVelocity(sf::Vector2f(moveSpeed, 0));
+        desiredVelocity += (sf::Vector2f(moveSpeed, 0));
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        pAgent->addVelocity(sf::Vector2f(0, -moveSpeed));
+        desiredVelocity += (sf::Vector2f(0, -moveSpeed));
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        pAgent->addVelocity(sf::Vector2f(0, moveSpeed));
+        desiredVelocity += (sf::Vector2f(0, moveSpeed));
     }
+
+    normalize(desiredVelocity);
+    desiredVelocity *= moveSpeed;
+
+    pAgent->addVelocity(desiredVelocity);
 
     // flip sprite to direction
     if (pAgent->getParentPointer()->getSprite())

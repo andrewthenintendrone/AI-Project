@@ -1,7 +1,7 @@
 #pragma once
+#include <string>
 #include "SFML\Graphics.hpp"
 #include "Agent.h"
-#include "moveToMouse.h"
 
 class GameObject
 {
@@ -20,8 +20,8 @@ public:
 
     void addBehavior(IBehavior* newBehavior);
 private:
-    sf::Texture* m_texture;
-    sf::Sprite* m_sprite;
-    sf::Text* m_text;
-    Agent* m_agent;
+    sf::Texture* m_texture = nullptr;
+    sf::Sprite* m_sprite = nullptr;
+    sf::Text* m_text = nullptr;
+    Agent* m_agent = nullptr;
 };

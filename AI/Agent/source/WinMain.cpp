@@ -1,9 +1,10 @@
-﻿#include <Windows.h>
+#include <Windows.h>
+#include "ObjectPool.h"
 #include "Renderer.h"
-#include <string>
-#include <stdlib.h>
-#include "Path.h"
-#include "Edge.h"
+#include "GameObject.h"
+#include "keyBoardControl.h"
+#include "Seek.h"
+#include "TimeManager.h"
 
 // returns path to the executable
 std::string getPath()
@@ -18,30 +19,14 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 {
     Renderer::getInstance()->createWindow(1280, 720);
 
+    ObjectPool::getInstance()->createObject("player")->setSprite("olimar")->addBehavior(new keyBoardControl);
+    ObjectPool::getInstance()->createObject("follower0")->setSprite("pikmin")->addBehavior(new Seek(ObjectPool::getInstance()->getObject("player")));
+    for (int i = 1; i < 20; i++)
+    {
+        ObjectPool::getInstance()->createObject("follower" + std::to_string(i))->setSprite("pikmin")->addBehavior(new Seek(ObjectPool::getInstance()->getObject("follower" + std::to_string(i - 1))));
+    }
+
     srand(unsigned(time(NULL)));
-
-    Path path;
-
-    for (unsigned int y = 0; y < 5; y++)
-    {
-        for (unsigned int x = 0; x < 10; x++)
-        {
-            path.addNode(sf::Vector2f(100 + x * 100.0f, 100 + y * 100.0f));
-        }
-    }
-
-    for (unsigned int y = 0; y < 5; y++)
-    {
-        for (unsigned int x = 0; x < 10; x++)
-        {
-            if ((x * 5 + y + 1) % 10 != 0)
-            {
-                PathNode* firstNode = path.getNode(x * 5 + y);
-                PathNode* secondNode = path.getNode(x * 5 + y + 1);
-                path.addEdge(firstNode, secondNode);
-            }
-        }
-    }
 
     while (Renderer::getInstance()->getWindow().isOpen())
     {
@@ -57,10 +42,11 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
                 Renderer::getInstance()->closeWindow();
             }
         }
+        TIMEMANAGER->update();
 
         Renderer::getInstance()->clearWindow();
-        path.update(event);
-        path.draw();
+        ObjectPool::getInstance()->updateAllObjects();
+        ObjectPool::getInstance()->drawAllObjects();
         Renderer::getInstance()->updateWindow();
     }
 

@@ -10,5 +10,5 @@ public:
 
 private:
     GameObject* m_target;
-    float seekSpeed = 500;
+    float seekSpeed = 500.0f;
 };

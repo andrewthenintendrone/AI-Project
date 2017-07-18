@@ -1,8 +1,10 @@
 #pragma once
+#include "SFML\Graphics.hpp"
 #include <list>
-#include "IBehavior.h"
-#include "TimeManager.h"
+#include <vector>
+
 class GameObject;
+class IBehavior;
 
 class Agent
 {
