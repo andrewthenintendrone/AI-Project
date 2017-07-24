@@ -25,11 +25,11 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     Renderer::getInstance()->createWindow(1280, 720);
 
     ObjectPool::getInstance()->createObject("player")->setSprite("olimar")->addBehavior(new copyMousePosition);
-    ObjectPool::getInstance()->createObject("follower0")->setSprite("pikmin_" + pikminTypes[rand() % 5])->addBehavior(new Flock(ObjectPool::getInstance()->getObject("player")));
-    for (int i = 1; i < 25; i++)
-    {
-        ObjectPool::getInstance()->createObject("follower" + std::to_string(i))->setSprite("pikmin_" + pikminTypes[rand() % 5])->addBehavior(new Flock(ObjectPool::getInstance()->getObject("player")));
-    }
+    ObjectPool::getInstance()->createObject("follower0")->setSprite("pikmin_" + pikminTypes[rand() % 5])->addBehavior(new Seek(ObjectPool::getInstance()->getObject("player")));
+    //for (int i = 1; i < 25; i++)
+    //{
+    //    ObjectPool::getInstance()->createObject("follower" + std::to_string(i))->setSprite("pikmin_" + pikminTypes[rand() % 5])->addBehavior(new Seek(ObjectPool::getInstance()->getObject("player")));
+    //}
 
     srand(unsigned(time(NULL)));
 

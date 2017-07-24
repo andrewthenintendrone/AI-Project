@@ -12,6 +12,9 @@ float sqrMagnitude(sf::Vector2f vector);
 // returns the normalized vector
 sf::Vector2f normalize(sf::Vector2f& input);
 
+// returns the normalized vector multiplied by the scalar
+sf::Vector2f normalize(sf::Vector2f& vector, float scalar);
+
 // linearly interpolates between two vectors
 sf::Vector2f Lerp(sf::Vector2f start, sf::Vector2f end, float percent);
 

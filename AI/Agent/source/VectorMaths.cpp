@@ -30,6 +30,16 @@ sf::Vector2f normalize(sf::Vector2f& input)
     return input;
 }
 
+// returns the normalized vector multiplied by the scalar
+sf::Vector2f normalize(sf::Vector2f& input, float scalar)
+{
+    if (input != sf::Vector2f(0, 0))
+    {
+        input = (input / magnitude(input) * scalar);
+    }
+    return input;
+}
+
 // linearly interpolates between two vectors
 sf::Vector2f Lerp(sf::Vector2f start, sf::Vector2f end, float percent)
 {

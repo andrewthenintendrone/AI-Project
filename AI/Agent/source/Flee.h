@@ -2,10 +2,10 @@
 #include "IBehavior.h"
 #include "GameObject.h"
 
-class Seek : public IBehavior
+class Flee : public IBehavior
 {
 public:
-    Seek(GameObject* newTarget);
+    Flee(GameObject* newTarget);
     virtual void Update(Agent *pAgent);
 
 private:

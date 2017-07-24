@@ -98,6 +98,7 @@
   <ItemGroup>
     <ClCompile Include="source\Agent.cpp" />
     <ClCompile Include="source\copyMousePosition.cpp" />
+    <ClCompile Include="source\Flee.cpp" />
     <ClCompile Include="source\Flock.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\IBehaviour.cpp" />
@@ -113,6 +114,7 @@
   <ItemGroup>
     <ClInclude Include="source\Agent.h" />
     <ClInclude Include="source\CopyMousePosition.h" />
+    <ClInclude Include="source\Flee.h" />
     <ClInclude Include="source\Flock.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\IBehavior.h" />
