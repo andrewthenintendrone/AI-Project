@@ -12,10 +12,28 @@ Seek::Seek(GameObject* newTarget)
 // moves towards target
 void Seek::Update(Agent *pAgent)
 {
-    sf::Vector2f desiredVelocity = normalize(m_target->getAgent()->getPosition() - pAgent->getPosition(), m_maxVelocity);
-    sf::Vector2f steering = normalize(desiredVelocity - pAgent->getVelocity(), m_maxForce / m_mass);
+    // Calculate the desired velocity
+    sf::Vector2f desiredVelocity = (m_target->getAgent()->getPosition() - pAgent->getPosition());
+    float distance = magnitude(desiredVelocity);
 
-    pAgent->setVelocity(normalize(pAgent->getVelocity() + steering, m_maxSpeed));
+    // Check the distance to detect whether the character
+    // is inside the slowing area
+    if (distance < m_slowingRange)
+    {
+        // Inside the slowing area
+        desiredVelocity = normalize(desiredVelocity, m_maxVelocity * (distance / m_slowingRange));
+    }
+    else
+    {
+        // Outside the slowing area.
+        desiredVelocity = normalize(desiredVelocity, m_maxVelocity);
+    }
+
+    sf::Vector2f steering = (desiredVelocity - pAgent->getVelocity());
+
+    desiredVelocity = truncate(pAgent->getVelocity() + steering, m_maxSpeed);
+
+    pAgent->setVelocity(desiredVelocity);
 
     // flip sprite to match velocity
     if (pAgent->getParentPointer()->getSprite())
