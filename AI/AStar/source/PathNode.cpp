@@ -60,6 +60,31 @@ void PathNode::draw()
     }
 }
 
+void PathNode::setNodeType(NodeType newNodeType)
+{
+    m_nodeType = newNodeType;
+}
+
+void PathNode::setPrevNode(PathNode* prevNode)
+{
+    m_prevNode = prevNode;
+}
+
+PathNode* PathNode::getPrevNode()
+{
+    return m_prevNode;
+}
+
+void PathNode::setGScore(float newGScore)
+{
+    Gscore = newGScore;
+}
+
+float PathNode::getGScore()
+{
+    return Gscore;
+}
+
 sf::Vector2f PathNode::getPosition()
 {
     return position;

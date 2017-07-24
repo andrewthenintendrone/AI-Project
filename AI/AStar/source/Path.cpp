@@ -36,6 +36,16 @@ PathNode* Path::getNode(int index)
     return (*iter);
 }
 
+PathNode* Path::getLastNode()
+{
+    return m_pathNodes.back();
+}
+
+std::list<PathNode*>& Path::getPathNodes()
+{
+    return m_pathNodes;
+}
+
 void Path::update(sf::Event currentEvent)
 {
     m_selectedPathNode = nullptr;

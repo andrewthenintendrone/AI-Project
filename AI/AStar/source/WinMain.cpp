@@ -23,28 +23,22 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     Path path;
 
-    for (unsigned int y = 0; y < 5; y++)
+    // add nodes
+    for (unsigned int x = 0; x < 10; x++)
     {
-        for (unsigned int x = 0; x < 10; x++)
+        path.addNode(sf::Vector2f(100 + x * 100.0f, 100.0f));
+    }
+    for (unsigned int x = 0; x < 10; x++)
+    {
+        if (x != 9)
         {
-            path.addNode(sf::Vector2f(100 + x * 100.0f, 100 + y * 100.0f));
+            PathNode* firstNode = path.getNode(x);
+            PathNode* secondNode = path.getNode(x + 1);
+            path.addEdge(firstNode, secondNode);
         }
     }
 
-    for (unsigned int y = 0; y < 5; y++)
-    {
-        for (unsigned int x = 0; x < 10; x++)
-        {
-            if ((x * 5 + y + 1) % 10 != 0)
-            {
-                PathNode* firstNode = path.getNode(x * 5 + y);
-                PathNode* secondNode = path.getNode(x * 5 + y + 1);
-                path.addEdge(firstNode, secondNode);
-            }
-        }
-    }
-
-    PathFinder pMan;
+    PathFinder pMan(&path);
 
     while (Renderer::getInstance()->getWindow().isOpen())
     {

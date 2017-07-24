@@ -45,3 +45,8 @@ void Edge::recalculate()
     distanceText.setOrigin(distanceText.getLocalBounds().width / 2, distanceText.getLocalBounds().height);
     distanceText.setPosition(centerOfNodes);
 }
+
+float Edge::length()
+{
+    return magnitude(secondNode->getPosition() - firstNode->getPosition());
+}

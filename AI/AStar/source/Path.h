@@ -12,6 +12,8 @@ public:
     void removeNode(PathNode* nodeToremove);
     void addEdge(PathNode* firstNode, PathNode* secondNode);
     PathNode* getNode(int index);
+    PathNode* getLastNode();
+    std::list<PathNode*>& getPathNodes();
     void update(sf::Event currentEvent);
     void draw();
 private:
