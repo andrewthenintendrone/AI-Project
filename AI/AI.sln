@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AStar", "AStar\AStar.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Agent", "Agent\Agent.vcxproj", "{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multithreading", "multithreading\multithreading.vcxproj", "{974C710E-F908-4E5D-948F-7586308A896B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,6 +23,10 @@ Global
 		{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}.Debug|x86.Build.0 = Debug|Win32
 		{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}.Release|x86.ActiveCfg = Release|Win32
 		{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}.Release|x86.Build.0 = Release|Win32
+		{974C710E-F908-4E5D-948F-7586308A896B}.Debug|x86.ActiveCfg = Debug|Win32
+		{974C710E-F908-4E5D-948F-7586308A896B}.Debug|x86.Build.0 = Debug|Win32
+		{974C710E-F908-4E5D-948F-7586308A896B}.Release|x86.ActiveCfg = Release|Win32
+		{974C710E-F908-4E5D-948F-7586308A896B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

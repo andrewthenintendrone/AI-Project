@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AA5B5F4D-B53F-4327-A1F4-862597E22DBA}</ProjectGuid>
+    <ProjectGuid>{974C710E-F908-4E5D-948F-7586308A896B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Agent</RootNamespace>
+    <RootNamespace>multithreading</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -59,18 +59,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\SFML-2.4.2\include\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SFML-2.4.2\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;sfml-audio-s-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-network-s-d.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>call copyresources.bat</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -80,49 +74,17 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\SFML-2.4.2\include\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SFML-2.4.2\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;sfml-audio-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-network-s.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>call copyresources.bat</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\Agent.cpp" />
-    <ClCompile Include="source\copyMousePosition.cpp" />
-    <ClCompile Include="source\Flock.cpp" />
-    <ClCompile Include="source\GameObject.cpp" />
-    <ClCompile Include="source\IBehaviour.cpp" />
-    <ClCompile Include="source\keyBoardControl.cpp" />
-    <ClCompile Include="source\moveToMouse.cpp" />
-    <ClCompile Include="source\ObjectPool.cpp" />
-    <ClCompile Include="source\Renderer.cpp" />
-    <ClCompile Include="source\Seek.cpp" />
-    <ClCompile Include="source\TimeManager.cpp" />
-    <ClCompile Include="source\VectorMaths.cpp" />
-    <ClCompile Include="source\WinMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="source\Agent.h" />
-    <ClInclude Include="source\CopyMousePosition.h" />
-    <ClInclude Include="source\Flock.h" />
-    <ClInclude Include="source\GameObject.h" />
-    <ClInclude Include="source\IBehavior.h" />
-    <ClInclude Include="source\keyBoardControl.h" />
-    <ClInclude Include="source\moveToMouse.h" />
-    <ClInclude Include="source\ObjectPool.h" />
-    <ClInclude Include="source\Renderer.h" />
-    <ClInclude Include="source\Seek.h" />
-    <ClInclude Include="source\TimeManager.h" />
-    <ClInclude Include="source\VectorMaths.h" />
+    <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

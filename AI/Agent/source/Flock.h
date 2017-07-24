@@ -17,4 +17,9 @@ protected:
 private:
     GameObject* m_target;
     float m_flockSpeed = 200.0f;
+
+    float m_movementWeight = 0.08f;
+    float m_alignmentWeight = 0.4f;
+    float m_cohesionWeight = 0.3f;
+    float m_seperationWeight = 0.7f;
 };

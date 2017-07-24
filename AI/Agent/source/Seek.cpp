@@ -21,8 +21,9 @@ void Seek::Update(Agent *pAgent)
     {
         return;
     }
+    float speedFactor = magnitude(desiredVelocity);
     normalize(desiredVelocity);
-    desiredVelocity *= seekSpeed;
+    desiredVelocity *= seekSpeed * powf(speedFactor, 0.3f);
 
     pAgent->addVelocity(desiredVelocity);
 

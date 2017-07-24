@@ -51,6 +51,9 @@
     <ClCompile Include="source\VectorMaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\copyMousePosition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
@@ -84,6 +87,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\VectorMaths.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CopyMousePosition.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

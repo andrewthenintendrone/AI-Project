@@ -6,8 +6,14 @@
 // returns the magnitude of the vector
 float magnitude(sf::Vector2f vector);
 
+// returns the squared magnitude of a vector
+float sqrMagnitude(sf::Vector2f vector);
+
 // returns the normalized vector
 sf::Vector2f normalize(sf::Vector2f& input);
+
+// linearly interpolates between two vectors
+sf::Vector2f Lerp(sf::Vector2f start, sf::Vector2f end, float percent);
 
 // returns the angle in degrees between two vectors
 float angleBetweenVectors(sf::Vector2f leftHandVector, sf::Vector2f rightHandVector);
