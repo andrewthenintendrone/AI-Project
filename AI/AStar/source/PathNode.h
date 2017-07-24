@@ -23,13 +23,15 @@ public:
     std::list<Edge*>* getEdges();
 private:
     std::list<Edge*> edges;
-    float Gscore;
-    float Hscore;
-    float Fscore;
     sf::Vector2f position;
     sf::CircleShape nodeGraphic;
     sf::Font m_font;
     sf::Text nodeText;
+
+    float Gscore;
+    //float Hscore;
+    //float Fscore;
+    PathNode* m_prevNode;
 
     void setUp();
 };

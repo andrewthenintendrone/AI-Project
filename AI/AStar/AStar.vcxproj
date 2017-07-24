@@ -99,6 +99,7 @@
   <ItemGroup>
     <ClCompile Include="source\Edge.cpp" />
     <ClCompile Include="source\Path.cpp" />
+    <ClCompile Include="source\PathFinder.cpp" />
     <ClCompile Include="source\PathNode.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\UI.cpp" />
@@ -108,6 +109,7 @@
   <ItemGroup>
     <ClInclude Include="source\Edge.h" />
     <ClInclude Include="source\Path.h" />
+    <ClInclude Include="source\PathFinder.h" />
     <ClInclude Include="source\PathNode.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\UI.h" />

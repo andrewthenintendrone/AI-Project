@@ -3,11 +3,15 @@
 #include "IBehavior.h"
 #include "TimeManager.h"
 
+#pragma region constructor / destructor
+
+// constructor
 Agent::Agent(GameObject* parent)
 {
     m_parentPointer = parent;
 }
 
+// destructor
 Agent::~Agent()
 {
     for (auto iter = m_behaviours.begin(); iter != m_behaviours.end(); iter++)
@@ -16,11 +20,84 @@ Agent::~Agent()
     }
 }
 
+#pragma endregion
+
+
+#pragma region access behaviors
+
 void Agent::addBehaviour(IBehavior* newBehaviour)
 {
     m_behaviours.push_back(newBehaviour);
 }
 
+void Agent::removeBehavior()
+{
+    m_behaviours.pop_back();
+}
+
+#pragma endregion
+
+#pragma region access velocity
+
+// get velocity
+sf::Vector2f Agent::getVelocity()
+{
+    return m_velocity;
+}
+
+// set velocity
+void Agent::setVelocity(sf::Vector2f newVelocity)
+{
+    m_velocity = newVelocity;
+}
+
+// add to velocity
+void Agent::addVelocity(sf::Vector2f velocityToAdd)
+{
+    m_velocity += velocityToAdd;
+}
+
+#pragma endregion
+
+#pragma region access position
+
+// get position
+sf::Vector2f Agent::getPosition()
+{
+    return m_position;
+}
+
+// set position
+void Agent::setPosition(sf::Vector2f newPosition)
+{
+    m_position = newPosition;
+}
+
+#pragma endregion
+
+#pragma region access rotation
+
+// get rotation
+float Agent::getRotation()
+{
+    return m_rotation;
+}
+
+// set rotation
+void Agent::setRotation(float newRotation)
+{
+    m_rotation = newRotation;
+}
+
+#pragma endregion
+
+// get parent pointer
+GameObject* Agent::getParentPointer()
+{
+    return m_parentPointer;
+}
+
+// update
 void Agent::Update()
 {
     // TODO: Sensing Calculations
@@ -36,48 +113,17 @@ void Agent::Update()
     m_position += m_velocity * TIMEMANAGER->deltaTime();
 }
 
-void Agent::setVelocity(sf::Vector2f newVelocity)
+void Agent::sense()
 {
-    m_velocity = newVelocity;
+
 }
 
-sf::Vector2f Agent::getVelocity()
+void Agent::think()
 {
-    return m_velocity;
+
 }
 
-// adds force
-void Agent::addVelocity(sf::Vector2f velocityToAdd)
+void Agent::act()
 {
-    m_velocity += velocityToAdd;
-}
 
-void Agent::setPosition(sf::Vector2f newPosition)
-{
-    m_position = newPosition;
-}
-
-sf::Vector2f Agent::getPosition()
-{
-    return m_position;
-}
-
-void Agent::setRotation(float newRotation)
-{
-    m_rotation = newRotation;
-}
-
-float Agent::getRotation()
-{
-    return m_rotation;
-}
-
-void Agent::pushBehaviour(IBehavior* newBehavior)
-{
-    m_behaviours.push_back(newBehavior);
-}
-
-GameObject* Agent::getParentPointer()
-{
-    return m_parentPointer;
 }

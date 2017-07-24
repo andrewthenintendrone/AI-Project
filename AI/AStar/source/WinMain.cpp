@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "Path.h"
 #include "Edge.h"
+#include "PathFinder.h"
 
 // returns path to the executable
 std::string getPath()
@@ -43,6 +44,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         }
     }
 
+    PathFinder pMan;
+
     while (Renderer::getInstance()->getWindow().isOpen())
     {
         sf::Event event;
@@ -61,6 +64,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         Renderer::getInstance()->clearWindow();
         path.update(event);
         path.draw();
+        pMan.Update();
         Renderer::getInstance()->updateWindow();
     }
 
