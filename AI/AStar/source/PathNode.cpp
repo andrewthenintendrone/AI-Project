@@ -16,7 +16,7 @@ PathNode::PathNode(sf::Vector2f newPosition, unsigned int newNumber)
 
 PathNode::~PathNode()
 {
-    edges.clear();
+    edges.erase(edges.begin(), edges.end());
     m_prevNode = nullptr;
 }
 
@@ -107,9 +107,9 @@ sf::FloatRect PathNode::getBounds()
     return nodeGraphic.getGlobalBounds();
 }
 
-std::list<Edge*> PathNode::getEdges()
+std::list<Edge*>* PathNode::getEdges()
 {
-    return edges;
+    return &edges;
 }
 
 void PathNode::setUp()

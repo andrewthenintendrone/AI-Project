@@ -34,7 +34,7 @@ public:
 
     sf::Vector2f getPosition();
     sf::FloatRect getBounds();
-    std::list<Edge*> getEdges();
+    std::list<Edge*>* getEdges();
 private:
     std::list<Edge*> edges;
     sf::Vector2f position;

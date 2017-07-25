@@ -66,7 +66,7 @@ std::list<PathNode*> PathFinder::AStar()
         m_openSet.remove(m_currentNode);
         m_closedSet.push_back(m_currentNode);
 
-        for each(Edge* currentEdge in m_currentNode->getEdges())
+        for each(Edge* currentEdge in *m_currentNode->getEdges())
         {
             PathNode* neighbor = (m_currentNode == currentEdge->firstNode ? currentEdge->secondNode : currentEdge->firstNode);
 
