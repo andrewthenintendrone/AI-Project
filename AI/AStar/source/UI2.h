@@ -16,6 +16,8 @@ public:
     void draw();
     void setPosition(sf::Vector2f newPosition);
 
+    UIMODE getUImode();
+
 private:
     sf::RectangleShape m_rightBar;
 
@@ -29,6 +31,7 @@ private:
     sf::Sprite m_linkSprite;
 
     UIMODE m_currentMode = UIMODE::IDLE;
+    void updateUIState();
 
     // scaling
     sf::Vector2u windowSize;

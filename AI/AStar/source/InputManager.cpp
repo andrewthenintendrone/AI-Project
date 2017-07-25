@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include "Renderer.h"
 
 InputManager* InputManager::getInstance()
 {
@@ -55,4 +56,29 @@ bool InputManager::getRightClick()
 bool InputManager::getRightHold()
 {
     return rightholding;
+}
+
+bool InputManager::getHovering(sf::Sprite* graphic)
+{
+    return graphic->getGlobalBounds().contains(getMousePosf());
+}
+
+bool InputManager::getHovering(sf::CircleShape* circleShape)
+{
+    return circleShape->getGlobalBounds().contains(getMousePosf());
+}
+
+bool InputManager::getHovering(sf::RectangleShape* rectangleShape)
+{
+    return rectangleShape->getGlobalBounds().contains(getMousePosf());
+}
+
+sf::Vector2f InputManager::getMousePosf()
+{
+    return sf::Vector2f(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
+}
+
+sf::Vector2i InputManager::getMousePosi()
+{
+    return sf::Mouse::getPosition(Renderer::getInstance()->getWindow());
 }
