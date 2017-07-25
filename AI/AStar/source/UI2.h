@@ -12,7 +12,7 @@ class UI2
 public:
     UI2();
 
-    void update(PathNode* selectedNode);
+    void update();
     void draw();
     void setPosition(sf::Vector2f newPosition);
 
@@ -28,5 +28,10 @@ private:
     sf::Texture m_linkTex;
     sf::Sprite m_linkSprite;
 
-    UIMODE m_currentMode;
+    UIMODE m_currentMode = UIMODE::IDLE;
+
+    // scaling
+    sf::Vector2u windowSize;
+    float iconSize = 100;
+    float barWidth = 200;
 };

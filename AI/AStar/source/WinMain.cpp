@@ -30,7 +30,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     std::list<PathNode2*> pathNodes;
     for (int i = 0; i < 100; i++)
     {
-        pathNodes.push_back(new PathNode2(sf::Vector2f(rand() % Renderer::getInstance()->getWindow().getSize().x, rand() % Renderer::getInstance()->getWindow().getSize().y)));
+        pathNodes.push_back(new PathNode2(sf::Vector2f(rand() % (Renderer::getInstance()->getWindow().getSize().x - 300) + 50, rand() % (Renderer::getInstance()->getWindow().getSize().y - 100) + 50)));
     }
 
     //// add nodes
@@ -74,6 +74,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         {
             (*iter)->draw();
         }
+        gui.update();
         gui.draw();
         Renderer::getInstance()->updateWindow();
     }

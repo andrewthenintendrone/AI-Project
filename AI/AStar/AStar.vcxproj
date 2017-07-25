@@ -100,6 +100,7 @@
     <ClCompile Include="source\Edge.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\Path.cpp" />
+    <ClCompile Include="source\Path2.cpp" />
     <ClCompile Include="source\PathFinder.cpp" />
     <ClCompile Include="source\PathNode.cpp" />
     <ClCompile Include="source\PathNode2.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="source\Edge.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\Path.h" />
+    <ClInclude Include="source\Path2.h" />
     <ClInclude Include="source\PathFinder.h" />
     <ClInclude Include="source\PathNode.h" />
     <ClInclude Include="source\PathNode2.h" />

@@ -16,7 +16,11 @@ PathNode2::PathNode2(sf::Vector2f newPosition)
 
 PathNode2::~PathNode2()
 {
-
+    // removes itself from all neighbors
+    for (auto iter = m_neighbors.begin(); iter != m_neighbors.end(); iter++)
+    {
+        (*iter)->m_neighbors.remove(this);
+    }
 }
 
 void PathNode2::draw()

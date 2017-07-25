@@ -54,6 +54,9 @@
     <ClCompile Include="source\UI2.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
+    <ClCompile Include="source\Path2.cpp">
+      <Filter>Source Files\Path</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\VectorMaths.h">
@@ -84,6 +87,9 @@
       <Filter>Source Files\Path</Filter>
     </ClInclude>
     <ClInclude Include="source\UI2.h">
+      <Filter>Source Files\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Path2.h">
       <Filter>Source Files\Path</Filter>
     </ClInclude>
   </ItemGroup>

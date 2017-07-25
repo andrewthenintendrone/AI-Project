@@ -13,4 +13,6 @@ public:
     void draw();
 private:
     sf::CircleShape m_graphic;
+
+    std::list<PathNode2*> m_neighbors;
 };
