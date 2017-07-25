@@ -1,6 +1,7 @@
 #include "UI.h"
 #include "Renderer.h"
 #include "Path.h"
+#include "InputManager.h"
 std::string getPath();
 
 UI::UI()
@@ -27,8 +28,11 @@ UI::UI()
     setPosition(sf::Vector2f(0, 0));
 }
 
-void UI::update(PathNode* selectedNode, bool clicking)
+void UI::update(PathNode* selectedNode)
 {
+
+    bool clicking = InputManager::getInstance()->getLeftClick();
+
     if (selectedNode != nullptr)
     {
         m_selectedNode = selectedNode;

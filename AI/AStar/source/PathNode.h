@@ -4,12 +4,12 @@
 #include "Edge.h"
 #include <limits>
 
+class Path;
+
 const sf::Color fillColor = sf::Color(79, 129, 189);
 const sf::Color fillColorSelected = sf::Color(128, 100, 162);
 const sf::Color outlineColor = sf::Color(56, 93, 138);
 const sf::Color outlineColorSelected = sf::Color(92, 71, 118);
-
-enum class NodeType { STARTNODE, NODE, ENDNODE, ONLYNODE };
 
 class PathNode
 {
@@ -21,16 +21,20 @@ public:
     void dragWithMouse(sf::Vector2f mousePos);
     void draw();
 
-    void setNodeType(NodeType newNodeType);
     void setPrevNode(PathNode* newPrevNode);
     PathNode* getPrevNode();
-    void setGScore(float newGScore);
-    float getGScore();
 
+    void setScores(Path* path);
+
+    float getGScore();
+    void setGScore(float newGscore);
+
+    float getFScore();
+    void setFScore(float newFscore);
 
     sf::Vector2f getPosition();
     sf::FloatRect getBounds();
-    std::list<Edge*>* getEdges();
+    std::list<Edge*> getEdges();
 private:
     std::list<Edge*> edges;
     sf::Vector2f position;
@@ -38,11 +42,8 @@ private:
     sf::Font m_font;
     sf::Text nodeText;
 
-
-    NodeType m_nodeType = NodeType::NODE;
-    float Gscore = std::numeric_limits<float>::infinity();
-    //float Hscore;
-    //float Fscore;
+    float Gscore;
+    float Fscore;
 
     PathNode* m_prevNode = nullptr;
 

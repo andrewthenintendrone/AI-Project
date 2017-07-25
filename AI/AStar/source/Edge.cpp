@@ -19,8 +19,8 @@ Edge::Edge(PathNode* newFirstNode, PathNode* newSecondNode)
 
 Edge::~Edge()
 {
-    firstNode->getEdges()->remove(this);
-    secondNode->getEdges()->remove(this);
+    firstNode->getEdges().remove(this);
+    secondNode->getEdges().remove(this);
 }
 
 void Edge::draw()

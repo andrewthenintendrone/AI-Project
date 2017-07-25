@@ -10,7 +10,7 @@ class UI
 public:
     UI();
 
-    void update(PathNode* selectedNode, bool clicking);
+    void update(PathNode* selectedNode);
     void draw();
     void setPosition(sf::Vector2f newPosition);
     void setPath(Path* newPath);

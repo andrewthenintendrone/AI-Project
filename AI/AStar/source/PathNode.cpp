@@ -1,5 +1,7 @@
 #include "Renderer.h"
 #include "PathNode.h"
+#include "VectorMaths.h"
+#include "Path.h"
 
 std::string getPath();
 
@@ -14,10 +16,8 @@ PathNode::PathNode(sf::Vector2f newPosition, unsigned int newNumber)
 
 PathNode::~PathNode()
 {
-    while (!edges.empty())
-    {
-        delete edges.back();
-    }
+    edges.clear();
+    m_prevNode = nullptr;
 }
 
 void PathNode::addEdge(Edge* newEdge)
@@ -60,11 +60,6 @@ void PathNode::draw()
     }
 }
 
-void PathNode::setNodeType(NodeType newNodeType)
-{
-    m_nodeType = newNodeType;
-}
-
 void PathNode::setPrevNode(PathNode* prevNode)
 {
     m_prevNode = prevNode;
@@ -75,14 +70,31 @@ PathNode* PathNode::getPrevNode()
     return m_prevNode;
 }
 
-void PathNode::setGScore(float newGScore)
+void PathNode::setScores(Path* path)
 {
-    Gscore = newGScore;
+    Gscore = std::numeric_limits<float>::infinity();
+    // replace this with end node
+    Fscore = std::numeric_limits<float>::infinity();
 }
 
 float PathNode::getGScore()
 {
     return Gscore;
+}
+
+void PathNode::setGScore(float newGscore)
+{
+    Gscore = newGscore;
+}
+
+float PathNode::getFScore()
+{
+    return Fscore;
+}
+
+void PathNode::setFScore(float newFscore)
+{
+    Fscore = newFscore;
 }
 
 sf::Vector2f PathNode::getPosition()
@@ -95,9 +107,9 @@ sf::FloatRect PathNode::getBounds()
     return nodeGraphic.getGlobalBounds();
 }
 
-std::list<Edge*>* PathNode::getEdges()
+std::list<Edge*> PathNode::getEdges()
 {
-    return &edges;
+    return edges;
 }
 
 void PathNode::setUp()

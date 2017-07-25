@@ -1,6 +1,8 @@
 #include "PathFinder.h"
 #include "Renderer.h"
 #include "Path.h"
+#include "VectorMaths.h"
+#include <algorithm>
 
 std::string getPath();
 
@@ -27,79 +29,69 @@ void PathFinder::Update()
 {
     Renderer::getInstance()->Draw(m_sprite);
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::B))
     {
-        std::list<PathNode*> shortestPath = findShortestPath();
-        int x = 0;
+        std::list<PathNode*> shortestPath = AStar();
     }
 }
 
 // uses AStar to find the shortest path
-std::list<PathNode*> PathFinder::findShortestPath()
+std::list<PathNode*> PathFinder::AStar()
 {
-    goalNode = m_path->getLastNode();
+    m_path->resetNodeScores();
+    m_closedSet.clear();
+    m_openSet.clear();
 
-    currentNode = m_path->getNode(0);
-    currentNode->setPrevNode(currentNode);
-    currentNode->setGScore(0);
+    m_goalNode = m_path->getLastNode();
+    m_currentNode = m_path->getFirstNode();
+    m_currentNode->setGScore(0);
+    m_currentNode->setFScore(magnitude(m_goalNode->getPosition() - m_currentNode->getPosition()));
+    m_openSet.push_back(m_currentNode);
 
-    // Push start node onto priority queue
-    openSet.push_back(currentNode);
-
-    // while queue is not empty
-    while (!openSet.empty())
+    while (!m_openSet.empty())
     {
-        // find next node by priority
-        for (auto iter = openSet.begin(); iter != openSet.end(); iter++)
+        for (auto iter = m_openSet.begin(); iter != m_openSet.end(); iter++)
         {
-            if ((*iter)->getGScore() < currentNode->getGScore())
+            if ((*iter)->getFScore() <= m_currentNode->getFScore())
             {
-                currentNode = (*iter);
+                m_currentNode = (*iter);
             }
         }
 
-        if (currentNode == goalNode)
+        if (m_currentNode == m_goalNode)
         {
-            return reconstructPath(currentNode->getPrevNode(), currentNode);
+            return reconstructPath(m_currentNode->getPrevNode(), m_currentNode);
         }
 
-        // mark that node as traversed
-        openSet.remove(currentNode);
-        closedSet.push_back(currentNode);
+        m_openSet.remove(m_currentNode);
+        m_closedSet.push_back(m_currentNode);
 
-        // loop through the current node's edges
-        for each(Edge* currentEdge in *currentNode->getEdges())
+        for each(Edge* currentEdge in m_currentNode->getEdges())
         {
-            PathNode* endNode;
+            PathNode* neighbor = (m_currentNode == currentEdge->firstNode ? currentEdge->secondNode : currentEdge->firstNode);
 
-            // find which node
-            //endNode = (currentNode == currentEdge->firstNode) ? currentEdge->secondNode : currentEdge->firstNode;
-
-            endNode = currentEdge->secondNode;
-
-            // next node has already been processed
-            if (std::find(closedSet.begin(), closedSet.end(), endNode) != closedSet.end())
+            // neighbor has not yet been processed
+            if (std::find(m_closedSet.begin(), m_closedSet.end(), neighbor) == m_closedSet.end())
             {
-                continue;
-            }
-            // has not been processed
-            // add it to the priority queue
-            else
-            {
-                openSet.push_back(endNode);
-            }
+                // if is not in the queue add it
+                if (std::find(m_openSet.begin(), m_openSet.end(), neighbor) == m_openSet.end())
+                {
+                    m_openSet.push_back(neighbor);
+                }
 
-            float newGScore = currentNode->getGScore() + currentEdge->length();
-
-            if (newGScore >= endNode->getGScore())
-            {
-                continue;
+                float tentativeGscore = m_currentNode->getGScore() + magnitude(neighbor->getPosition() - m_currentNode->getPosition());
+                if (tentativeGscore < neighbor->getGScore())
+                {
+                    neighbor->setPrevNode(m_currentNode);
+                    neighbor->setGScore(tentativeGscore);
+                    neighbor->setFScore(neighbor->getGScore() + magnitude(m_goalNode->getPosition() - neighbor->getPosition()));
+                }
             }
-
-            endNode->setPrevNode(currentNode);
-            endNode->setGScore(newGScore);
         }
     }
+
+    std::list<PathNode*> a;
+    return a;
 }
 
 std::list<PathNode*> PathFinder::reconstructPath(PathNode* cameFrom, PathNode* current)
@@ -107,7 +99,7 @@ std::list<PathNode*> PathFinder::reconstructPath(PathNode* cameFrom, PathNode* c
     // backtrack to get the path
     std::list<PathNode*> totalPath;
     totalPath.push_back(current);
-    while (std::find(closedSet.begin(), closedSet.end(), current) != closedSet.end())
+    while (std::find(m_closedSet.begin(), m_closedSet.end(), current) != m_closedSet.end())
     {
         current = current->getPrevNode();
         totalPath.push_front(current);

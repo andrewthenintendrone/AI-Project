@@ -13,7 +13,7 @@ public:
 
     void Update();
 
-    std::list<PathNode*> findShortestPath();
+    std::list<PathNode*> AStar();
 
 private:
     // graphic
@@ -23,10 +23,10 @@ private:
     // Path Finding
     Path* m_path;
 
-    PathNode* currentNode;
-    PathNode* goalNode;
-    std::list<PathNode*> openSet;
-    std::list<PathNode*> closedSet;
+    PathNode* m_currentNode;
+    PathNode* m_goalNode;
+    std::list<PathNode*> m_openSet;
+    std::list<PathNode*> m_closedSet;
 
     std::list<PathNode*> reconstructPath(PathNode* cameFrom, PathNode* current);
 };

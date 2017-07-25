@@ -1,6 +1,7 @@
 #include "Path.h"
 #include "SFML\Graphics.hpp"
 #include "Renderer.h"
+#include "InputManager.h"
 
 std::string getPath();
 
@@ -36,6 +37,11 @@ PathNode* Path::getNode(int index)
     return (*iter);
 }
 
+PathNode* Path::getFirstNode()
+{
+    return m_pathNodes.front();
+}
+
 PathNode* Path::getLastNode()
 {
     return m_pathNodes.back();
@@ -46,7 +52,7 @@ std::list<PathNode*>& Path::getPathNodes()
     return m_pathNodes;
 }
 
-void Path::update(sf::Event currentEvent)
+void Path::update()
 {
     m_selectedPathNode = nullptr;
 
@@ -59,11 +65,11 @@ void Path::update(sf::Event currentEvent)
         if ((*iter)->getBounds().contains(mousePos))
         {
             m_selectedPathNode = (*iter);
-            if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left && m_draggingNode == nullptr)
+            if (InputManager::getInstance()->getLeftHold() && m_draggingNode == nullptr)
             {
                 m_draggingNode = (*iter);
             }
-            if (currentEvent.type == sf::Event::EventType::MouseButtonReleased && currentEvent.mouseButton.button == sf::Mouse::Left && m_draggingNode != nullptr)
+            else
             {
                 m_draggingNode = nullptr;
             }
@@ -76,18 +82,18 @@ void Path::update(sf::Event currentEvent)
     }
 
     // deal with dropdown box
-    if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Right)
+    if (InputManager::getInstance()->getRightClick())
     {
         m_gui.setPosition(mousePos);
         m_gui.isVisible = true;
     }
-    if (currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left && !m_gui.getBounds().contains(mousePos))
+    if (InputManager::getInstance()->getLeftClick() && !m_gui.getBounds().contains(mousePos))
     {
         m_gui.isVisible = false;
     }
     if (m_gui.isVisible)
     {
-        m_gui.update(m_selectedPathNode, currentEvent.type == sf::Event::EventType::MouseButtonPressed && currentEvent.mouseButton.button == sf::Mouse::Left);
+        m_gui.update(m_selectedPathNode);
     }
 }
 
@@ -100,5 +106,13 @@ void Path::draw()
     if (m_gui.isVisible)
     {
         m_gui.draw();
+    }
+}
+
+void Path::resetNodeScores()
+{
+    for (auto iter = m_pathNodes.begin(); iter != m_pathNodes.end(); iter++)
+    {
+        (*iter)->setScores(this);
     }
 }

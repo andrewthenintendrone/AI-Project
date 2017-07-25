@@ -5,6 +5,7 @@
 #include "Path.h"
 #include "Edge.h"
 #include "PathFinder.h"
+#include "InputManager.h"
 
 // returns path to the executable
 std::string getPath()
@@ -55,8 +56,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
             }
         }
 
+        InputManager::getInstance()->update(event);
         Renderer::getInstance()->clearWindow();
-        path.update(event);
+        path.update();
         path.draw();
         pMan.Update();
         Renderer::getInstance()->updateWindow();
