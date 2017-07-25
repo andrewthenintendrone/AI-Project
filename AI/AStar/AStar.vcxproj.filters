@@ -48,6 +48,12 @@
     <ClCompile Include="source\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\PathNode2.cpp">
+      <Filter>Source Files\Path</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UI2.cpp">
+      <Filter>Source Files\Path</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\VectorMaths.h">
@@ -73,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="source\InputManager.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PathNode2.h">
+      <Filter>Source Files\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UI2.h">
+      <Filter>Source Files\Path</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
