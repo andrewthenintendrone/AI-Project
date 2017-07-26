@@ -20,6 +20,17 @@ public:
     sf::CircleShape* getGraphic();
     sf::Vector2f getPosition();
 
+    // score access
+    float getGscore();
+    void setGscore(float newGscore);
+
+    float getHscore();
+    void setHscore(float newHscore);
+
+    float getFscore();
+    void setFscore(float newFscore);
+
+
 private:
     // graphic
     sf::CircleShape m_graphic;
@@ -27,7 +38,7 @@ private:
     // pathFinding
     std::list<Edge*> m_edges;
 
-    float FScore = std::numeric_limits<float>::infinity();
-    float GScore = std::numeric_limits<float>::infinity();
+    float Gscore = std::numeric_limits<float>::infinity();
     float Hscore = std::numeric_limits<float>::infinity();
+    float Fscore = std::numeric_limits<float>::infinity();
 };

@@ -11,7 +11,7 @@ public:
 
     void Update();
 
-    std::list<PathNode*> AStar(PathNode* startNode, PathNode* endNode);
+    std::list<PathNode*> AStar();
 
 private:
     // graphics

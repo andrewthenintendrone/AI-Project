@@ -35,7 +35,7 @@ void PathFinder::Update()
 }
 
 // uses AStar to find the shortest path
-std::list<PathNode*> PathFinder::AStar(PathNode* newStartNode, PathNode* newGoalNode)
+std::list<PathNode*> PathFinder::AStar()
 {
     m_closedSet.clear();
     m_openSet.clear();

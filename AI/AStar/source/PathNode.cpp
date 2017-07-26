@@ -53,3 +53,33 @@ sf::Vector2f PathNode::getPosition()
 {
     return m_graphic.getPosition();
 }
+
+float PathNode::getGscore()
+{
+    return Gscore;
+}
+
+void PathNode::setGscore(float newGscore)
+{
+    Gscore = newGscore;
+}
+
+float PathNode::getHscore()
+{
+    return Hscore;
+}
+
+void PathNode::setHscore(float newHscore)
+{
+    Hscore = newHscore;
+}
+
+float PathNode::getFscore()
+{
+    return Fscore;
+}
+
+void PathNode::setFscore(float newFscore)
+{
+    Fscore = newFscore;
+}
