@@ -1,4 +1,4 @@
-#include "UI2.h"
+#include "UI.h"
 #include "Renderer.h"
 #include "InputManager.h"
 
@@ -9,7 +9,7 @@ UI::UI()
     // setup size and position
     windowSize = Renderer::getInstance()->getWindow().getSize();
 
-    m_rightBar.setSize(sf::Vector2f(barWidth, windowSize.y));
+    m_rightBar.setSize(sf::Vector2f((float)barWidth, (float)windowSize.y));
     m_rightBar.setFillColor(sf::Color(0, 0, 0, 128));
 
     // calculate icon size by dividing wanted size by image size
@@ -58,13 +58,13 @@ void UI::setPosition(sf::Vector2f newPosition)
     m_rightBar.setPosition(newPosition);
 
     // move create node option graphic
-    m_addSprite.setPosition(m_rightBar.getPosition().x + (barWidth / 2), windowSize.y / 4);
+    m_addSprite.setPosition((float)m_rightBar.getPosition().x + (barWidth / 2), (float)windowSize.y / 4);
 
     // move delete node option graphic
-    m_removeSprite.setPosition(m_rightBar.getPosition().x + (barWidth / 2), windowSize.y / 2);
+    m_removeSprite.setPosition((float)m_rightBar.getPosition().x + (barWidth / 2), (float)windowSize.y / 2);
 
     // move link node option graphic
-    m_linkSprite.setPosition(m_rightBar.getPosition().x + (barWidth / 2), windowSize.y * 3 / 4);
+    m_linkSprite.setPosition((float)m_rightBar.getPosition().x + (barWidth / 2), (float)windowSize.y * 3 / 4);
 }
 
 UIMODE UI::getUImode()

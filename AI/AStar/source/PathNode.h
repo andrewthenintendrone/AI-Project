@@ -33,6 +33,7 @@ public:
     PathNode* getPreviousNode();
     void setPreviousNode(PathNode* newPreviousNode);
 
+    std::list<Edge*>* getEdges();
 
 private:
     // graphic

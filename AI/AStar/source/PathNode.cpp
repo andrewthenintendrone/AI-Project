@@ -93,3 +93,8 @@ void PathNode::setPreviousNode(PathNode* newPreviousNode)
 {
     m_prevNode = newPreviousNode;
 }
+
+std::list<Edge*>* PathNode::getEdges()
+{
+    return &m_edges;
+}

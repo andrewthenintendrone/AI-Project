@@ -6,8 +6,6 @@
 #include "Edge.h"
 #include "PathFinder.h"
 #include "InputManager.h"
-#include "Path2.h"
-#include "UI2.h"
 
 // returns path to the executable
 std::string getPath()

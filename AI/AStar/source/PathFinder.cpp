@@ -1,5 +1,6 @@
 #include "PathFinder.h"
 #include "Renderer.h"
+#include "Edge.h"
 #include "VectorMaths.h"
 #include <algorithm>
 
@@ -56,7 +57,7 @@ std::list<PathNode*> PathFinder::AStar()
 
         if (m_currentNode == m_goalNode)
         {
-            return reconstructPath(m_currentNode->getPrevNode(), m_currentNode);
+            return reconstructPath(m_currentNode->getPreviousNode(), m_currentNode);
         }
 
         m_openSet.remove(m_currentNode);
@@ -64,7 +65,7 @@ std::list<PathNode*> PathFinder::AStar()
 
         for each(Edge* currentEdge in *m_currentNode->getEdges())
         {
-            PathNode* neighbor = (m_currentNode == currentEdge->m_ ? currentEdge->secondNode : currentEdge->firstNode);
+            PathNode* neighbor = (m_currentNode == currentEdge->m_firstNode ? currentEdge->m_secondNode : currentEdge->m_firstNode);
 
             // neighbor has not yet been processed
             if (std::find(m_closedSet.begin(), m_closedSet.end(), neighbor) == m_closedSet.end())
@@ -75,12 +76,12 @@ std::list<PathNode*> PathFinder::AStar()
                     m_openSet.push_back(neighbor);
                 }
 
-                float tentativeGscore = m_currentNode->getGScore() + magnitude(neighbor->getPosition() - m_currentNode->getPosition());
-                if (tentativeGscore < neighbor->getGScore())
+                float tentativeGscore = m_currentNode->getGscore() + magnitude(neighbor->getPosition() - m_currentNode->getPosition());
+                if (tentativeGscore < neighbor->getGscore())
                 {
-                    neighbor->setPrevNode(m_currentNode);
-                    neighbor->setGScore(tentativeGscore);
-                    neighbor->setFScore(neighbor->getGScore() + magnitude(m_goalNode->getPosition() - neighbor->getPosition()));
+                    neighbor->setPreviousNode(m_currentNode);
+                    neighbor->setGscore(tentativeGscore);
+                    neighbor->setFscore(neighbor->getGscore() + magnitude(m_goalNode->getPosition() - neighbor->getPosition()));
                 }
             }
         }
@@ -97,7 +98,7 @@ std::list<PathNode*> PathFinder::reconstructPath(PathNode* cameFrom, PathNode* c
     totalPath.push_back(current);
     while (std::find(m_closedSet.begin(), m_closedSet.end(), current) != m_closedSet.end())
     {
-        current = current->getPrevNode();
+        current = current->getPreviousNode();
         totalPath.push_front(current);
     }
 
