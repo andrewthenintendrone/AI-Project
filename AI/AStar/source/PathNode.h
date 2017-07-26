@@ -30,6 +30,9 @@ public:
     float getFscore();
     void setFscore(float newFscore);
 
+    PathNode* getPreviousNode();
+    void setPreviousNode(PathNode* newPreviousNode);
+
 
 private:
     // graphic
@@ -41,4 +44,5 @@ private:
     float Gscore = std::numeric_limits<float>::infinity();
     float Hscore = std::numeric_limits<float>::infinity();
     float Fscore = std::numeric_limits<float>::infinity();
+    PathNode* m_prevNode = nullptr;
 };

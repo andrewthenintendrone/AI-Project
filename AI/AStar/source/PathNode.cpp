@@ -83,3 +83,13 @@ void PathNode::setFscore(float newFscore)
 {
     Fscore = newFscore;
 }
+
+PathNode* PathNode::getPreviousNode()
+{
+    return m_prevNode;
+}
+
+void PathNode::setPreviousNode(PathNode* newPreviousNode)
+{
+    m_prevNode = newPreviousNode;
+}

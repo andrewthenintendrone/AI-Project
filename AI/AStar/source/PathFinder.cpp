@@ -40,15 +40,15 @@ std::list<PathNode*> PathFinder::AStar()
     m_closedSet.clear();
     m_openSet.clear();
 
-    m_startNode->setGScore(0);
-    m_currentNode->setFScore(magnitude(m_goalNode->getPosition() - m_currentNode->getPosition()));
-    m_openSet.push_back(m_currentNode);
+    m_startNode->setGscore(0);
+    m_startNode->setFscore(magnitude(m_goalNode->getPosition() - m_startNode->getPosition()));
+    m_openSet.push_back(m_startNode);
 
     while (!m_openSet.empty())
     {
         for (auto iter = m_openSet.begin(); iter != m_openSet.end(); iter++)
         {
-            if ((*iter)->getFScore() <= m_currentNode->getFScore())
+            if ((*iter)->getFscore() <= m_currentNode->getFscore())
             {
                 m_currentNode = (*iter);
             }
@@ -64,7 +64,7 @@ std::list<PathNode*> PathFinder::AStar()
 
         for each(Edge* currentEdge in *m_currentNode->getEdges())
         {
-            PathNode* neighbor = (m_currentNode == currentEdge->firstNode ? currentEdge->secondNode : currentEdge->firstNode);
+            PathNode* neighbor = (m_currentNode == currentEdge->m_ ? currentEdge->secondNode : currentEdge->firstNode);
 
             // neighbor has not yet been processed
             if (std::find(m_closedSet.begin(), m_closedSet.end(), neighbor) == m_closedSet.end())

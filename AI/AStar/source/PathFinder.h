@@ -21,6 +21,7 @@ private:
     // Path Finding
     PathNode* m_startNode;
     PathNode* m_goalNode;
+    PathNode* m_currentNode;
 
     std::list<PathNode*> m_openSet;
     std::list<PathNode*> m_closedSet;
