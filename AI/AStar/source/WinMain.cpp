@@ -25,27 +25,16 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     srand(unsigned(time(NULL)));
 
     Path2 path;
+    path.addNode(sf::Vector2f((float)(rand() % (Renderer::getInstance()->getWindow().getSize().x - 300) + 50), (float)(rand() % (Renderer::getInstance()->getWindow().getSize().y - 100) + 50)));
     for (int i = 0; i < 10; i++)
     {
         path.addNode(sf::Vector2f((float)(rand() % (Renderer::getInstance()->getWindow().getSize().x - 300) + 50), (float)(rand() % (Renderer::getInstance()->getWindow().getSize().y - 100) + 50)));
     }
 
+    sf::Event event;
     while (Renderer::getInstance()->getWindow().isOpen())
     {
-        sf::Event event;
-        while (Renderer::getInstance()->getWindow().pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                Renderer::getInstance()->closeWindow();
-            }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-            {
-                Renderer::getInstance()->closeWindow();
-            }
-        }
-
-        InputManager::getInstance()->update(event);
+        InputManager::getInstance()->update();
         Renderer::getInstance()->clearWindow();
         path.update();
         path.draw();

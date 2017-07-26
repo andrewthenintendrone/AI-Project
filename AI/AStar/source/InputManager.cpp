@@ -7,32 +7,49 @@ InputManager* InputManager::getInstance()
     return &instance;
 }
 
-void InputManager::update(sf::Event & currentEvent)
+void InputManager::update()
 {
+    sf::Event event;
+    Renderer::getInstance()->getWindow().pollEvent(event);
+
+    // deal with closing
+    if (event.type == sf::Event::Closed)
+    {
+        Renderer::getInstance()->closeWindow();
+    }
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+    {
+        Renderer::getInstance()->closeWindow();
+    }
+
     leftclicking = false;
     rightclicking = false;
+    leftreleasing = false;
+    rightreleasing = false;
 
-    if (currentEvent.type == sf::Event::EventType::MouseButtonPressed)
+    if (event.type == sf::Event::MouseButtonPressed)
     {
-        if (currentEvent.mouseButton.button == sf::Mouse::Button::Left)
+        if (event.mouseButton.button == sf::Mouse::Button::Left)
         {
             leftclicking = true;
             leftholding = true;
         }
-        if (currentEvent.mouseButton.button == sf::Mouse::Button::Right)
+        if (event.mouseButton.button == sf::Mouse::Button::Right)
         {
             rightclicking = true;
             rightholding = true;
         }
     }
-    if (currentEvent.type == sf::Event::EventType::MouseButtonReleased)
+    if (event.type == sf::Event::MouseButtonReleased)
     {
-        if (currentEvent.mouseButton.button == sf::Mouse::Button::Left)
+        if (event.mouseButton.button == sf::Mouse::Button::Left)
         {
+            leftreleasing = true;
             leftholding = false;
         }
-        if (currentEvent.mouseButton.button == sf::Mouse::Button::Right)
+        if (event.mouseButton.button == sf::Mouse::Button::Right)
         {
+            rightreleasing = true;
             rightholding = false;
         }
     }
@@ -46,6 +63,16 @@ bool InputManager::getLeftClick()
 bool InputManager::getLeftHold()
 {
     return leftholding;
+}
+
+bool InputManager::getLeftRelease()
+{
+    return leftreleasing;
+}
+
+bool InputManager::getRightRelease()
+{
+    return rightreleasing;
 }
 
 bool InputManager::getRightClick()

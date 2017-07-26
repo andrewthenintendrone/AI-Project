@@ -6,10 +6,13 @@ class InputManager
 public:
     static InputManager* getInstance();
 
-    void update(sf::Event& currentEvent);
+    void update();
 
     bool getLeftClick();
     bool getLeftHold();
+
+    bool getLeftRelease();
+    bool getRightRelease();
 
     bool getRightClick();
     bool getRightHold();
@@ -23,8 +26,11 @@ public:
 
 private:
     bool leftclicking = false;
-    bool leftholding = false;
-
     bool rightclicking = false;
+
+    bool leftholding = false;
     bool rightholding = false;
+
+    bool leftreleasing = false;
+    bool rightreleasing = false;
 };
