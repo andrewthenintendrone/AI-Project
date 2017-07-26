@@ -1,41 +1,38 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Edge.h"
-#include "PathNode.h"
 
 class Path;
+
+enum class UIMODE {IDLE, ADDING, REMOVING, LINKING};
 
 class UI
 {
 public:
     UI();
 
-    void update(PathNode* selectedNode);
+    void update();
     void draw();
     void setPosition(sf::Vector2f newPosition);
-    void setPath(Path* newPath);
-    sf::FloatRect getBounds();
-    bool isVisible = false;
+
+    UIMODE getUImode();
 
 private:
-    // dropdown box graphic
-    sf::RectangleShape m_dropDown;
+    sf::RectangleShape m_rightBar;
 
-    // create node option graphic
-    sf::Texture m_optionCreateIcon;
-    sf::Sprite m_optionCreateIconSprite;
+    sf::Texture m_addTex;
+    sf::Sprite m_addSprite;
 
-    // destroy node option graphic
-    sf::Texture m_optionDeleteIcon;
-    sf::Sprite m_optionDeleteIconSprite;
+    sf::Texture m_removeTex;
+    sf::Sprite m_removeSprite;
 
-    // link nodes option graphic
-    sf::Texture m_optionLinkIcon;
-    sf::Sprite m_optionLinkIconSprite;
+    sf::Texture m_linkTex;
+    sf::Sprite m_linkSprite;
 
+    UIMODE m_currentMode = UIMODE::IDLE;
+    void updateUIState();
 
-    Path* m_path = nullptr;
-    PathNode* m_selectedNode = nullptr;
-    PathNode* m_linkNode = nullptr;
-    bool linking = false;
+    // scaling
+    sf::Vector2u windowSize;
+    float iconSize = 100;
+    float barWidth = 200;
 };

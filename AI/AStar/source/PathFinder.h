@@ -3,28 +3,25 @@
 #include "PathNode.h"
 #include <list>
 
-class Path;
-
 class PathFinder
 {
 public:
-    PathFinder(Path* newPath);
+    PathFinder(PathNode* start, PathNode* goal);
     ~PathFinder();
 
     void Update();
 
-    std::list<PathNode*> AStar();
+    std::list<PathNode*> AStar(PathNode* startNode, PathNode* endNode);
 
 private:
-    // graphic
+    // graphics
     sf::Texture* m_texture;
     sf::Sprite* m_sprite;
 
     // Path Finding
-    Path* m_path;
-
-    PathNode* m_currentNode;
+    PathNode* m_startNode;
     PathNode* m_goalNode;
+
     std::list<PathNode*> m_openSet;
     std::list<PathNode*> m_closedSet;
 

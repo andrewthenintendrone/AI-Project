@@ -16,9 +16,6 @@
     <Filter Include="Source Files\Path">
       <UniqueIdentifier>{fb089334-049b-486f-9765-671a759247a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Path\UI">
-      <UniqueIdentifier>{3cccb130-29b6-4ae7-b014-a18ba916b897}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\WinMain.cpp">
@@ -26,18 +23,6 @@
     </ClCompile>
     <ClCompile Include="source\VectorMaths.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\PathNode.cpp">
-      <Filter>Source Files\Path</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Path.cpp">
-      <Filter>Source Files\Path</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Edge.cpp">
-      <Filter>Source Files\Path</Filter>
-    </ClCompile>
-    <ClCompile Include="source\UI.cpp">
-      <Filter>Source Files\Path\UI</Filter>
     </ClCompile>
     <ClCompile Include="source\Renderer.cpp">
       <Filter>Source Files</Filter>
@@ -48,34 +33,22 @@
     <ClCompile Include="source\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\PathNode2.cpp">
+    <ClCompile Include="source\Path.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
-    <ClCompile Include="source\UI2.cpp">
+    <ClCompile Include="source\PathNode.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
-    <ClCompile Include="source\Path2.cpp">
+    <ClCompile Include="source\UI.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
-    <ClCompile Include="source\Edge2.cpp">
+    <ClCompile Include="source\Edge.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\VectorMaths.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\PathNode.h">
-      <Filter>Source Files\Path</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Path.h">
-      <Filter>Source Files\Path</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Edge.h">
-      <Filter>Source Files\Path</Filter>
-    </ClInclude>
-    <ClInclude Include="source\UI.h">
-      <Filter>Source Files\Path\UI</Filter>
     </ClInclude>
     <ClInclude Include="source\Renderer.h">
       <Filter>Source Files</Filter>
@@ -86,16 +59,16 @@
     <ClInclude Include="source\InputManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\PathNode2.h">
+    <ClInclude Include="source\Path.h">
       <Filter>Source Files\Path</Filter>
     </ClInclude>
-    <ClInclude Include="source\UI2.h">
+    <ClInclude Include="source\PathNode.h">
       <Filter>Source Files\Path</Filter>
     </ClInclude>
-    <ClInclude Include="source\Path2.h">
+    <ClInclude Include="source\UI.h">
       <Filter>Source Files\Path</Filter>
     </ClInclude>
-    <ClInclude Include="source\Edge2.h">
+    <ClInclude Include="source\Edge.h">
       <Filter>Source Files\Path</Filter>
     </ClInclude>
   </ItemGroup>

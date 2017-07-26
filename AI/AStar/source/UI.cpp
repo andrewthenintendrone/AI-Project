@@ -1,138 +1,118 @@
-#include "UI.h"
+#include "UI2.h"
 #include "Renderer.h"
-#include "Path.h"
 #include "InputManager.h"
+
 std::string getPath();
 
 UI::UI()
 {
-    // setup dropdown box graphic
-    m_dropDown.setSize(sf::Vector2f(96, 96));
-    m_dropDown.setFillColor(sf::Color::Black);
+    // setup size and position
+    windowSize = Renderer::getInstance()->getWindow().getSize();
+
+    m_rightBar.setSize(sf::Vector2f(barWidth, windowSize.y));
+    m_rightBar.setFillColor(sf::Color(0, 0, 0, 128));
+
+    // calculate icon size by dividing wanted size by image size
+    float adjustedIconSize = (iconSize / 96.0f);
 
     // setup create node option graphic
-    m_optionCreateIcon.loadFromFile(getPath() + "\\resources\\graphics\\ic_add_circle_outline_white_24dp_2x.png");
-    m_optionCreateIconSprite.setTexture(m_optionCreateIcon);
-    m_optionCreateIconSprite.setColor(sf::Color::White);
+    m_addTex.loadFromFile(getPath() + "\\resources\\graphics\\ic_add_circle_outline_white_24dp.png");
+    m_addSprite.setTexture(m_addTex);
+    m_addSprite.setScale(adjustedIconSize, adjustedIconSize);
+    m_addSprite.setOrigin(m_addSprite.getLocalBounds().width / 2.0f, m_addSprite.getLocalBounds().height / 2.0f);
 
     // setup delete node option graphic
-    m_optionDeleteIcon.loadFromFile(getPath() + "\\resources\\graphics\\ic_remove_circle_outline_white_24dp_2x.png");
-    m_optionDeleteIconSprite.setTexture(m_optionDeleteIcon);
-    m_optionDeleteIconSprite.setColor(sf::Color::White);
+    m_removeTex.loadFromFile(getPath() + "\\resources\\graphics\\ic_remove_circle_outline_white_24dp.png");
+    m_removeSprite.setTexture(m_removeTex);
+    m_removeSprite.setScale(adjustedIconSize, adjustedIconSize);
+    m_removeSprite.setOrigin(m_removeSprite.getLocalBounds().width / 2.0f, m_removeSprite.getLocalBounds().height / 2.0f);
 
     // setup link node option graphic
-    m_optionLinkIcon.loadFromFile(getPath() + "\\resources\\graphics\\ic_link_white_24dp_2x.png");
-    m_optionLinkIconSprite.setTexture(m_optionLinkIcon);
-    m_optionLinkIconSprite.setColor(sf::Color::White);
+    m_linkTex.loadFromFile(getPath() + "\\resources\\graphics\\ic_share_white_24dp.png");
+    m_linkSprite.setTexture(m_linkTex);
+    m_linkSprite.setScale(adjustedIconSize, adjustedIconSize);
+    m_linkSprite.setOrigin(m_linkSprite.getLocalBounds().width / 2.0f, m_linkSprite.getLocalBounds().height / 2.0f);
 
-    setPosition(sf::Vector2f(0, 0));
+    setPosition(sf::Vector2f(windowSize.x - barWidth, 0));
 }
 
-void UI::update(PathNode* selectedNode)
+void UI::update()
 {
-
-    bool clicking = InputManager::getInstance()->getLeftClick();
-
-    if (selectedNode != nullptr)
-    {
-        m_selectedNode = selectedNode;
-    }
-
-    // clear all selections to white
-    m_optionCreateIconSprite.setColor(sf::Color::White);
-    m_optionDeleteIconSprite.setColor(sf::Color::White);
-    m_optionLinkIconSprite.setColor(sf::Color::White);
-
-    // store mouse position
-    sf::Vector2f mousePos(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
-
-    if (!linking)
-    {
-        // create node
-        if (m_optionCreateIconSprite.getGlobalBounds().contains(mousePos))
-        {
-            m_optionCreateIconSprite.setColor(sf::Color::Green);
-            if (clicking)
-            {
-                m_path->addNode(mousePos);
-                isVisible = false;
-            }
-        }
-
-        // delete node
-        if (m_optionDeleteIconSprite.getGlobalBounds().contains(mousePos))
-        {
-            m_optionDeleteIconSprite.setColor(sf::Color::Red);
-            if (clicking)
-            {
-                if (m_selectedNode != nullptr)
-                {
-                    m_path->removeNode(m_selectedNode);
-                    m_selectedNode = nullptr;
-                }
-                isVisible = false;
-            }
-        }
-
-        // link nodes
-        if (m_optionLinkIconSprite.getGlobalBounds().contains(mousePos))
-        {
-            m_optionLinkIconSprite.setColor(sf::Color(128, 128, 128, 255));
-            if (clicking)
-            {
-                if (m_selectedNode != nullptr)
-                {
-                    linking = true;
-                    m_linkNode = m_selectedNode;
-                }
-                isVisible = false;
-            }
-        }
-    }
-
-    if (linking && clicking && m_linkNode != m_selectedNode)
-    {
-        if (m_linkNode != nullptr && m_selectedNode != nullptr)
-        {
-            m_path->addEdge(m_linkNode, m_selectedNode);
-            linking = false;
-        }
-        isVisible = false;
-    }
+    updateUIState();
 }
 
 void UI::draw()
 {
-    if (isVisible)
-    {
-        Renderer::getInstance()->Draw(&m_dropDown);
-        Renderer::getInstance()->Draw(&m_optionCreateIconSprite);
-        Renderer::getInstance()->Draw(&m_optionDeleteIconSprite);
-        Renderer::getInstance()->Draw(&m_optionLinkIconSprite);
-    }
+
+    Renderer::getInstance()->Draw(&m_rightBar);
+    Renderer::getInstance()->Draw(&m_addSprite);
+    Renderer::getInstance()->Draw(&m_removeSprite);
+    Renderer::getInstance()->Draw(&m_linkSprite);
 }
 
 void UI::setPosition(sf::Vector2f newPosition)
 {
+    sf::Vector2u screenSize = Renderer::getInstance()->getWindow().getSize();
+
     // move dropdown box graphic
-    m_dropDown.setPosition(newPosition);
+    m_rightBar.setPosition(newPosition);
 
     // move create node option graphic
-    m_optionCreateIconSprite.setPosition(m_dropDown.getPosition().x, m_dropDown.getPosition().y);
+    m_addSprite.setPosition(m_rightBar.getPosition().x + (barWidth / 2), windowSize.y / 4);
 
     // move delete node option graphic
-    m_optionDeleteIconSprite.setPosition(m_dropDown.getPosition().x + 48, m_dropDown.getPosition().y);
+    m_removeSprite.setPosition(m_rightBar.getPosition().x + (barWidth / 2), windowSize.y / 2);
 
     // move link node option graphic
-    m_optionLinkIconSprite.setPosition(m_dropDown.getPosition().x + 24, m_dropDown.getPosition().y + 48);
+    m_linkSprite.setPosition(m_rightBar.getPosition().x + (barWidth / 2), windowSize.y * 3 / 4);
 }
 
-void UI::setPath(Path* newPath)
+UIMODE UI::getUImode()
 {
-    m_path = newPath;
+    return m_currentMode;
 }
 
-sf::FloatRect UI::getBounds()
+void UI::updateUIState()
 {
-    return m_dropDown.getGlobalBounds();
+    // we are hovering over the add button
+    if (InputManager::getInstance()->getHovering(&m_addSprite))
+    {
+        if (InputManager::getInstance()->getLeftClick())
+        {
+            m_currentMode = UIMODE::ADDING;
+            m_addSprite.setColor(sf::Color::Green);
+            m_removeSprite.setColor(sf::Color::White);
+            m_linkSprite.setColor(sf::Color::White);
+        }
+    }
+    // we are hovering over the remove button
+    else if (InputManager::getInstance()->getHovering(&m_removeSprite))
+    {
+        if (InputManager::getInstance()->getLeftClick())
+        {
+            m_currentMode = UIMODE::REMOVING;
+            m_removeSprite.setColor(sf::Color::Red);
+            m_addSprite.setColor(sf::Color::White);
+            m_linkSprite.setColor(sf::Color::White);
+        }
+    }
+    // we are hovering over the link button
+    else if (InputManager::getInstance()->getHovering(&m_linkSprite))
+    {
+        if (InputManager::getInstance()->getLeftClick())
+        {
+            m_currentMode = UIMODE::LINKING;
+            m_linkSprite.setColor(sf::Color::Yellow);
+            m_addSprite.setColor(sf::Color::White);
+            m_removeSprite.setColor(sf::Color::White);
+        }
+    }
+
+    if (InputManager::getInstance()->getRightClick())
+    {
+        m_currentMode = UIMODE::IDLE;
+        m_addSprite.setColor(sf::Color::White);
+        m_removeSprite.setColor(sf::Color::White);
+        m_linkSprite.setColor(sf::Color::White);
+    }
 }

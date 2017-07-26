@@ -1,28 +1,27 @@
 #pragma once
 #include "PathNode.h"
 #include "UI.h"
-#include <list>
+
+class PathNode;
 
 class Path
 {
 public:
     Path();
+    ~Path();
 
-    PathNode* addNode(sf::Vector2f position);
-    void removeNode(PathNode* nodeToremove);
-    void addEdge(PathNode* firstNode, PathNode* secondNode);
-    PathNode* getNode(int index);
-    PathNode* getFirstNode();
-    PathNode* getLastNode();
-    std::list<PathNode*>& getPathNodes();
     void update();
     void draw();
 
-    void resetNodeScores();
+    void processInteraction();
+    void addNode(sf::Vector2f position);
+    void removeNode(PathNode* nodeToRemove);
+    void linkNodes(PathNode* firstNode, PathNode* secondNode);
+
 private:
-    std::list<PathNode*> m_pathNodes;
-    sf::Text t_addNode;
-    PathNode* m_draggingNode = nullptr;
-    PathNode* m_selectedPathNode = nullptr;
-    UI m_gui;
+    std::list<PathNode*> m_PathNodes;
+
+    PathNode* m_firstLinkNode = nullptr;
+    PathNode* m_secondLinkNode = nullptr;
+    UI m_ui;
 };

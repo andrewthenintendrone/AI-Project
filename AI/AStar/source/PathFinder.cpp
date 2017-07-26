@@ -1,14 +1,14 @@
 #include "PathFinder.h"
 #include "Renderer.h"
-#include "Path.h"
 #include "VectorMaths.h"
 #include <algorithm>
 
 std::string getPath();
 
-PathFinder::PathFinder(Path* newPath)
+PathFinder::PathFinder(PathNode* start, PathNode* goal)
 {
-    m_path = newPath;
+    m_startNode = start;
+    m_goalNode = goal;
 
     m_texture = new sf::Texture;
     m_texture->loadFromFile(getPath() + "\\resources\\graphics\\PathFinder.png");
@@ -16,7 +16,6 @@ PathFinder::PathFinder(Path* newPath)
     m_sprite->setTexture(*m_texture);
 
     m_sprite->setOrigin(sf::Vector2f(m_sprite->getGlobalBounds().width / 2.0f, m_sprite->getGlobalBounds().height / 2.0f));
-    m_sprite->setPosition(m_path->getNode(0)->getPosition());
 }
 
 PathFinder::~PathFinder()
@@ -36,15 +35,12 @@ void PathFinder::Update()
 }
 
 // uses AStar to find the shortest path
-std::list<PathNode*> PathFinder::AStar()
+std::list<PathNode*> PathFinder::AStar(PathNode* newStartNode, PathNode* newGoalNode)
 {
-    m_path->resetNodeScores();
     m_closedSet.clear();
     m_openSet.clear();
 
-    m_goalNode = m_path->getLastNode();
-    m_currentNode = m_path->getFirstNode();
-    m_currentNode->setGScore(0);
+    m_startNode->setGScore(0);
     m_currentNode->setFScore(magnitude(m_goalNode->getPosition() - m_currentNode->getPosition()));
     m_openSet.push_back(m_currentNode);
 

@@ -98,31 +98,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\Edge.cpp" />
-    <ClCompile Include="source\Edge2.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\Path.cpp" />
-    <ClCompile Include="source\Path2.cpp" />
     <ClCompile Include="source\PathFinder.cpp" />
     <ClCompile Include="source\PathNode.cpp" />
-    <ClCompile Include="source\PathNode2.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\UI.cpp" />
-    <ClCompile Include="source\UI2.cpp" />
     <ClCompile Include="source\VectorMaths.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Edge.h" />
-    <ClInclude Include="source\Edge2.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\Path.h" />
-    <ClInclude Include="source\Path2.h" />
     <ClInclude Include="source\PathFinder.h" />
     <ClInclude Include="source\PathNode.h" />
-    <ClInclude Include="source\PathNode2.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\UI.h" />
-    <ClInclude Include="source\UI2.h" />
     <ClInclude Include="source\VectorMaths.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

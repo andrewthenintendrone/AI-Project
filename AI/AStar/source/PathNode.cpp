@@ -1,132 +1,55 @@
-#include "Renderer.h"
 #include "PathNode.h"
-#include "VectorMaths.h"
-#include "Path.h"
+#include "Renderer.h"
+#include "Edge.h"
 
-std::string getPath();
-
-PathNode::PathNode(sf::Vector2f newPosition, unsigned int newNumber)
+PathNode::PathNode(sf::Vector2f newPosition)
 {
-    position = newPosition;
-    m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
-    nodeText.setFont(m_font);
-    nodeText.setString(std::to_string(newNumber));
-    setUp();
+    // node graphic
+    m_graphic.setRadius(10.0f);
+    m_graphic.setOutlineThickness(5.0f);
+
+    m_graphic.setFillColor(sf::Color::Blue);
+    m_graphic.setOutlineColor(sf::Color::Black);
+
+    m_graphic.setOrigin(m_graphic.getLocalBounds().width / 2 - m_graphic.getOutlineThickness(), m_graphic.getGlobalBounds().height / 2 - m_graphic.getOutlineThickness());
+    m_graphic.setPosition(newPosition);
 }
 
 PathNode::~PathNode()
 {
-    edges.erase(edges.begin(), edges.end());
-    m_prevNode = nullptr;
+    // TO DO
+    // removes itself from all neighbors
+    /*for (std::list<Edge2*>::iterator iter = m_edges.begin(); iter != m_edges.end();)
+    {
+
+    }*/
 }
 
 void PathNode::addEdge(Edge* newEdge)
 {
-    edges.push_back(newEdge);
+    m_edges.push_back(newEdge);
 }
 
-void PathNode::update(bool selected)
+void PathNode::removeEdge(Edge* edgeToRemove)
 {
-    if (selected)
-    {
-        nodeGraphic.setFillColor(fillColorSelected);
-        nodeGraphic.setOutlineColor(outlineColorSelected);
-    }
-    else
-    {
-        nodeGraphic.setFillColor(fillColor);
-        nodeGraphic.setOutlineColor(outlineColor);
-    }
-}
-
-void PathNode::dragWithMouse(sf::Vector2f mousePos)
-{
-    position = mousePos;
-    nodeGraphic.setPosition(position);
-    nodeText.setPosition(position);
-    for (std::list<Edge*>::iterator iter = edges.begin(); iter != edges.end(); iter++)
-    {
-        (*iter)->recalculate();
-    }
+    m_edges.remove(edgeToRemove);
 }
 
 void PathNode::draw()
 {
-    Renderer::getInstance()->Draw(&nodeGraphic);
-    Renderer::getInstance()->Draw(&nodeText);
-    for (auto iter = edges.begin(); iter != edges.end(); iter++)
+    Renderer::getInstance()->Draw(&m_graphic);
+    for (std::list<Edge*>::iterator iter = m_edges.begin(); iter != m_edges.end(); iter++)
     {
         (*iter)->draw();
     }
 }
 
-void PathNode::setPrevNode(PathNode* prevNode)
+sf::CircleShape * PathNode::getGraphic()
 {
-    m_prevNode = prevNode;
-}
-
-PathNode* PathNode::getPrevNode()
-{
-    return m_prevNode;
-}
-
-void PathNode::setScores(Path* path)
-{
-    Gscore = std::numeric_limits<float>::infinity();
-    // replace this with end node
-    Fscore = std::numeric_limits<float>::infinity();
-}
-
-float PathNode::getGScore()
-{
-    return Gscore;
-}
-
-void PathNode::setGScore(float newGscore)
-{
-    Gscore = newGscore;
-}
-
-float PathNode::getFScore()
-{
-    return Fscore;
-}
-
-void PathNode::setFScore(float newFscore)
-{
-    Fscore = newFscore;
+    return &m_graphic;
 }
 
 sf::Vector2f PathNode::getPosition()
 {
-    return position;
-}
-
-sf::FloatRect PathNode::getBounds()
-{
-    return nodeGraphic.getGlobalBounds();
-}
-
-std::list<Edge*>* PathNode::getEdges()
-{
-    return &edges;
-}
-
-void PathNode::setUp()
-{
-    // node graphic
-    nodeGraphic.setRadius(35.0f);
-    nodeGraphic.setOutlineThickness(5.0f);
-
-    nodeGraphic.setFillColor(fillColor);
-    nodeGraphic.setOutlineColor(outlineColor);
-
-    nodeGraphic.setOrigin(nodeGraphic.getLocalBounds().width / 2 - nodeGraphic.getOutlineThickness(), nodeGraphic.getGlobalBounds().height / 2 - nodeGraphic.getOutlineThickness());
-    nodeGraphic.setPosition(position);
-
-    // text
-    nodeText.setCharacterSize(40);
-    nodeText.setFillColor(sf::Color::White);
-    nodeText.setOrigin(nodeText.getLocalBounds().width / 2, nodeText.getLocalBounds().height);
-    nodeText.setPosition(position);
+    return m_graphic.getPosition();
 }
