@@ -21,6 +21,7 @@ public:
 
 private:
     std::list<PathNode*> m_PathNodes;
+    PathNode* m_draggingNode = nullptr;
 
     PathNode* m_firstLinkNode = nullptr;
     PathNode* m_secondLinkNode = nullptr;

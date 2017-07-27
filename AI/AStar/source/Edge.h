@@ -13,6 +13,7 @@ public:
     PathNode* m_firstNode = nullptr;
     PathNode* m_secondNode = nullptr;
 
+    float m_length;
     void recalculate();
     void draw();
 

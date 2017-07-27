@@ -8,7 +8,7 @@ Edge::Edge(PathNode* newFirstNode, PathNode* newSecondNode)
     m_firstNode = newFirstNode;
     m_secondNode = newSecondNode;
 
-    m_line.setFillColor(sf::Color::Magenta);
+    m_line.setFillColor(sf::Color(255, 255, 0));
 
     recalculate();
 }
@@ -22,9 +22,9 @@ void Edge::recalculate()
 {
     sf::Vector2f centerOfNodes = (m_firstNode->getPosition() + m_secondNode->getPosition()) / 2.0f;
     float rotationAngle = angleBetweenVectors(m_firstNode->getPosition(), m_secondNode->getPosition());
-    float lineLength = magnitude(m_secondNode->getPosition() - m_firstNode->getPosition());
+    m_length = magnitude(m_secondNode->getPosition() - m_firstNode->getPosition());
 
-    m_line.setSize(sf::Vector2f(lineLength, 3));
+    m_line.setSize(sf::Vector2f(m_length - 50.0f, 3));
     m_line.setOrigin(m_line.getLocalBounds().width / 2, m_line.getLocalBounds().height / 2);
     m_line.setPosition(centerOfNodes);
     m_line.setRotation(rotationAngle);
@@ -32,6 +32,9 @@ void Edge::recalculate()
 
 void Edge::draw()
 {
-    Renderer::getInstance()->Draw(&m_line);
+    if (m_length > 50.0f)
+    {
+        Renderer::getInstance()->Draw(&m_line);
+    }
 }
 

@@ -39,7 +39,7 @@ void Path::draw()
 
 void Path::processInteraction()
 {
-    // UI is in add mode
+    // add mode
     if (m_ui.getUImode() == UIMODE::ADDING)
     {
         // we are clicking left of the UI
@@ -51,10 +51,11 @@ void Path::processInteraction()
             }
         }
     }
+    // remove mode
     else if (m_ui.getUImode() == UIMODE::REMOVING)
     {
         // we are clicking left of the UI
-        if (InputManager::getInstance()->getLeftClick())
+        if (InputManager::getInstance()->getLeftHold())
         {
             if (InputManager::getInstance()->getMousePosf().x < Renderer::getInstance()->getWindowSizef().x - 200.0f)
             {
@@ -75,10 +76,11 @@ void Path::processInteraction()
             }
         }
     }
+    // link mode
     else if (m_ui.getUImode() == UIMODE::LINKING)
     {
         // we are holding left of the UI
-        if (InputManager::getInstance()->getLeftClick())
+        if (InputManager::getInstance()->getLeftHold())
         {
             for (std::list<PathNode*>::iterator iter = m_PathNodes.begin(); iter != m_PathNodes.end(); iter++)
             {
@@ -101,6 +103,44 @@ void Path::processInteraction()
                 m_secondLinkNode = nullptr;
             }
         }
+        else
+        {
+            m_firstLinkNode = nullptr;
+            m_secondLinkNode = nullptr;
+        }
+    }
+    // idle mode
+    else
+    {
+        if (InputManager::getInstance()->getLeftHold())
+        {
+            if (m_draggingNode == nullptr)
+            {
+                for (std::list<PathNode*>::iterator iter = m_PathNodes.begin(); iter != m_PathNodes.end(); iter++)
+                {
+                    if (InputManager::getInstance()->getHovering((*iter)->getGraphic()))
+                    {
+                        m_draggingNode = (*iter);
+                        break;
+                    }
+                }
+            }
+            if (m_draggingNode != nullptr)
+            {
+                m_draggingNode->setPosition(InputManager::getInstance()->getMousePosf());
+            }
+        }
+        else
+        {
+            m_draggingNode = nullptr;
+        }
+    }
+
+    // prevent from "storing" link nodes between mode changes
+    if (m_ui.getUImode() != UIMODE::LINKING)
+    {
+        m_firstLinkNode = nullptr;
+        m_secondLinkNode = nullptr;
     }
 }
 

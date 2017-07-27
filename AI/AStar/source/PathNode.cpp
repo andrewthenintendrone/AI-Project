@@ -5,10 +5,10 @@
 PathNode::PathNode(sf::Vector2f newPosition)
 {
     // node graphic
-    m_graphic.setRadius(10.0f);
+    m_graphic.setRadius(20.0f);
     m_graphic.setOutlineThickness(5.0f);
 
-    m_graphic.setFillColor(sf::Color::Blue);
+    m_graphic.setFillColor(sf::Color(128, 0, 255));
     m_graphic.setOutlineColor(sf::Color::Black);
 
     m_graphic.setOrigin(m_graphic.getLocalBounds().width / 2 - m_graphic.getOutlineThickness(), m_graphic.getGlobalBounds().height / 2 - m_graphic.getOutlineThickness());
@@ -67,6 +67,15 @@ sf::CircleShape * PathNode::getGraphic()
 sf::Vector2f PathNode::getPosition()
 {
     return m_graphic.getPosition();
+}
+
+void PathNode::setPosition(sf::Vector2f newPosition)
+{
+    m_graphic.setPosition(newPosition);
+    for (std::list<Edge*>::iterator iter = m_edges.begin(); iter != m_edges.end(); iter++)
+    {
+        (*iter)->recalculate();
+    }
 }
 
 float PathNode::getGscore()

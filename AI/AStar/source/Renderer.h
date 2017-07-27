@@ -1,7 +1,7 @@
 #pragma once
 #include "SFML\Graphics.hpp"
 
-const sf::Color backgroundColor = sf::Color(28, 32, 44);
+const sf::Color backgroundColor = sf::Color(128, 128, 128);
 
 class Renderer
 {
