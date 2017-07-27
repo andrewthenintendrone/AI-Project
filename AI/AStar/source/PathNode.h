@@ -13,7 +13,8 @@ public:
 
 
     void addEdge(Edge* newEdge);
-    void removeEdge(Edge* edgeToRemove);
+    void removeSingleEdge(Edge* edgeToRemove);
+    void deleteEdges();
 
     void draw();
 

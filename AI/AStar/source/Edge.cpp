@@ -34,3 +34,4 @@ void Edge::draw()
 {
     Renderer::getInstance()->Draw(&m_line);
 }
+

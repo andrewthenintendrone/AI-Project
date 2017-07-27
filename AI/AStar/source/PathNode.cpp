@@ -17,12 +17,7 @@ PathNode::PathNode(sf::Vector2f newPosition)
 
 PathNode::~PathNode()
 {
-    // TO DO
-    // removes itself from all neighbors
-    /*for (std::list<Edge2*>::iterator iter = m_edges.begin(); iter != m_edges.end();)
-    {
 
-    }*/
 }
 
 void PathNode::addEdge(Edge* newEdge)
@@ -30,17 +25,37 @@ void PathNode::addEdge(Edge* newEdge)
     m_edges.push_back(newEdge);
 }
 
-void PathNode::removeEdge(Edge* edgeToRemove)
+void PathNode::removeSingleEdge(Edge* edgeToRemove)
 {
     m_edges.remove(edgeToRemove);
+}
+
+void PathNode::deleteEdges()
+{
+    for(std::list<Edge*>::iterator iter = m_edges.begin(); iter != m_edges.end();)
+    {
+        PathNode* otherNode = (this == (*iter)->m_firstNode ? (*iter)->m_secondNode : (*iter)->m_firstNode);
+        otherNode->removeSingleEdge(*iter);
+        delete (*iter);
+        (*iter) = nullptr;
+        iter = m_edges.erase(iter);
+    }
 }
 
 void PathNode::draw()
 {
     Renderer::getInstance()->Draw(&m_graphic);
-    for (std::list<Edge*>::iterator iter = m_edges.begin(); iter != m_edges.end(); iter++)
+    for (std::list<Edge*>::iterator iter = m_edges.begin(); iter != m_edges.end();)
     {
-        (*iter)->draw();
+        if ((*iter) == nullptr)
+        {
+            iter = m_edges.erase(iter);
+        }
+        else
+        {
+            (*iter)->draw();
+            iter++;
+        }
     }
 }
 

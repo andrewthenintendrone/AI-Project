@@ -28,8 +28,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     {
         path.addNode(sf::Vector2f((float)(rand() % (Renderer::getInstance()->getWindow().getSize().x - 300) + 50), (float)(rand() % (Renderer::getInstance()->getWindow().getSize().y - 100) + 50)));
     }
+    path.linkNodes();
 
-    sf::Event event;
     while (Renderer::getInstance()->getWindow().isOpen())
     {
         InputManager::getInstance()->update();

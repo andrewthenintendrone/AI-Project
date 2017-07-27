@@ -22,9 +22,17 @@ void Path::update()
 
 void Path::draw()
 {
-    for (std::list<PathNode*>::iterator iter = m_PathNodes.begin(); iter != m_PathNodes.end(); iter++)
+    for (std::list<PathNode*>::iterator iter = m_PathNodes.begin(); iter != m_PathNodes.end();)
     {
-        (*iter)->draw();
+        if ((*iter) == nullptr)
+        {
+            iter = m_PathNodes.erase(iter);
+        }
+        else
+        {
+            (*iter)->draw();
+            iter++;
+        }
     }
     m_ui.draw();
 }
@@ -54,7 +62,10 @@ void Path::processInteraction()
                 {
                     if (InputManager::getInstance()->getHovering((*iter)->getGraphic()))
                     {
-                        m_PathNodes.erase(iter++);
+                        (*iter)->deleteEdges();
+                        delete(*iter);
+                        (*iter) = nullptr;
+                        iter = m_PathNodes.erase(iter);
                     }
                     else
                     {
@@ -69,7 +80,7 @@ void Path::processInteraction()
         // we are holding left of the UI
         if (InputManager::getInstance()->getLeftClick())
         {
-            for (std::list<PathNode*>::iterator iter = m_PathNodes.begin(); iter != m_PathNodes.end();)
+            for (std::list<PathNode*>::iterator iter = m_PathNodes.begin(); iter != m_PathNodes.end(); iter++)
             {
                 if (InputManager::getInstance()->getHovering((*iter)->getGraphic()))
                 {
@@ -77,7 +88,7 @@ void Path::processInteraction()
                     {
                         m_firstLinkNode = (*iter);
                     }
-                    else if (m_secondLinkNode == nullptr && m_secondLinkNode != m_firstLinkNode)
+                    else if (m_secondLinkNode == nullptr && (*iter) != m_firstLinkNode)
                     {
                         m_secondLinkNode = (*iter);
                     }
@@ -101,6 +112,8 @@ void Path::addNode(sf::Vector2f position)
 void Path::removeNode(PathNode* nodeToRemove)
 {
     m_PathNodes.remove(nodeToRemove);
+    delete nodeToRemove;
+    nodeToRemove = nullptr;
 }
 
 void Path::linkNodes(PathNode* firstNode, PathNode* secondNode)
@@ -108,4 +121,9 @@ void Path::linkNodes(PathNode* firstNode, PathNode* secondNode)
     Edge* newEdge = new Edge(firstNode, secondNode);
     firstNode->addEdge(newEdge);
     secondNode->addEdge(newEdge);
+}
+
+void Path::linkNodes()
+{
+    linkNodes(m_PathNodes.front(), m_PathNodes.back());
 }

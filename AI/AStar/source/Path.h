@@ -17,6 +17,7 @@ public:
     void addNode(sf::Vector2f position);
     void removeNode(PathNode* nodeToRemove);
     void linkNodes(PathNode* firstNode, PathNode* secondNode);
+    void linkNodes();
 
 private:
     std::list<PathNode*> m_PathNodes;
