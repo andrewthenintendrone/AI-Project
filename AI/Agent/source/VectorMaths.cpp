@@ -65,5 +65,5 @@ sf::Vector2f Lerp(sf::Vector2f start, sf::Vector2f end, float percent)
 float angleBetweenVectors(sf::Vector2f leftHandVector, sf::Vector2f rightHandVector)
 {
     sf::Vector2f angleVector = leftHandVector - rightHandVector;
-    return std::atan2f(angleVector.y, angleVector.x) * 180 / M_PI;
+    return std::atan2f(angleVector.y, angleVector.x) * 180 / (float)M_PI;
 }

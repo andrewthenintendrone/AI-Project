@@ -3,20 +3,29 @@
 #include "PathNode.h"
 #include <list>
 
+enum class MOVESTATE { IDLE, WALK, RUN };
+enum class MOVEDIRECTION { DOWN, LEFT, DOWNLEFT, UPLEFT, UP, RIGHT, DOWNRIGHT, UPRIGHT };
+
 class PathFinder
 {
 public:
-    PathFinder(PathNode* start, PathNode* goal);
+    PathFinder();
     ~PathFinder();
 
-    void Update();
+    void update();
+    void draw();
 
-    std::list<PathNode*> AStar();
+    std::list<PathNode*> AStar(PathNode* start, PathNode* goal);
 
 private:
     // graphics
-    sf::Texture* m_texture;
-    sf::Sprite* m_sprite;
+    sf::Texture m_texture;
+    sf::Sprite m_sprite;
+    MOVESTATE m_movementState = MOVESTATE::RUN;
+    MOVEDIRECTION m_movementDirection = MOVEDIRECTION::DOWNRIGHT;
+    sf::Vector2i currentSpriteCoordinate;
+    int m_animationFrameRate = 10;
+    sf::Clock m_clock;
 
     // Path Finding
     PathNode* m_startNode;

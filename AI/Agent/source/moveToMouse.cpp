@@ -13,7 +13,7 @@ void moveToMouse::Update(Agent* pAgent)
     if (magnitude >= 32)
     {
         pAgent->setVelocity(direction / magnitude * 500.0f);
-        float rotation = atan2(-direction.y, -direction.x) * 180 / M_PI;
+        float rotation = atan2(-direction.y, -direction.x) * 180 / (float)M_PI;
         pAgent->setRotation(rotation);
     }
     else

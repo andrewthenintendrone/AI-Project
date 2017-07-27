@@ -19,9 +19,9 @@ void Renderer::closeWindow()
     window.close();
 }
 
-sf::RenderWindow& Renderer::getWindow()
+sf::RenderWindow* Renderer::getWindow()
 {
-    return window;
+    return &window;
 }
 
 sf::Vector2f Renderer::getWindowSizef()

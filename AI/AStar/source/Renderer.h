@@ -11,7 +11,7 @@ public:
     bool createWindow(int width, int height);
     void closeWindow();
 
-    sf::RenderWindow& getWindow();
+    sf::RenderWindow* getWindow();
     sf::Vector2f getWindowSizef();
     sf::Vector2u getWindowSizeu();
 

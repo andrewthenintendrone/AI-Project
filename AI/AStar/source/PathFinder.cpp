@@ -6,37 +6,70 @@
 
 std::string getPath();
 
-PathFinder::PathFinder(PathNode* start, PathNode* goal)
+const sf::Vector2i pathFinderSpriteSize(40, 56);
+
+PathFinder::PathFinder()
 {
-    m_startNode = start;
-    m_goalNode = goal;
+    m_texture.loadFromFile(getPath() + "\\resources\\graphics\\sheet.png");
+    m_sprite.setTexture(m_texture);
 
-    m_texture = new sf::Texture;
-    m_texture->loadFromFile(getPath() + "\\resources\\graphics\\PathFinder.png");
-    m_sprite = new sf::Sprite;
-    m_sprite->setTexture(*m_texture);
-
-    m_sprite->setOrigin(sf::Vector2f(m_sprite->getGlobalBounds().width / 2.0f, m_sprite->getGlobalBounds().height / 2.0f));
+    m_sprite.setOrigin(sf::Vector2f(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f));
 }
 
 PathFinder::~PathFinder()
 {
-    delete m_sprite;
-    delete m_texture;
+
 }
 
-void PathFinder::Update()
+void PathFinder::update()
 {
-    Renderer::getInstance()->Draw(m_sprite);
+    if (m_clock.getElapsedTime().asSeconds() > (1.0f / (float)m_animationFrameRate))
+    {
+        // animate along the x axis
+        m_movementDirection = static_cast<MOVEDIRECTION>((int)m_movementDirection + 1);
+        if ((int)m_movementDirection > 7)
+        {
+            m_movementDirection = MOVEDIRECTION::DOWN;
+        }
+
+        currentSpriteCoordinate.x += pathFinderSpriteSize.x;
+        if (currentSpriteCoordinate.x == (pathFinderSpriteSize.x * 6))
+        {
+            currentSpriteCoordinate.x = 0;
+        }
+        m_clock.restart();
+    }
+
+    // move to part of the sprite sheet based on movement state
+    currentSpriteCoordinate.y = (int)m_movementState * (pathFinderSpriteSize.y * 5);
+    currentSpriteCoordinate.y += ((int)m_movementDirection > 4 ? (int)m_movementDirection - 4 : (int)m_movementDirection) * pathFinderSpriteSize.y;
+
+    if ((int)m_movementDirection < 5)
+    {
+        m_sprite.setScale(1, 1);
+    }
+    else
+    {
+        m_sprite.setScale(-1, 1);
+    }
+    m_sprite.setTextureRect(sf::IntRect(currentSpriteCoordinate, pathFinderSpriteSize));
+
+    m_sprite.setPosition(150, 150);
+    m_sprite.setOrigin(sf::Vector2f(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f));
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::B))
     {
-        std::list<PathNode*> shortestPath = AStar();
+        std::list<PathNode*> shortestPath = AStar(m_startNode, m_goalNode);
     }
 }
 
+void PathFinder::draw()
+{
+    Renderer::getInstance()->Draw(&m_sprite);
+}
+
 // uses AStar to find the shortest path
-std::list<PathNode*> PathFinder::AStar()
+std::list<PathNode*> PathFinder::AStar(PathNode* start, PathNode* goal)
 {
     m_closedSet.clear();
     m_openSet.clear();

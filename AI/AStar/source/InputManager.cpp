@@ -10,14 +10,15 @@ InputManager* InputManager::getInstance()
 void InputManager::update()
 {
     sf::Event event;
-    Renderer::getInstance()->getWindow().pollEvent(event);
+    event.type = sf::Event::EventType::GainedFocus;
+    Renderer::getInstance()->getWindow()->pollEvent(event);
 
     // deal with closing
-    if (event.type == sf::Event::Closed)
+    if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
     {
         Renderer::getInstance()->closeWindow();
     }
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+    if (event.type == sf::Event::Closed)
     {
         Renderer::getInstance()->closeWindow();
     }
@@ -102,10 +103,10 @@ bool InputManager::getHovering(sf::RectangleShape* rectangleShape)
 
 sf::Vector2f InputManager::getMousePosf()
 {
-    return sf::Vector2f(sf::Mouse::getPosition(Renderer::getInstance()->getWindow()));
+    return sf::Vector2f(sf::Mouse::getPosition(*Renderer::getInstance()->getWindow()));
 }
 
 sf::Vector2i InputManager::getMousePosi()
 {
-    return sf::Mouse::getPosition(Renderer::getInstance()->getWindow());
+    return sf::Mouse::getPosition(*Renderer::getInstance()->getWindow());
 }

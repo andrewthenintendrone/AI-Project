@@ -7,7 +7,7 @@ std::string getPath();
 UI::UI()
 {
     // setup size and position
-    windowSize = Renderer::getInstance()->getWindow().getSize();
+    windowSize = Renderer::getInstance()->getWindow()->getSize();
 
     m_rightBar.setSize(sf::Vector2f((float)barWidth, (float)windowSize.y));
     m_rightBar.setFillColor(sf::Color(0, 0, 0, 128));
@@ -52,7 +52,7 @@ void UI::draw()
 
 void UI::setPosition(sf::Vector2f newPosition)
 {
-    sf::Vector2u screenSize = Renderer::getInstance()->getWindow().getSize();
+    sf::Vector2u screenSize = Renderer::getInstance()->getWindow()->getSize();
 
     // move dropdown box graphic
     m_rightBar.setPosition(newPosition);
