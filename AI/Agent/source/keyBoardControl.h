@@ -1,10 +1,10 @@
 #pragma once
 #include "IBehavior.h"
 
-class keyBoardControl : public IBehavior
+class KeyboardControl : public IBehavior
 {
 public:
-    keyBoardControl(float maxVelocity = 100.0f);
+    KeyboardControl(float maxVelocity = 100.0f);
 
     virtual sf::Vector2f update();
 private:

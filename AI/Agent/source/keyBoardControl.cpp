@@ -1,16 +1,14 @@
-#include "keyBoardControl.h"
-#include "IBehavior.h"
-#include "GameObject.h"
+#include "KeyboardControl.h"
 #include "SFML\Graphics.hpp"
 #include "Agent.h"
 #include "VectorMaths.h"
 
-keyBoardControl::keyBoardControl(float maxVelocity)
+KeyboardControl::KeyboardControl(float maxVelocity)
 {
     m_maxVelocity = maxVelocity;
 }
 
-sf::Vector2f keyBoardControl::update()
+sf::Vector2f KeyboardControl::update()
 {
     sf::Vector2f desiredVelocity = sf::Vector2f(0, 0);
 

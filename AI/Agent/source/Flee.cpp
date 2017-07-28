@@ -1,6 +1,6 @@
 #include "Flee.h"
 #include "SFML\Graphics.hpp"
-#include "Agent.h"
+#include "GameObject.h"
 #include "VectorMaths.h"
 
 // sets target in constructor

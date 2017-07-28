@@ -1,17 +1,16 @@
 #pragma once
 #include "IBehavior.h"
-#include "GameObject.h"
+
+class GameObject;
 
 class Flee : public IBehavior
 {
 public:
     Flee(GameObject* newTarget);
-    Flee(GameObject* newTarget, float maxVelocity);
+    Flee(GameObject* newTarget, float maxVelocity = 100.0f);
     virtual sf::Vector2f update();
 
 private:
     GameObject* m_target;
-    float m_mass = 1.0f;
-    float m_slowingRange = 150.0f;
-    float m_maxVelocity = 100.0f;
+    float m_maxVelocity = 0.0f;
 };
