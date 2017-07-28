@@ -100,6 +100,7 @@
     <ClCompile Include="source\Agent.cpp" />
     <ClCompile Include="source\Character.cpp" />
     <ClCompile Include="source\copyMousePosition.cpp" />
+    <ClCompile Include="source\Evade.cpp" />
     <ClCompile Include="source\Flee.cpp" />
     <ClCompile Include="source\Flock.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="source\keyBoardControl.cpp" />
     <ClCompile Include="source\moveToMouse.cpp" />
     <ClCompile Include="source\ObjectPool.cpp" />
+    <ClCompile Include="source\Pursue.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\Seek.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
@@ -119,6 +121,7 @@
     <ClInclude Include="source\Agent.h" />
     <ClInclude Include="source\Character.h" />
     <ClInclude Include="source\CopyMousePosition.h" />
+    <ClInclude Include="source\Evade.h" />
     <ClInclude Include="source\Flee.h" />
     <ClInclude Include="source\Flock.h" />
     <ClInclude Include="source\GameObject.h" />
@@ -126,6 +129,7 @@
     <ClInclude Include="source\keyBoardControl.h" />
     <ClInclude Include="source\moveToMouse.h" />
     <ClInclude Include="source\ObjectPool.h" />
+    <ClInclude Include="source\Pursue.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Seek.h" />
     <ClInclude Include="source\TimeManager.h" />

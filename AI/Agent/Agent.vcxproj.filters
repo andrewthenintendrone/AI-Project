@@ -69,6 +69,12 @@
     <ClCompile Include="source\Wander.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
+    <ClCompile Include="source\Evade.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Pursue.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
@@ -117,6 +123,12 @@
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
     <ClInclude Include="source\Wander.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Pursue.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Evade.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>
