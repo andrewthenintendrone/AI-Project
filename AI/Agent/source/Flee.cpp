@@ -9,24 +9,17 @@ Flee::Flee(GameObject* newTarget)
     m_target = newTarget;
 }
 
-// moves towards target
-void Flee::Update(Agent *pAgent)
+Flee::Flee(GameObject* newTarget, float maxVelocity)
 {
-    sf::Vector2f desiredVelocity = normalize(pAgent->getPosition() - m_target->getAgent()->getPosition(), m_maxVelocity);
-    sf::Vector2f steering = normalize(desiredVelocity - pAgent->getVelocity(), m_maxForce / m_mass);
+    m_target = newTarget;
+    m_maxVelocity = maxVelocity;
+}
 
-    pAgent->setVelocity(normalize(pAgent->getVelocity() + steering, m_maxSpeed));
+// moves towards target
+sf::Vector2f Flee::update()
+{
+    sf::Vector2f velocity = normalize(m_myAgent->getPosition() - m_target->getAgent()->getPosition(), m_maxVelocity);
+    sf::Vector2f force = velocity - m_myAgent->getVelocity();
 
-    // flip sprite to match velocity
-    if (pAgent->getParentPointer()->getSprite())
-    {
-        if (pAgent->getVelocity().x < 0)
-        {
-            pAgent->getParentPointer()->getSprite()->setScale(-1, 1);
-        }
-        else if (pAgent->getVelocity().x > 0)
-        {
-            pAgent->getParentPointer()->getSprite()->setScale(1, 1);
-        }
-    }
+    return force;
 }

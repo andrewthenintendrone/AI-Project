@@ -8,7 +8,7 @@ class Flock : public IBehavior
 {
 public:
     Flock(GameObject* newTarget);
-    virtual void Update(Agent *pAgent);
+    virtual void update(Agent *pAgent);
 protected:
     sf::Vector2f computeMovement(Agent* pAgent);
     sf::Vector2f computeAlignment(Agent* pAgent, std::vector<GameObject*> objects);

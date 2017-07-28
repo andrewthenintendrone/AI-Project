@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "IBehavior.h"
 #include "TimeManager.h"
+#include "VectorMaths.h"
 
 #pragma region constructor / destructor
 
@@ -27,6 +28,7 @@ Agent::~Agent()
 
 void Agent::addBehaviour(IBehavior* newBehaviour)
 {
+    newBehaviour->m_myAgent = this;
     m_behaviours.push_back(newBehaviour);
 }
 
@@ -98,7 +100,7 @@ GameObject* Agent::getParentPointer()
 }
 
 // update
-void Agent::Update()
+void Agent::update()
 {
     // TODO: Sensing Calculations
     // TODO: Thinking Calculations
@@ -106,11 +108,11 @@ void Agent::Update()
     // Acting:
     for (std::list<IBehavior*>::iterator iter = m_behaviours.begin(); iter != m_behaviours.end(); iter++)
     {
-        (*iter)->Update(this);
+        m_velocity += (*iter)->update();
     }
 
     //TODO: Physics stuff with force, acceleration, velocity etc...
-    m_position += m_velocity * TIMEMANAGER->deltaTime();
+    m_position += truncate(m_velocity, m_maxSpeed) * TIMEMANAGER->deltaTime();
 }
 
 void Agent::sense()

@@ -2,7 +2,7 @@
 
 IBehavior::IBehavior()
 {
-
+    
 }
 
 IBehavior::~IBehavior()

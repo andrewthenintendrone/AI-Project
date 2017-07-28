@@ -4,7 +4,7 @@
 class keyBoardControl : public IBehavior
 {
 public:
-    virtual void Update(Agent* pAgent);
+    virtual void update(Agent* pAgent);
 private:
     float moveSpeed = 500.0f;
 };

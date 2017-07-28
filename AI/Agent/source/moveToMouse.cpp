@@ -4,10 +4,20 @@
 #include "VectorMaths.h"
 #include "Agent.h"
 
-void moveToMouse::Update(Agent* pAgent)
+moveToMouse::moveToMouse()
 {
-    sf::Vector2f force = normalize(InputManager::getInstance()->getMousePosf() - pAgent->getPosition(), m_maxVelocity);
-    force -= pAgent->getVelocity();
 
-    pAgent->addVelocity(force);
+}
+
+moveToMouse::moveToMouse(float maxVelocity)
+{
+    m_maxVelocity = maxVelocity;
+}
+
+sf::Vector2f moveToMouse::update()
+{
+    sf::Vector2f force = normalize(InputManager::getInstance()->getMousePosf() - m_myAgent->getPosition(), m_maxVelocity);
+    force -= m_myAgent->getVelocity();
+
+    return force;
 }

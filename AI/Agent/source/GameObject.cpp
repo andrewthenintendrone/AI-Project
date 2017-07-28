@@ -71,7 +71,7 @@ void GameObject::update()
 {
     if(m_agent)
     {
-        m_agent->Update();
+        m_agent->update();
         if (m_sprite)
         {
             m_sprite->setPosition(m_agent->getPosition());

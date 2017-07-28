@@ -33,7 +33,7 @@ public:
     // access parent pointer
     GameObject* getParentPointer();
 
-    void Update();
+    void update();
 
 protected:
 
@@ -43,7 +43,9 @@ protected:
 
     sf::Vector2f m_position;
     sf::Vector2f m_velocity;
-    float m_rotation = 0;
+
+    float m_maxSpeed = 500.0f;
+    float m_rotation = 0.0f;
 
     void sense();
     void think();

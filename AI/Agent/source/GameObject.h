@@ -12,9 +12,12 @@ public:
 
     GameObject* setSprite(std::string fileName);
     sf::Sprite* getSprite();
+
     GameObject* setText(std::string& newText, sf::Font& newFont);
     sf::Text* getText();
+
     Agent* getAgent();
+
     void update();
     void draw();
 

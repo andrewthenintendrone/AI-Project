@@ -10,7 +10,7 @@ Flock::Flock(GameObject* newTarget)
     m_target = newTarget;
 }
 
-void Flock::Update(Agent* pAgent)
+void Flock::update(Agent* pAgent)
 {
     pAgent->setVelocity(sf::Vector2f(0, 0));
     sf::Vector2f toPlayer = (m_target->getAgent()->getPosition() - pAgent->getPosition());

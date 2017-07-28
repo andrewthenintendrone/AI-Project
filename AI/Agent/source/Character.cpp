@@ -28,7 +28,7 @@ Character::~Character()
 
 void Character::update()
 {
-    m_agent->Update();
+    m_agent->update();
     m_sprite.setPosition(m_agent->getPosition());
     updateSprite();
 }

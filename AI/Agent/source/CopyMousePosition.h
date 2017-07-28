@@ -3,5 +3,5 @@
 
 class copyMousePosition : public IBehavior
 {
-    virtual void Update(Agent *pAgent);
+    virtual void update(Agent *pAgent);
 };

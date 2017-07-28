@@ -6,12 +6,12 @@ class Flee : public IBehavior
 {
 public:
     Flee(GameObject* newTarget);
-    virtual void Update(Agent *pAgent);
+    Flee(GameObject* newTarget, float maxVelocity);
+    virtual sf::Vector2f update();
 
 private:
     GameObject* m_target;
     float m_mass = 1.0f;
-    float m_maxVelocity = 50.0f;
-    float m_maxForce = 60.0f;
-    float m_maxSpeed = 500.0f;
+    float m_slowingRange = 150.0f;
+    float m_maxVelocity = 100.0f;
 };

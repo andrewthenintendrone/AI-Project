@@ -5,7 +5,7 @@
 #include "Agent.h"
 #include "VectorMaths.h"
 
-void keyBoardControl::Update(Agent* pAgent)
+void keyBoardControl::update(Agent* pAgent)
 {
     // reset force
     pAgent->setVelocity(sf::Vector2f(0, 0));
