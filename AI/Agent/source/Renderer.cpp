@@ -14,14 +14,24 @@ bool Renderer::createWindow(int width, int height)
     return true;
 }
 
-sf::RenderWindow& Renderer::getWindow()
-{
-    return window;
-}
-
 void Renderer::closeWindow()
 {
     window.close();
+}
+
+sf::RenderWindow* Renderer::getWindow()
+{
+    return &window;
+}
+
+sf::Vector2f Renderer::getWindowSizef()
+{
+    return sf::Vector2f(window.getSize());
+}
+
+sf::Vector2u Renderer::getWindowSizeu()
+{
+    return window.getSize();
 }
 
 void Renderer::clearWindow()

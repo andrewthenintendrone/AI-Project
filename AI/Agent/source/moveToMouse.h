@@ -8,5 +8,5 @@ public:
     virtual void Update(Agent* pAgent);
 
 private:
-    sf::Vector2f m_mousePosition;
+    float m_maxVelocity = 500.0f;
 };

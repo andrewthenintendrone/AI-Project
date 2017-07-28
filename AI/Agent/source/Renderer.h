@@ -1,15 +1,19 @@
 #pragma once
 #include "SFML\Graphics.hpp"
 
-const sf::Color backgroundColor = sf::Color(28, 32, 44);
+const sf::Color backgroundColor = sf::Color(128, 128, 128);
 
 class Renderer
 {
 public:
     static Renderer* getInstance();
+
     bool createWindow(int width, int height);
-    sf::RenderWindow& getWindow();
     void closeWindow();
+
+    sf::RenderWindow* getWindow();
+    sf::Vector2f getWindowSizef();
+    sf::Vector2u getWindowSizeu();
 
     void clearWindow();
     void Draw(sf::Drawable* objectToDraw);

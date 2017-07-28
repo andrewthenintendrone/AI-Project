@@ -96,7 +96,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\AStar\source\InputManager.cpp" />
     <ClCompile Include="source\Agent.cpp" />
+    <ClCompile Include="source\Character.cpp" />
     <ClCompile Include="source\copyMousePosition.cpp" />
     <ClCompile Include="source\Flee.cpp" />
     <ClCompile Include="source\Flock.cpp" />
@@ -112,7 +114,9 @@
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\AStar\source\InputManager.h" />
     <ClInclude Include="source\Agent.h" />
+    <ClInclude Include="source\Character.h" />
     <ClInclude Include="source\CopyMousePosition.h" />
     <ClInclude Include="source\Flee.h" />
     <ClInclude Include="source\Flock.h" />

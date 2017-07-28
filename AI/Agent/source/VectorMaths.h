@@ -23,4 +23,7 @@ sf::Vector2f scaleBy(sf::Vector2f& vector, float scalar);
 sf::Vector2f Lerp(sf::Vector2f start, sf::Vector2f end, float percent);
 
 // returns the angle in degrees between two vectors
-float angleBetweenVectors(sf::Vector2f leftHandVector, sf::Vector2f rightHandVector);
+float angleBetweenVectors(sf::Vector2f lhs, sf::Vector2f rhs);
+
+// returns the angle of the vector
+float vectorAngle(sf::Vector2f& vector);

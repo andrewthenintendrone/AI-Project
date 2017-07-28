@@ -30,7 +30,7 @@ void ObjectPool::updateAllObjects()
     {
         if (iter->second)
         {
-            iter->second->Update();
+            iter->second->update();
         }
     }
 }
@@ -41,7 +41,7 @@ void ObjectPool::drawAllObjects()
     {
         if (iter->second)
         {
-            iter->second->Draw();
+            iter->second->draw();
         }
     }
 }

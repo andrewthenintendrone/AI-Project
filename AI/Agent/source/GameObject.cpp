@@ -67,7 +67,7 @@ Agent* GameObject::getAgent()
 }
 
 // updates this GameObject using its Agent
-void GameObject::Update()
+void GameObject::update()
 {
     if(m_agent)
     {
@@ -86,7 +86,7 @@ void GameObject::Update()
 }
 
 // draws this GameObject using the renderer
-void GameObject::Draw()
+void GameObject::draw()
 {
     if (m_sprite)
     {

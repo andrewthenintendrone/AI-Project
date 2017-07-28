@@ -39,22 +39,28 @@
     <ClCompile Include="source\ObjectPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Seek.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\TimeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\VectorMaths.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\copyMousePosition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Flee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AStar\source\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VectorMaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,22 +86,28 @@
     <ClInclude Include="source\ObjectPool.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Renderer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\Seek.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\TimeManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\VectorMaths.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\CopyMousePosition.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Flee.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Character.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AStar\source\InputManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Renderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\VectorMaths.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

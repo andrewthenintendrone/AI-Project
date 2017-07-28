@@ -15,11 +15,11 @@ public:
     GameObject* setText(std::string& newText, sf::Font& newFont);
     sf::Text* getText();
     Agent* getAgent();
-    void Update();
-    void Draw();
+    void update();
+    void draw();
 
     void addBehavior(IBehavior* newBehavior);
-private:
+protected:
     sf::Texture* m_texture = nullptr;
     sf::Sprite* m_sprite = nullptr;
     sf::Text* m_text = nullptr;

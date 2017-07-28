@@ -8,6 +8,7 @@
 #include "Flock.h"
 #include "Seek.h"
 #include "TimeManager.h"
+#include "Character.h"
 
 const std::string pikminTypes[5] = { "red", "yellow", "blue", "rock", "pink" };
 
@@ -24,8 +25,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 {
     Renderer::getInstance()->createWindow(1280, 720);
 
-    ObjectPool::getInstance()->createObject("player")->setSprite("olimar")->addBehavior(new copyMousePosition);
-    ObjectPool::getInstance()->createObject("follower0")->setSprite("pikmin_" + pikminTypes[rand() % 5])->addBehavior(new Seek(ObjectPool::getInstance()->getObject("player")));
+    //ObjectPool::getInstance()->createObject("player")->setSprite("Character")->addBehavior(new copyMousePosition);
+    //ObjectPool::getInstance()->createObject("follower0")->setSprite("pikmin_" + pikminTypes[rand() % 5])->addBehavior(new Seek(ObjectPool::getInstance()->getObject("player")));
     //for (int i = 1; i < 25; i++)
     //{
     //    ObjectPool::getInstance()->createObject("follower" + std::to_string(i))->setSprite("pikmin_" + pikminTypes[rand() % 5])->addBehavior(new Seek(ObjectPool::getInstance()->getObject("player")));
@@ -33,10 +34,13 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     srand(unsigned(time(NULL)));
 
-    while (Renderer::getInstance()->getWindow().isOpen())
+    Character guy;
+    guy.addBehavior(new moveToMouse);
+
+    while (Renderer::getInstance()->getWindow()->isOpen())
     {
         sf::Event event;
-        while (Renderer::getInstance()->getWindow().pollEvent(event))
+        while (Renderer::getInstance()->getWindow()->pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
             {
@@ -50,8 +54,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         TIMEMANAGER->update();
 
         Renderer::getInstance()->clearWindow();
-        ObjectPool::getInstance()->updateAllObjects();
-        ObjectPool::getInstance()->drawAllObjects();
+        /*ObjectPool::getInstance()->updateAllObjects();
+        ObjectPool::getInstance()->drawAllObjects();*/
+        guy.update();
+        guy.draw();
         Renderer::getInstance()->updateWindow();
     }
 
