@@ -5,49 +5,51 @@
 #include "Agent.h"
 #include "VectorMaths.h"
 
-void keyBoardControl::update(Agent* pAgent)
+keyBoardControl::keyBoardControl(float maxVelocity)
 {
-    // reset force
-    pAgent->setVelocity(sf::Vector2f(0, 0));
+    m_maxVelocity = maxVelocity;
+}
 
+sf::Vector2f keyBoardControl::update()
+{
     sf::Vector2f desiredVelocity = sf::Vector2f(0, 0);
+
+    bool directionPressed = false;
 
     // check keys
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        desiredVelocity += (sf::Vector2f(-moveSpeed, 0));
+        directionPressed = true;
+        desiredVelocity += (sf::Vector2f(-1, 0));
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        desiredVelocity += (sf::Vector2f(moveSpeed, 0));
+        directionPressed = true;
+        desiredVelocity += (sf::Vector2f(1, 0));
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        desiredVelocity += (sf::Vector2f(0, -moveSpeed));
+        directionPressed = true;
+        desiredVelocity += (sf::Vector2f(0, -1));
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        desiredVelocity += (sf::Vector2f(0, moveSpeed));
+        directionPressed = true;
+        desiredVelocity += (sf::Vector2f(0, 1));
     }
 
-    normalize(desiredVelocity);
-    desiredVelocity *= moveSpeed;
-
-    pAgent->addVelocity(desiredVelocity);
-
-    // flip sprite to direction
-    if (pAgent->getParentPointer()->getSprite())
+    if (directionPressed)
     {
-        if (pAgent->getVelocity().x < 0)
-        {
-            pAgent->getParentPointer()->getSprite()->setScale(-1, 1);
-        }
-        else if (pAgent->getVelocity().x > 0)
-        {
-            pAgent->getParentPointer()->getSprite()->setScale(1, 1);
-        }
+        normalize(desiredVelocity);
+        desiredVelocity *= m_maxVelocity;
+        return desiredVelocity;
+    }
+    else
+    {
+        m_myAgent->setVelocity(desiredVelocity);
+        return (desiredVelocity);
     }
 }

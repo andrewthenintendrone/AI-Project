@@ -6,8 +6,8 @@
 #include "keyBoardControl.h"
 #include "moveToMouse.h"
 #include "CopyMousePosition.h"
-#include "Flock.h"
 #include "Seek.h"
+#include "Wander.h"
 #include "TimeManager.h"
 #include "Character.h"
 
@@ -31,8 +31,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     Character player;
     player.addBehavior(new moveToMouse(200.0f));
 
-    GameObject follower("pikmin_" + pikminTypes[rand() % 6]);
-    follower.addBehavior(new Seek(&player, 100.0f));
+    GameObject follower("pikmin_" + pikminTypes[rand() % 5]);
+    follower.getAgent()->setPosition(sf::Vector2f(300.0f, 300.0f));
+    follower.addBehavior(new Wander());
 
     while (Renderer::getInstance()->getWindow()->isOpen())
     {

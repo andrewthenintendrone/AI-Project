@@ -4,11 +4,6 @@
 #include "VectorMaths.h"
 #include "Agent.h"
 
-moveToMouse::moveToMouse()
-{
-
-}
-
 moveToMouse::moveToMouse(float maxVelocity)
 {
     m_maxVelocity = maxVelocity;

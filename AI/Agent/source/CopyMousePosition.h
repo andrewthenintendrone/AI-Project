@@ -3,5 +3,5 @@
 
 class copyMousePosition : public IBehavior
 {
-    virtual void update(Agent *pAgent);
+    virtual sf::Vector2f update();
 };

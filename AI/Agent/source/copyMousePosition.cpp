@@ -3,7 +3,8 @@
 #include "Renderer.h"
 #include "Agent.h"
 
-void copyMousePosition::update(Agent *pAgent)
+sf::Vector2f copyMousePosition::update()
 {
-    pAgent->setPosition(sf::Vector2f(InputManager::getInstance()->getMousePosf()));
+    m_myAgent->setPosition(sf::Vector2f(InputManager::getInstance()->getMousePosf()));
+    return sf::Vector2f(0.0f, 0.0f);
 }

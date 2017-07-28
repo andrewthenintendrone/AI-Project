@@ -5,10 +5,9 @@
 class moveToMouse : public IBehavior
 {
 public:
-    moveToMouse();
-    moveToMouse(float maxVelocity);
+    moveToMouse(float maxVelocity = 100.0f);
     virtual sf::Vector2f update();
 
 private:
-    float m_maxVelocity = 500.0f;
+    float m_maxVelocity = 0.0f;
 };

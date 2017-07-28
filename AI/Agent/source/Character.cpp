@@ -44,50 +44,49 @@ void Character::updateSprite()
     // turn based on velocity
     sf::Vector2f velocity = m_agent->getVelocity();
 
-    float movementAngle = vectorAngle(velocity);
-    m_text.setString("angle = " + std::to_string(movementAngle));
+    if (magnitude(velocity) == 0.0f)
+    {
+        m_movementState = MOVESTATE::IDLE;
+    }
+    else
+    {
+        m_movementState = MOVESTATE::RUN;
 
+        float movementAngle = vectorAngle(velocity);
+        m_text.setString("angle = " + std::to_string(movementAngle));
 
-    /*22.5
-    67.5
-    112.5
-    157.5
-    202.5
-    247.5
-    292.5
-    337.5*/
-
-    if (movementAngle <= 22.5f || movementAngle > 337.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::RIGHT;
-    }
-    else if (movementAngle <= 67.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::DOWNRIGHT;
-    }
-    else if (movementAngle <= 112.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::DOWN;
-    }
-    else if (movementAngle <= 157.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::DOWNLEFT;
-    }
-    else if (movementAngle <= 202.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::LEFT;
-    }
-    else if (movementAngle <= 247.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::UPLEFT;
-    }
-    else if (movementAngle <= 292.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::UP;
-    }
-    else if (movementAngle <= 337.5f)
-    {
-        m_movementDirection = MOVEDIRECTION::UPRIGHT;
+        if (movementAngle <= 22.5f || movementAngle > 337.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::RIGHT;
+        }
+        else if (movementAngle <= 67.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::DOWNRIGHT;
+        }
+        else if (movementAngle <= 112.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::DOWN;
+        }
+        else if (movementAngle <= 157.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::DOWNLEFT;
+        }
+        else if (movementAngle <= 202.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::LEFT;
+        }
+        else if (movementAngle <= 247.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::UPLEFT;
+        }
+        else if (movementAngle <= 292.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::UP;
+        }
+        else if (movementAngle <= 337.5f)
+        {
+            m_movementDirection = MOVEDIRECTION::UPRIGHT;
+        }
     }
 
 
@@ -116,4 +115,5 @@ void Character::updateSprite()
     m_sprite.setTextureRect(sf::IntRect(currentSpriteCoordinate, pathFinderSpriteSize));
 
     m_sprite.setOrigin(sf::Vector2f(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f));
+    
 }

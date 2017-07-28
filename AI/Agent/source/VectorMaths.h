@@ -27,3 +27,6 @@ float angleBetweenVectors(sf::Vector2f lhs, sf::Vector2f rhs);
 
 // returns the angle of the vector
 float vectorAngle(sf::Vector2f& vector);
+
+// returns a random vector of a specified length
+sf::Vector2f getRandomVector(float length);

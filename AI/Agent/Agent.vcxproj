@@ -111,6 +111,7 @@
     <ClCompile Include="source\Seek.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\VectorMaths.cpp" />
+    <ClCompile Include="source\Wander.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,7 @@
     <ClInclude Include="source\Seek.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\VectorMaths.h" />
+    <ClInclude Include="source\Wander.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

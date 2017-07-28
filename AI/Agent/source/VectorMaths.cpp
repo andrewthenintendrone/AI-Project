@@ -74,3 +74,9 @@ float vectorAngle(sf::Vector2f& vector)
     float angle = std::atan2f(vector.y, vector.x) / (float)M_PI * 180.0f;
     return angle < 0.0f ? angle + 360.0f : angle;
 }
+
+sf::Vector2f getRandomVector(float length)
+{
+    float randomAngle = ((float)rand() / RAND_MAX) * (float)M_PI * 2.0f;
+    return sf::Vector2f(cosf(randomAngle), sinf(randomAngle) * length);
+}

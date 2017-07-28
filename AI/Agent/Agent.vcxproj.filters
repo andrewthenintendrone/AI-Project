@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\behaviours">
+      <UniqueIdentifier>{fa575bf2-a273-4df7-9303-f37ee0f6f4dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\WinMain.cpp">
@@ -21,34 +24,16 @@
     <ClCompile Include="source\Agent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Flock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\IBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\keyBoardControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\moveToMouse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\ObjectPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Seek.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\TimeManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\copyMousePosition.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Flee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Character.cpp">
@@ -63,12 +48,30 @@
     <ClCompile Include="source\VectorMaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\copyMousePosition.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Flee.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Flock.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\keyBoardControl.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\moveToMouse.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Seek.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wander.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Flock.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\GameObject.h">
@@ -77,25 +80,10 @@
     <ClInclude Include="source\IBehavior.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\keyBoardControl.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\moveToMouse.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\ObjectPool.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Seek.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\TimeManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\CopyMousePosition.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Flee.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Character.h">
@@ -109,6 +97,27 @@
     </ClInclude>
     <ClInclude Include="source\VectorMaths.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CopyMousePosition.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Flee.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Flock.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\keyBoardControl.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\moveToMouse.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Seek.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wander.h">
+      <Filter>Source Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

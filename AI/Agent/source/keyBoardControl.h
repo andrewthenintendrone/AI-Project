@@ -4,7 +4,9 @@
 class keyBoardControl : public IBehavior
 {
 public:
-    virtual void update(Agent* pAgent);
+    keyBoardControl(float maxVelocity = 100.0f);
+
+    virtual sf::Vector2f update();
 private:
-    float moveSpeed = 500.0f;
+    float m_maxVelocity = 0.0f;
 };

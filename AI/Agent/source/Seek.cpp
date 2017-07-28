@@ -1,18 +1,16 @@
 #include "Seek.h"
 #include "SFML\Graphics.hpp"
+#include "GameObject.h"
 #include "Agent.h"
 #include "VectorMaths.h"
 
-// sets target in constructor
-Seek::Seek(GameObject* newTarget)
-{
-    m_target = newTarget;
-}
-
-Seek::Seek(GameObject* newTarget, float maxVelocity)
+// set the target and optionally the maximum velocity in the constructor
+Seek::Seek(GameObject* newTarget, float maxVelocity, float arriveRange, float mass)
 {
     m_target = newTarget;
     m_maxVelocity = maxVelocity;
+    m_slowingRange = arriveRange;
+    m_mass = mass;
 }
 
 // moves towards target
