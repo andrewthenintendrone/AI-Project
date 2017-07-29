@@ -98,27 +98,32 @@
   <ItemGroup>
     <ClCompile Include="..\AStar\source\InputManager.cpp" />
     <ClCompile Include="source\Agent.cpp" />
+    <ClCompile Include="source\Arrive.cpp" />
+    <ClCompile Include="source\Avoid.cpp" />
     <ClCompile Include="source\Character.cpp" />
-    <ClCompile Include="source\copyMousePosition.cpp" />
+    <ClCompile Include="source\CopyMousePosition.cpp" />
     <ClCompile Include="source\Evade.cpp" />
     <ClCompile Include="source\Flee.cpp" />
     <ClCompile Include="source\Flock.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\IBehaviour.cpp" />
-    <ClCompile Include="source\keyBoardControl.cpp" />
-    <ClCompile Include="source\moveToMouse.cpp" />
+    <ClCompile Include="source\KeyboardControl.cpp" />
+    <ClCompile Include="source\SeekMouse.cpp" />
     <ClCompile Include="source\ObjectPool.cpp" />
     <ClCompile Include="source\Pursue.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\Seek.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\VectorMaths.cpp" />
+    <ClCompile Include="source\Wall.cpp" />
     <ClCompile Include="source\Wander.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AStar\source\InputManager.h" />
     <ClInclude Include="source\Agent.h" />
+    <ClInclude Include="source\Arrive.h" />
+    <ClInclude Include="source\Avoid.h" />
     <ClInclude Include="source\Character.h" />
     <ClInclude Include="source\CopyMousePosition.h" />
     <ClInclude Include="source\Evade.h" />
@@ -126,14 +131,15 @@
     <ClInclude Include="source\Flock.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\IBehavior.h" />
-    <ClInclude Include="source\keyBoardControl.h" />
-    <ClInclude Include="source\moveToMouse.h" />
+    <ClInclude Include="source\KeyboardControl.h" />
+    <ClInclude Include="source\SeekMouse.h" />
     <ClInclude Include="source\ObjectPool.h" />
     <ClInclude Include="source\Pursue.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Seek.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\VectorMaths.h" />
+    <ClInclude Include="source\Wall.h" />
     <ClInclude Include="source\Wander.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

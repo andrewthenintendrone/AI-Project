@@ -3,6 +3,7 @@
 #include "IBehavior.h"
 #include "TimeManager.h"
 #include "VectorMaths.h"
+#include <algorithm>
 
 #pragma region constructor / destructor
 
@@ -112,7 +113,8 @@ void Agent::update()
     }
 
     //TODO: Physics stuff with force, acceleration, velocity etc...
-    m_position += truncate(m_velocity, m_maxSpeed) * TIMEMANAGER->deltaTime();
+    truncate(m_velocity, m_maxSpeed);
+    m_position += m_velocity * TIMEMANAGER->deltaTime();
 }
 
 void Agent::sense()

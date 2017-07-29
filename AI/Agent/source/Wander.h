@@ -6,7 +6,7 @@ class GameObject;
 class Wander : public IBehavior
 {
 public:
-    Wander(float maxVelocity = 300.0f, float wanderRadius = 50.0f, float wanderDistance = 200.0f, float wanderJitterAmount = 100.0f);
+    Wander(float maxVelocity = 300.0f, float wanderRadius = 10.0f, float wanderDistance = 200.0f, float wanderJitterAmount = 5.0f);
     virtual sf::Vector2f update();
 
 private:

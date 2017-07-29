@@ -19,6 +19,11 @@ GameObject* ObjectPool::createObject(std::string key)
     return newGameObject;
 }
 
+void ObjectPool::addObject(GameObject* newObject, std::string& key)
+{
+    m_objectPool.insert(std::pair<std::string, GameObject*>(key, newObject));
+}
+
 GameObject* ObjectPool::getObject(std::string key)
 {
     return m_objectPool.at(key);

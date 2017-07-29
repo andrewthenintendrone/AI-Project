@@ -40,19 +40,11 @@ sf::Vector2f normalize(sf::Vector2f& input, float scalar)
     return input;
 }
 
+// reduces the magitude of the vector to max only if the magnitude is already bigger
 sf::Vector2f truncate(sf::Vector2f& vector, float max)
 {
-    float i = (max / magnitude(vector));
-    i = i < 1.0 ? i : 1.0f;
-    scaleBy(vector, i);
-    return vector;
-}
-
-sf::Vector2f scaleBy(sf::Vector2f& vector, float scalar)
-{
-    float i = magnitude(vector) * scalar;
-    normalize(vector, i);
-    return vector;
+    float i = std::min(magnitude(vector), max);
+    return normalize(vector, i);
 }
 
 // linearly interpolates between two vectors

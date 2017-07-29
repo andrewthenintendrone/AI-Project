@@ -48,19 +48,10 @@
     <ClCompile Include="source\VectorMaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\copyMousePosition.cpp">
-      <Filter>Source Files\behaviours</Filter>
-    </ClCompile>
     <ClCompile Include="source\Flee.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
     <ClCompile Include="source\Flock.cpp">
-      <Filter>Source Files\behaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="source\keyBoardControl.cpp">
-      <Filter>Source Files\behaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="source\moveToMouse.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
     <ClCompile Include="source\Seek.cpp">
@@ -73,6 +64,24 @@
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
     <ClCompile Include="source\Pursue.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CopyMousePosition.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\KeyboardControl.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SeekMouse.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Arrive.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Avoid.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,12 +122,6 @@
     <ClInclude Include="source\Flock.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
-    <ClInclude Include="source\keyBoardControl.h">
-      <Filter>Source Files\behaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="source\moveToMouse.h">
-      <Filter>Source Files\behaviours</Filter>
-    </ClInclude>
     <ClInclude Include="source\Seek.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
@@ -129,6 +132,21 @@
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
     <ClInclude Include="source\Evade.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\KeyboardControl.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SeekMouse.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Arrive.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wall.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Avoid.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>

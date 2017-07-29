@@ -4,13 +4,16 @@
 #include "GameObject.h"
 #include "InputManager.h"
 #include "keyBoardControl.h"
-#include "moveToMouse.h"
+#include "SeekMouse.h"
 #include "CopyMousePosition.h"
 #include "Pursue.h"
 #include "Evade.h"
 #include "Wander.h"
+#include "Arrive.h"
 #include "TimeManager.h"
 #include "Character.h"
+#include "Wall.h"
+#include "Avoid.h"
 
 const std::string pikminTypes[5] = { "red", "yellow", "blue", "rock", "pink" };
 
@@ -29,24 +32,34 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     srand(unsigned(time(NULL)));
 
-    Character player;
-    player.addBehavior(new moveToMouse(200.0f));
-
-    GameObject follower("pikmin_" + pikminTypes[rand() % 5]);
-    follower.getAgent()->setPosition(sf::Vector2f(300.0f, 300.0f));
-    follower.addBehavior(new Evade(&player));
+    std::list<Wall*> walls;
+    for (int i = 0; i < 10; i++)
+    {
+        walls.push_back(new Wall);
+    }
+    std::list<GameObject*> gameobjects;
+    for (int i = 0; i < 100; i++)
+    {
+        GameObject* newGameObject = new GameObject("pikmin_" + pikminTypes[rand() % 5]);
+        newGameObject->addBehavior(new Wander);
+        newGameObject->addBehavior(new Avoid(walls));
+        gameobjects.push_back(newGameObject);
+    }
 
     while (Renderer::getInstance()->getWindow()->isOpen())
     {
         InputManager::getInstance()->update();
         TIMEMANAGER->update();
         Renderer::getInstance()->clearWindow();
-
-        player.update();
-        player.draw();
-
-        follower.update();
-        follower.draw();
+        for (auto iter = gameobjects.begin(); iter != gameobjects.end(); iter++)
+        {
+            (*iter)->update();
+            (*iter)->draw();
+        }
+        for (auto iter = walls.begin(); iter != walls.end(); iter++)
+        {
+            (*iter)->draw();
+        }
         Renderer::getInstance()->updateWindow();
     }
 

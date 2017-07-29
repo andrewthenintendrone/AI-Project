@@ -36,7 +36,7 @@ void Character::update()
 void Character::draw()
 {
     Renderer::getInstance()->Draw(&m_sprite);
-    Renderer::getInstance()->Draw(&m_text);
+    //Renderer::getInstance()->Draw(&m_text);
 }
 
 void Character::updateSprite()
@@ -50,7 +50,14 @@ void Character::updateSprite()
     }
     else
     {
-        m_movementState = MOVESTATE::RUN;
+        if (magnitude(velocity) < 120.0f)
+        {
+            m_movementState = MOVESTATE::WALK;
+        }
+        else
+        {
+            m_movementState = MOVESTATE::RUN;
+        }
 
         float movementAngle = vectorAngle(velocity);
         m_text.setString("angle = " + std::to_string(movementAngle));
@@ -89,7 +96,6 @@ void Character::updateSprite()
         }
     }
 
-
     if (m_clock.getElapsedTime().asSeconds() > (1.0f / (float)m_animationFrameRate))
     {
         currentSpriteCoordinate.x += pathFinderSpriteSize.x;
@@ -115,5 +121,4 @@ void Character::updateSprite()
     m_sprite.setTextureRect(sf::IntRect(currentSpriteCoordinate, pathFinderSpriteSize));
 
     m_sprite.setOrigin(sf::Vector2f(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f));
-    
 }

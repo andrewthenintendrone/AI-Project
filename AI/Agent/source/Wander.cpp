@@ -27,14 +27,23 @@ sf::Vector2f Wander::update()
     sf::Vector2f velocity = target - m_myAgent->getPosition();
     sf::Vector2f force = velocity - m_myAgent->getVelocity();
 
+    // keep within the window
     sf::Vector2f windowSize = Renderer::getInstance()->getWindowSizef();
-    if (m_myAgent->getPosition().x + force.x < 0 || m_myAgent->getPosition().x + force.x > windowSize.x)
+    if (m_myAgent->getPosition().x <= 0)
     {
-        force.x = -force.x;
+        force.x = fabsf(force.x);
     }
-    if (m_myAgent->getPosition().y + force.y < 0 || m_myAgent->getPosition().y + force.y > windowSize.y)
+    else if (m_myAgent->getPosition().x >= windowSize.x)
     {
-        force.y = -force.y;
+        force.x = -fabsf(force.x);
+    }
+    if (m_myAgent->getPosition().y <= 0)
+    {
+        force.y = fabsf(force.y);
+    }
+    else if(m_myAgent->getPosition().y >= windowSize.y)
+    {
+        force.y = -fabsf(force.y);
     }
 
     return force;
