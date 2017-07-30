@@ -84,6 +84,9 @@
     <ClCompile Include="source\Avoid.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
+    <ClCompile Include="source\SingleFile.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
@@ -147,6 +150,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Avoid.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Behaviors.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SingleFile.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>

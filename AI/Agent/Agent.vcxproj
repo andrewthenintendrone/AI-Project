@@ -113,6 +113,7 @@
     <ClCompile Include="source\Pursue.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\Seek.cpp" />
+    <ClCompile Include="source\SingleFile.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\VectorMaths.cpp" />
     <ClCompile Include="source\Wall.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="source\Agent.h" />
     <ClInclude Include="source\Arrive.h" />
     <ClInclude Include="source\Avoid.h" />
+    <ClInclude Include="source\Behaviors.h" />
     <ClInclude Include="source\Character.h" />
     <ClInclude Include="source\CopyMousePosition.h" />
     <ClInclude Include="source\Evade.h" />
@@ -137,6 +139,7 @@
     <ClInclude Include="source\Pursue.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Seek.h" />
+    <ClInclude Include="source\SingleFile.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\VectorMaths.h" />
     <ClInclude Include="source\Wall.h" />

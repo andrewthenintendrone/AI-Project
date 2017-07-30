@@ -50,7 +50,7 @@ void Character::updateSprite()
     }
     else
     {
-        if (magnitude(velocity) < 120.0f)
+        if (magnitude(velocity) < 200.0f)
         {
             m_movementState = MOVESTATE::WALK;
         }

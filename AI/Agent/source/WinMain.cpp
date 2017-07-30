@@ -2,18 +2,12 @@
 #include "ObjectPool.h"
 #include "Renderer.h"
 #include "GameObject.h"
+#include "Behaviors.h"
 #include "InputManager.h"
-#include "keyBoardControl.h"
-#include "SeekMouse.h"
-#include "CopyMousePosition.h"
-#include "Pursue.h"
-#include "Evade.h"
-#include "Wander.h"
-#include "Arrive.h"
 #include "TimeManager.h"
 #include "Character.h"
 #include "Wall.h"
-#include "Avoid.h"
+#include "VectorMaths.h"
 
 const std::string pikminTypes[5] = { "red", "yellow", "blue", "rock", "pink" };
 
@@ -32,18 +26,24 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     srand(unsigned(time(NULL)));
 
-    std::list<Wall*> walls;
-    for (int i = 0; i < 10; i++)
-    {
-        walls.push_back(new Wall);
-    }
-    std::list<GameObject*> gameobjects;
+    sf::Vector2u windowSize = Renderer::getInstance()->getWindowSizeu();
+
+    std::list<GameObject*> gameObjects;
+
+    Character leader;
+    leader.addBehavior(new SeekMouse);
+    leader.getAgent()->setPosition(sf::Vector2f(rand() % windowSize.x, rand() % windowSize.y));
+
     for (int i = 0; i < 100; i++)
     {
         GameObject* newGameObject = new GameObject("pikmin_" + pikminTypes[rand() % 5]);
-        newGameObject->addBehavior(new Wander);
-        newGameObject->addBehavior(new Avoid(walls));
-        gameobjects.push_back(newGameObject);
+        newGameObject->getAgent()->setPosition(sf::Vector2f(rand() % windowSize.x, rand() % windowSize.y));
+        newGameObject->getAgent()->setVelocity(getRandomVector(10.0f));
+        gameObjects.push_back(newGameObject);
+    }
+    for (auto iter = gameObjects.begin(); iter != gameObjects.end(); iter++)
+    {
+        (*iter)->addBehavior(new Flock(gameObjects));
     }
 
     while (Renderer::getInstance()->getWindow()->isOpen())
@@ -51,15 +51,13 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         InputManager::getInstance()->update();
         TIMEMANAGER->update();
         Renderer::getInstance()->clearWindow();
-        for (auto iter = gameobjects.begin(); iter != gameobjects.end(); iter++)
+        for (auto iter = std::next(gameObjects.begin()); iter != gameObjects.end(); iter++)
         {
             (*iter)->update();
             (*iter)->draw();
         }
-        for (auto iter = walls.begin(); iter != walls.end(); iter++)
-        {
-            (*iter)->draw();
-        }
+        leader.update();
+        leader.draw();
         Renderer::getInstance()->updateWindow();
     }
 

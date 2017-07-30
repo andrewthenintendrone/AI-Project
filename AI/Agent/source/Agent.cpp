@@ -113,7 +113,7 @@ void Agent::update()
     }
 
     //TODO: Physics stuff with force, acceleration, velocity etc...
-    truncate(m_velocity, m_maxSpeed);
+    m_velocity = truncate(m_velocity, m_maxSpeed);
     m_position += m_velocity * TIMEMANAGER->deltaTime();
 }
 
