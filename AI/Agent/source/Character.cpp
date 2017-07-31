@@ -96,6 +96,7 @@ void Character::updateSprite()
         }
     }
 
+    // animation
     if (m_clock.getElapsedTime().asSeconds() > (1.0f / (float)m_animationFrameRate))
     {
         currentSpriteCoordinate.x += pathFinderSpriteSize.x;

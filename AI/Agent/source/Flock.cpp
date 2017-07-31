@@ -13,40 +13,43 @@ Flock::Flock(std::list<GameObject*>& flock, float maximumVelocity)
 
 sf::Vector2f Flock::update()
 {
+    sf::Vector2f windowSize = Renderer::getInstance()->getWindowSizef();
+    sf::Vector2f myPos = m_myAgent->getPosition();
+
+    if (myPos.x < 0)
+    {
+        m_myAgent->setPosition(sf::Vector2f(windowSize.x, myPos.y));
+    }
+    else if (myPos.x > windowSize.x)
+    {
+        m_myAgent->setPosition(sf::Vector2f(0, myPos.y));
+    }
+
+    if (myPos.y < 0)
+    {
+        m_myAgent->setPosition(sf::Vector2f(myPos.x, windowSize.y));
+    }
+    else if (myPos.y > windowSize.y)
+    {
+        m_myAgent->setPosition(sf::Vector2f(myPos.x, 0));
+    }
+
+
     sf::Vector2f alignment = computeAlignment() * m_alignmentWeight;
     sf::Vector2f cohesion = computeCohesion(m_cohesionRadius) * m_cohesionWeight;
     sf::Vector2f seperation = -computeCohesion(m_seperationRadius) * m_seperationWeight;
 
-    sf::Vector2f target = seperation;
-    sf::Vector2f velocity = target - m_myAgent->getPosition();
+    sf::Vector2f velocity = alignment + cohesion + seperation;
+    velocity = normalize(velocity, m_maximumVelocity);
 
     sf::Vector2f force = velocity - m_myAgent->getVelocity();
-
-    // keep within the window
-    /*sf::Vector2f windowSize = Renderer::getInstance()->getWindowSizef();
-    if (m_myAgent->getPosition().x <= 0)
-    {
-        force.x = fabsf(force.x);
-    }
-    else if (m_myAgent->getPosition().x >= windowSize.x)
-    {
-        force.x = -fabsf(force.x);
-    }
-    if (m_myAgent->getPosition().y <= 0)
-    {
-        force.y = fabsf(force.y);
-    }
-    else if (m_myAgent->getPosition().y >= windowSize.y)
-    {
-        force.y = -fabsf(force.y);
-    }*/
 
     return force;
 }
 
 sf::Vector2f Flock::computeAlignment()
 {
-    sf::Vector2f velocity;
+    sf::Vector2f target;
     int numNeighbors = 0;
 
     for each(GameObject* gameobject in m_flock)
@@ -55,7 +58,7 @@ sf::Vector2f Flock::computeAlignment()
         {
             if (magnitude(gameobject->getAgent()->getPosition()) < m_alignmentRadius)
             {
-                velocity += gameobject->getAgent()->getVelocity();
+                target += gameobject->getAgent()->getVelocity();
                 numNeighbors++;
             }
         }
@@ -63,17 +66,17 @@ sf::Vector2f Flock::computeAlignment()
 
     if (numNeighbors > 0)
     {
-        velocity /= (float)numNeighbors;
+        target /= (float)numNeighbors;
     }
 
-    sf::Vector2f force = velocity - m_myAgent->getVelocity();
+    target = normalize(target, m_maximumVelocity);
 
-    return force;
+    return target;
 }
 
 sf::Vector2f Flock::computeCohesion(float radius)
 {
-    sf::Vector2f target = m_myAgent->getPosition();
+    sf::Vector2f target;
     int numNeighbors = 0;
 
     for each(GameObject* gameobject in m_flock)
@@ -93,9 +96,7 @@ sf::Vector2f Flock::computeCohesion(float radius)
         target /= (float)numNeighbors;
     }
 
-    sf::Vector2f velocity = target - m_myAgent->getPosition();
+    target = normalize(target, m_maximumVelocity);
 
-    sf::Vector2f force = velocity - m_myAgent->getVelocity();
-
-    return force;
+    return target;
 }

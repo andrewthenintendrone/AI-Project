@@ -18,6 +18,11 @@ Edge::~Edge()
 
 }
 
+void Edge::setColor(sf::Color newColor)
+{
+    m_line.setFillColor(newColor);
+}
+
 void Edge::recalculate()
 {
     sf::Vector2f centerOfNodes = (m_firstNode->getPosition() + m_secondNode->getPosition()) / 2.0f;

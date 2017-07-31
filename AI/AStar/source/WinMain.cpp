@@ -6,6 +6,7 @@
 #include "Edge.h"
 #include "PathFinder.h"
 #include "InputManager.h"
+#include "TimeManager.h"
 
 // returns path to the executable
 std::string getPath()
@@ -28,18 +29,14 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     {
         path.addNode(sf::Vector2f((float)(rand() % (Renderer::getInstance()->getWindow()->getSize().x - 300) + 50), (float)(rand() % (Renderer::getInstance()->getWindow()->getSize().y - 100) + 50)));
     }
-    path.linkNodes();
-
-    PathFinder pf;
 
     while (Renderer::getInstance()->getWindow()->isOpen())
     {
+        TIMEMANAGER->update();
         InputManager::getInstance()->update();
         Renderer::getInstance()->clearWindow();
         path.update();
         path.draw();
-        pf.update();
-        pf.draw();
         Renderer::getInstance()->updateWindow();
     }
 

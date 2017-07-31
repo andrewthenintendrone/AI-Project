@@ -22,6 +22,8 @@ public:
     sf::Vector2f getPosition();
     void setPosition(sf::Vector2f newPosition);
 
+    void setColor(sf::Color newColor);
+
     // score access
     float getGscore();
     void setGscore(float newGscore);
@@ -37,6 +39,8 @@ public:
 
     std::list<Edge*>* getEdges();
 
+    void reset();
+
 private:
     // graphic
     sf::CircleShape m_graphic;
@@ -47,5 +51,6 @@ private:
     float Gscore = std::numeric_limits<float>::infinity();
     float Hscore = std::numeric_limits<float>::infinity();
     float Fscore = std::numeric_limits<float>::infinity();
+
     PathNode* m_prevNode = nullptr;
 };

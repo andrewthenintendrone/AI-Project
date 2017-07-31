@@ -17,6 +17,7 @@ Path::~Path()
 void Path::update()
 {
     m_ui.update();
+    m_pathFinder.update();
     processInteraction();
 }
 
@@ -30,11 +31,24 @@ void Path::draw()
         }
         else
         {
+            if (*iter == m_PathNodes.front())
+            {
+                (*iter)->setColor(sf::Color::Green);
+            }
+            else if (*iter == m_PathNodes.back())
+            {
+                (*iter)->setColor(sf::Color::Red);
+            }
+            else
+            {
+                (*iter)->setColor(sf::Color(128, 0, 255));
+            }
             (*iter)->draw();
             iter++;
         }
     }
     m_ui.draw();
+    m_pathFinder.draw();
 }
 
 void Path::processInteraction()
@@ -63,6 +77,9 @@ void Path::processInteraction()
                 {
                     if (InputManager::getInstance()->getHovering((*iter)->getGraphic()))
                     {
+                        // fix up pathfinder
+                        m_pathFinder.stopPathFinding();
+
                         (*iter)->deleteEdges();
                         delete(*iter);
                         (*iter) = nullptr;
@@ -142,18 +159,21 @@ void Path::processInteraction()
         m_firstLinkNode = nullptr;
         m_secondLinkNode = nullptr;
     }
+
+    // if the a button is pressed the pathfinder will seek to the goal node
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        if (m_PathNodes.size() > 1)
+        {
+            resetNodes();
+            m_pathFinder.seekToGoal(m_PathNodes.front(), m_PathNodes.back());
+        }
+    }
 }
 
 void Path::addNode(sf::Vector2f position)
 {
     m_PathNodes.push_back(new PathNode(position));
-}
-
-void Path::removeNode(PathNode* nodeToRemove)
-{
-    m_PathNodes.remove(nodeToRemove);
-    delete nodeToRemove;
-    nodeToRemove = nullptr;
 }
 
 void Path::linkNodes(PathNode* firstNode, PathNode* secondNode)
@@ -166,4 +186,16 @@ void Path::linkNodes(PathNode* firstNode, PathNode* secondNode)
 void Path::linkNodes()
 {
     linkNodes(m_PathNodes.front(), m_PathNodes.back());
+}
+
+void Path::resetNodes()
+{
+    for (auto iter = m_PathNodes.begin(); iter != m_PathNodes.end(); iter++)
+    {
+        (*iter)->reset();
+        for (auto iter2 = (*iter)->getEdges()->begin(); iter2 != (*iter)->getEdges()->end(); iter2++)
+        {
+            (*iter2)->setColor(sf::Color(255, 255, 0));
+        }
+    }
 }

@@ -103,6 +103,7 @@
     <ClCompile Include="source\PathFinder.cpp" />
     <ClCompile Include="source\PathNode.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
+    <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\UI.cpp" />
     <ClCompile Include="source\VectorMaths.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="source\PathFinder.h" />
     <ClInclude Include="source\PathNode.h" />
     <ClInclude Include="source\Renderer.h" />
+    <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\UI.h" />
     <ClInclude Include="source\VectorMaths.h" />
   </ItemGroup>

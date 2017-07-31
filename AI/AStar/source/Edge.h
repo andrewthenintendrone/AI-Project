@@ -13,6 +13,8 @@ public:
     PathNode* m_firstNode = nullptr;
     PathNode* m_secondNode = nullptr;
 
+    void setColor(sf::Color newColor);
+
     float m_length;
     void recalculate();
     void draw();

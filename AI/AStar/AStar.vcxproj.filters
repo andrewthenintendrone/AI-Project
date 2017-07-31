@@ -45,6 +45,9 @@
     <ClCompile Include="source\Edge.cpp">
       <Filter>Source Files\Path</Filter>
     </ClCompile>
+    <ClCompile Include="source\TimeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\VectorMaths.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="source\Edge.h">
       <Filter>Source Files\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TimeManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

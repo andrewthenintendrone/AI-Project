@@ -59,7 +59,7 @@ void PathNode::draw()
     }
 }
 
-sf::CircleShape * PathNode::getGraphic()
+sf::CircleShape* PathNode::getGraphic()
 {
     return &m_graphic;
 }
@@ -76,6 +76,11 @@ void PathNode::setPosition(sf::Vector2f newPosition)
     {
         (*iter)->recalculate();
     }
+}
+
+void PathNode::setColor(sf::Color newColor)
+{
+    m_graphic.setFillColor(newColor);
 }
 
 float PathNode::getGscore()
@@ -121,4 +126,12 @@ void PathNode::setPreviousNode(PathNode* newPreviousNode)
 std::list<Edge*>* PathNode::getEdges()
 {
     return &m_edges;
+}
+
+void PathNode::reset()
+{
+    Gscore = std::numeric_limits<float>::infinity();
+    Hscore = std::numeric_limits<float>::infinity();
+    Fscore = std::numeric_limits<float>::infinity();
+    m_prevNode = nullptr;
 }

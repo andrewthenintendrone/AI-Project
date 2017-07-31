@@ -29,21 +29,30 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     sf::Vector2u windowSize = Renderer::getInstance()->getWindowSizeu();
 
     std::list<GameObject*> gameObjects;
+    std::list<Wall*> walls;
+
+    for (int i = 0; i < 5; i++)
+    {
+        walls.push_back(new Wall);
+    }
 
     Character leader;
     leader.addBehavior(new SeekMouse);
+    leader.addBehavior(new Avoid(walls));
     leader.getAgent()->setPosition(sf::Vector2f(rand() % windowSize.x, rand() % windowSize.y));
+    gameObjects.push_back(&leader);
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
         GameObject* newGameObject = new GameObject("pikmin_" + pikminTypes[rand() % 5]);
         newGameObject->getAgent()->setPosition(sf::Vector2f(rand() % windowSize.x, rand() % windowSize.y));
         newGameObject->getAgent()->setVelocity(getRandomVector(10.0f));
         gameObjects.push_back(newGameObject);
     }
-    for (auto iter = gameObjects.begin(); iter != gameObjects.end(); iter++)
+    for (auto iter = std::next(gameObjects.begin()); iter != gameObjects.end(); iter++)
     {
-        (*iter)->addBehavior(new Flock(gameObjects));
+        (*iter)->addBehavior(new SingleFile(&gameObjects, 500.0f, 120.0f, 40.0f));
+        (*iter)->addBehavior(new Avoid(walls));
     }
 
     while (Renderer::getInstance()->getWindow()->isOpen())
@@ -51,6 +60,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         InputManager::getInstance()->update();
         TIMEMANAGER->update();
         Renderer::getInstance()->clearWindow();
+        for (auto iter = walls.begin(); iter != walls.end(); iter++)
+        {
+            (*iter)->draw();
+        }
         for (auto iter = std::next(gameObjects.begin()); iter != gameObjects.end(); iter++)
         {
             (*iter)->update();
