@@ -115,7 +115,24 @@ void Path::processInteraction()
             }
             if (m_firstLinkNode != nullptr && m_secondLinkNode != nullptr)
             {
-                linkNodes(m_firstLinkNode, m_secondLinkNode);
+                bool alreadyLinked = false;
+                for (auto iter = m_firstLinkNode->getEdges()->begin(); iter != m_firstLinkNode->getEdges()->end(); iter++)
+                {
+                    if ((*iter)->m_firstNode == m_firstLinkNode && (*iter)->m_secondNode == m_secondLinkNode)
+                    {
+                        alreadyLinked = true;
+                        break;
+                    }
+                    else if ((*iter)->m_secondNode == m_firstLinkNode && (*iter)->m_firstNode == m_secondLinkNode)
+                    {
+                        alreadyLinked = true;
+                        break;
+                    }
+                }
+                if (!alreadyLinked)
+                {
+                    linkNodes(m_firstLinkNode, m_secondLinkNode);
+                }
                 m_firstLinkNode = nullptr;
                 m_secondLinkNode = nullptr;
             }

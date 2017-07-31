@@ -46,6 +46,20 @@ void PathFinder::seekToGoal(PathNode* start, PathNode* goal)
 
     if (!m_bestPath.empty())
     {
+        for (std::list<PathNode*>::iterator iter = m_bestPath.begin(); iter != std::prev(m_bestPath.end()); iter++)
+        {
+            for (std::list<Edge*>::iterator edgeiter = (*iter)->getEdges()->begin(); edgeiter != (*iter)->getEdges()->end(); edgeiter++)
+            {
+                if ((*edgeiter)->m_firstNode == (*iter) && (*edgeiter)->m_secondNode == *std::next(iter))
+                {
+                    (*edgeiter)->setColor(sf::Color(0, 0, 255));
+                }
+                else if ((*edgeiter)->m_secondNode == (*iter) && (*edgeiter)->m_firstNode == *std::next(iter))
+                {
+                    (*edgeiter)->setColor(sf::Color(0, 0, 255));
+                }
+            }
+        }
         m_position = m_startNode->getPosition();
         m_currentTarget = (*std::next(m_bestPath.begin()));
         m_followingPath = true;
@@ -143,14 +157,14 @@ void PathFinder::followPath()
     if (magnitude(velocity) < 1.0f)
     {
         m_velocity = normalize(velocity, 0.0f);
-        m_bestPath.pop_front();
-        if (!m_bestPath.empty())
+        if (m_currentTarget != m_bestPath.back())
         {
-            m_currentTarget = m_bestPath.front();
+            m_currentTarget = *std::next(std::find(m_bestPath.begin(), m_bestPath.end(), m_currentTarget));
         }
         else
         {
-            m_followingPath = false;
+            m_currentTarget = *std::next(m_bestPath.begin());
+            m_position = m_bestPath.front()->getPosition();
         }
     }
     else if (m_currentTarget == m_bestPath.back() && magnitude(velocity) < m_slowRadius)
