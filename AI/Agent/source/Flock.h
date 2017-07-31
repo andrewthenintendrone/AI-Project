@@ -16,9 +16,9 @@ private:
     std::list<GameObject*>m_flock;
     float m_maximumVelocity;
 
-    float m_alignmentWeight = 0.5f;
+    float m_alignmentWeight = 0.3f;
     float m_cohesionWeight = 0.5f;
-    float m_seperationWeight = 0.9f;
+    float m_seperationWeight = 0.6f;
 
     float m_alignmentRadius = 200.0f;
     float m_cohesionRadius = 150.0f;
