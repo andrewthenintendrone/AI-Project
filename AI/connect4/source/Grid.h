@@ -1,20 +1,29 @@
 #pragma once
 #include "GridTile.h"
+#include "AI.h"
 
-const int numColumns = 7;
-const int numRows = 6;
+const int width = 7;
+const int height = 6;
 
 class Grid
 {
 public:
     Grid();
 
+    void playerTurn();
+    void aiTurn();
+
     void update();
     void draw();
 
-    int getPlacement(int columnToCheck);
+    bool canPlay(int column);
+    void play(int column);
+
+    void swapTurns();
 
 private:
-    GridTile m_gridTiles[numColumns][numRows];
-    bool player1Turn = true;
+    GridTile m_gridTiles[width][height];
+    bool m_playersTurn = true;
+
+    AI m_AI;
 };
