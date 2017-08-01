@@ -9,8 +9,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     // create window
     Renderer::getInstance()->createWindow(1280, 720);
 
-    bool player1Turn = true;
-
     Grid grid;
     sf::Clock timer;
 

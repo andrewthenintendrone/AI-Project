@@ -27,6 +27,11 @@ void GridTile::setPosition(float newX, float newY)
     setPosition(sf::Vector2f(newX, newY));
 }
 
+sf::RectangleShape GridTile::getRectangleGraphic()
+{
+    return m_rectangleGraphic;
+}
+
 sf::Vector2f GridTile::getPosition()
 {
     return m_rectangleGraphic.getPosition();

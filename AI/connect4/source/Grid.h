@@ -12,6 +12,9 @@ public:
     void update();
     void draw();
 
+    int getPlacement(int columnToCheck);
+
 private:
     GridTile m_gridTiles[numColumns][numRows];
+    bool player1Turn = true;
 };

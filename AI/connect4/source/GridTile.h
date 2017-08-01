@@ -12,6 +12,8 @@ public:
     void setPosition(sf::Vector2f& newPosition);
     void setPosition(float newX, float newY);
 
+    sf::RectangleShape getRectangleGraphic();
+
     sf::Vector2f getPosition();
 
     TILESTATE getState();
