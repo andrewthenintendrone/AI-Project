@@ -16,6 +16,8 @@ public:
     void update();
     void draw();
 
+    bool checkWin();
+
     bool canPlay(int column);
     void play(int column);
 
@@ -25,5 +27,7 @@ private:
     GridTile m_gridTiles[width][height];
     bool m_playersTurn = true;
 
+    sf::Font m_font;
+    sf::Text m_winText;
     AI m_AI;
 };

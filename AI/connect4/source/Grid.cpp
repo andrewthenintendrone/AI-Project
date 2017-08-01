@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "InputManager.h"
 
+std::string getPath();
+
 Grid::Grid()
 {
     // set up grid
@@ -15,31 +17,15 @@ Grid::Grid()
         }
     }
 
+    // set up win text
+    m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
+    m_winText.setFont(m_font);
+
     // allow AI to access the grid
     m_AI.setUp(this);
 }
 
-void Grid::update()
-{
-    if (m_playersTurn)
-    {
-        playerTurn();
-    }
-    else
-    {
-        aiTurn();
-    }
-
-    for (int x = 0; x < width; x++)
-    {
-        for (int y = 0; y < height; y++)
-        {
-            m_gridTiles[x][y].update();
-        }
-    }
-}
-
-// wait for the player to make a valid move
+// waits for the player to make a valid move
 void Grid::playerTurn()
 {
     // player has clicked
@@ -48,7 +34,7 @@ void Grid::playerTurn()
         // check all grid squares
         for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < width; y++)
+            for (int y = 0; y < height; y++)
             {
                 // if one has been clicked
                 if (InputManager::getInstance()->getHovering(&m_gridTiles[x][y].getRectangleGraphic()))
@@ -67,12 +53,45 @@ void Grid::playerTurn()
     }
 }
 
-// calculate a good move and play it
+// calculates a good move and play it
 void Grid::aiTurn()
 {
     m_AI.makeBestMove();
 }
 
+// handles game flow
+void Grid::update()
+{
+    if (checkWin())
+    {
+        m_winText.setString(std::string("player " + std::string(m_playersTurn ? "2" : "1") + " wins!"));
+        m_winText.setCharacterSize(40);
+        m_winText.setPosition(20, 20);
+        m_winText.setFillColor(sf::Color(255, 255, 255));
+        Renderer::getInstance()->Draw(&m_winText);
+    }
+    else
+    {
+        if (m_playersTurn)
+        {
+            playerTurn();
+        }
+        else
+        {
+            playerTurn();
+        }
+    }
+
+    for (int x = 0; x < width; x++)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            m_gridTiles[x][y].update();
+        }
+    }
+}
+
+// draws grid tiles
 void Grid::draw()
 {
     for (int x = 0; x < width; x++)
@@ -84,10 +103,111 @@ void Grid::draw()
     }
 }
 
+// returns true if a player has won
+bool Grid::checkWin()
+{
+    // only check the player who's turn it is
+    TILESTATE stateToCheck = (m_playersTurn ? TILESTATE::YELLOW : TILESTATE::RED);
+
+    int cumulativeCount = 0;
+
+    // check vertical
+    for (int x = 0; x < width; x++)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            if (m_gridTiles[x][y].getState() == stateToCheck)
+            {
+                cumulativeCount++;
+                if (cumulativeCount == 4)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                cumulativeCount = 0;
+            }
+        }
+        cumulativeCount = 0;
+    }
+
+    // check horizontal
+    for (int x = 0; x < height; x++)
+    {
+        for (int y = 0; y < width; y++)
+        {
+            if (m_gridTiles[y][x].getState() == stateToCheck)
+            {
+                cumulativeCount++;
+                if (cumulativeCount == 4)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                cumulativeCount = 0;
+            }
+        }
+        cumulativeCount = 0;
+    }
+
+    // check left diagonals
+    for (int x = 0; x < width - 3; x++)
+    {
+        for (int y = 0; y < height - 3; y++)
+        {
+            for (int d = 0; d < 4; d++)
+            {
+                if (m_gridTiles[x + d][y + d].getState() == stateToCheck)
+                {
+                    cumulativeCount++;
+                    if (cumulativeCount == 4)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    cumulativeCount = 0;
+                }
+            }
+            cumulativeCount = 0;
+        }
+    }
+
+    // check right diagonals
+    for (int x = width; x >= 3; x--)
+    {
+        for (int y = 0; y < height - 3; y++)
+        {
+            for (int d = 0; d < 4; d++)
+            {
+                if (m_gridTiles[x - d][y + d].getState() == stateToCheck)
+                {
+                    cumulativeCount++;
+                    if (cumulativeCount == 4)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    cumulativeCount = 0;
+                }
+            }
+            cumulativeCount = 0;
+        }
+    }
+
+    return false;
+}
+
 // returns true if a column can be played
 bool Grid::canPlay(int column)
 {
-    for (int currentRow = height - 1; currentRow >= 0; currentRow--)
+    for (int currentRow = (height - 1); currentRow >= 0; currentRow--)
     {
         if (m_gridTiles[column][currentRow].getState() == TILESTATE::EMPTY)
         {
@@ -100,7 +220,7 @@ bool Grid::canPlay(int column)
 // plays a column
 void Grid::play(int column)
 {
-    for (int currentRow = height - 1; currentRow >= 0; currentRow--)
+    for (int currentRow = (height - 1); currentRow >= 0; currentRow--)
     {
         if (m_gridTiles[column][currentRow].getState() == TILESTATE::EMPTY)
         {
