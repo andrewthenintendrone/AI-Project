@@ -35,11 +35,11 @@ sf::Vector2f SeekMouse::update()
 
     sf::Vector2f velocity = mousePos - m_myAgent->getPosition();
 
-    if (magnitude(velocity) < m_stopRadius)
+    if (distanceCheck(velocity, m_stopRadius))
     {
         velocity = sf::Vector2f(0, 0);
     }
-    else if (magnitude(velocity) < m_slowRadius)
+    else if (distanceCheck(velocity, m_slowRadius))
     {
         velocity = normalize(velocity, magnitude(velocity) / m_slowRadius) * m_maxVelocity;
     }

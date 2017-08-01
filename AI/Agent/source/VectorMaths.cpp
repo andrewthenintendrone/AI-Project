@@ -20,6 +20,18 @@ float sqrMagnitude(sf::Vector2f vector)
     return (vector.x * vector.x) + (vector.y * vector.y);
 }
 
+// returns true if the distance between position1 and position2 is less than or equal to distance (cheaper than using magnitude)
+bool distanceCheck(sf::Vector2f position1, sf::Vector2f position2, float distance)
+{
+    return (sqrMagnitude(position2 - position1) <= (distance * distance));
+}
+
+// returns true if the magnitude of vector is less than or equal to distance (cheaper than using magnitude)
+bool distanceCheck(sf::Vector2f vector, float distance)
+{
+    return (sqrMagnitude(vector) <= (distance * distance));
+}
+
 // returns the normalized vector
 sf::Vector2f normalize(sf::Vector2f& input)
 {

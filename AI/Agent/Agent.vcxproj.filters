@@ -87,6 +87,9 @@
     <ClCompile Include="source\SingleFile.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
+    <ClCompile Include="source\WrapScreen.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
@@ -156,6 +159,9 @@
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
     <ClInclude Include="source\SingleFile.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\WrapScreen.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>

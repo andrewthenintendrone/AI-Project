@@ -4,15 +4,22 @@
 #include "GameObject.h"
 #include "VectorMaths.h"
 #include "Renderer.h"
+#include "TimeManager.h"
 
-Flock::Flock(std::list<GameObject*>& flock, float maximumVelocity)
+Flock::Flock(std::list<GameObject*>* flock, float maximumVelocity)
 {
-    m_flock = flock;
+    m_flock = *flock;
     m_maximumVelocity = maximumVelocity;
 }
 
 sf::Vector2f Flock::update()
 {
+    /*if (m_myAgent->getPosition().x > windowSize.x || m_myAgent->getPosition().x < 0 || m_myAgent->getPosition().y > windowSize.y || m_myAgent->getPosition().y < 0)
+    {
+        m_myAgent->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
+        m_myAgent->setVelocity(getRandomVector(1.0f));
+    }*/
+
     sf::Vector2f alignment = computeAlignment();
     alignment = normalize(alignment, m_alignmentWeight * m_maximumVelocity);
     sf::Vector2f cohesion = computeCohesion(m_cohesionRadius);
@@ -35,7 +42,7 @@ sf::Vector2f Flock::computeAlignment()
     {
         if (gameobject->getAgent() != m_myAgent)
         {
-            if (magnitude(gameobject->getAgent()->getPosition()) < m_alignmentRadius)
+            if (distanceCheck(gameobject->getAgent()->getPosition(), m_myAgent->getPosition(), m_alignmentRadius))
             {
                 velocity += gameobject->getAgent()->getVelocity();
                 numNeighbors++;
@@ -60,7 +67,7 @@ sf::Vector2f Flock::computeCohesion(float radius)
     {
         if (gameobject->getAgent() != m_myAgent)
         {
-            if (magnitude(gameobject->getAgent()->getPosition() - m_myAgent->getPosition()) < radius)
+            if (distanceCheck(gameobject->getAgent()->getPosition(), m_myAgent->getPosition(), radius))
             {
                 velocity += gameobject->getAgent()->getPosition() - m_myAgent->getPosition();
                 numNeighbors++;

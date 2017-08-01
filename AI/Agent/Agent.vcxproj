@@ -119,6 +119,7 @@
     <ClCompile Include="source\Wall.cpp" />
     <ClCompile Include="source\Wander.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
+    <ClCompile Include="source\WrapScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\AStar\source\InputManager.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="source\VectorMaths.h" />
     <ClInclude Include="source\Wall.h" />
     <ClInclude Include="source\Wander.h" />
+    <ClInclude Include="source\WrapScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

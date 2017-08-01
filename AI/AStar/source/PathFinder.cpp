@@ -154,7 +154,7 @@ void PathFinder::followPath()
 {
     sf::Vector2f velocity = (m_currentTarget->getPosition() - m_position);
 
-    if (magnitude(velocity) < 1.0f)
+    if (distanceCheck(velocity, 1.0f))
     {
         m_velocity = normalize(velocity, 0.0f);
         if (m_currentTarget != m_bestPath.back())
@@ -167,7 +167,7 @@ void PathFinder::followPath()
             m_position = m_bestPath.front()->getPosition();
         }
     }
-    else if (m_currentTarget == m_bestPath.back() && magnitude(velocity) < m_slowRadius)
+    else if (m_currentTarget == m_bestPath.back() && distanceCheck(velocity, m_slowRadius))
     {
         m_velocity = normalize(velocity, magnitude(velocity) / m_slowRadius * m_maxVelocity * TIMEMANAGER->deltaTime());
     }
@@ -182,13 +182,13 @@ void PathFinder::followPath()
 
 void PathFinder::updateSprite()
 {
-    if (magnitude(m_velocity) / TIMEMANAGER->deltaTime() == 0.0f)
+    if (distanceCheck(m_velocity / TIMEMANAGER->deltaTime, 0.0f))
     {
         m_movementState = MOVESTATE::IDLE;
     }
     else
     {
-        if (magnitude(m_velocity) / TIMEMANAGER->deltaTime() < m_slowRadius)
+        if (distanceCheck(m_velocity / TIMEMANAGER->deltaTime(), m_slowRadius))
         {
             m_movementState = MOVESTATE::WALK;
         }

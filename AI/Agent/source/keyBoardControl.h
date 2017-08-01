@@ -8,5 +8,6 @@ public:
 
     virtual sf::Vector2f update();
 private:
+    sf::Vector2f getTarget();
     float m_maxVelocity = 0.0f;
 };

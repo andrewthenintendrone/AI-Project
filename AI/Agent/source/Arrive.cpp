@@ -18,11 +18,11 @@ sf::Vector2f Arrive::update()
 {
     sf::Vector2f velocity = m_target->getAgent()->getPosition() - m_myAgent->getPosition();
 
-    if (magnitude(velocity) < m_stopRadius)
+    if (distanceCheck(velocity, m_stopRadius))
     {
         velocity = normalize(velocity, 0.0f);
     }
-    else if (magnitude(velocity) < m_slowRadius)
+    else if (distanceCheck(velocity, m_slowRadius))
     {
         velocity = normalize(velocity, magnitude(velocity) / m_slowRadius) * m_maxVelocity;
     }

@@ -13,3 +13,4 @@
 #include "SeekMouse.h"
 #include "SingleFile.h"
 #include "Wander.h"
+#include "WrapScreen.h"

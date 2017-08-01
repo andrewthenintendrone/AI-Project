@@ -27,10 +27,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     for (int x = 0; x < 10; x++)
     {
-        for (int y = 0; y < 10; y++)
-        {
-            path.addNode(sf::Vector2f(100 * x + 64, 100 + y * 64));
-        }
+        path.addNode(sf::Vector2f((float)(rand() % (Renderer::getInstance()->getWindow()->getSize().x - 300) + 50), (float)(rand() % (Renderer::getInstance()->getWindow()->getSize().y - 100) + 50)));
     }
 
     while (Renderer::getInstance()->getWindow()->isOpen())
