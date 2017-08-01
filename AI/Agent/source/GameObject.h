@@ -21,7 +21,7 @@ public:
     void update();
     void draw();
 
-    void addBehavior(IBehavior* newBehavior);
+    void addBehavior(IBehavior* newBehavior, float newWeight = 1.0f);
 protected:
     sf::Texture* m_texture = nullptr;
     sf::Sprite* m_sprite = nullptr;

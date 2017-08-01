@@ -3,6 +3,7 @@
 #include "IBehavior.h"
 #include "SFML\Graphics.hpp"
 #include "GameObject.h"
+#include "Character.h"
 
 class Flock : public IBehavior
 {
@@ -13,7 +14,7 @@ protected:
     sf::Vector2f computeAlignment();
     sf::Vector2f computeCohesion(float radius);
 private:
-    std::list<GameObject*>m_flock;
+    std::list<GameObject*> m_flock;
     float m_maximumVelocity;
 
     float m_alignmentWeight = 0.5f;

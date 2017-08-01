@@ -28,83 +28,29 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     sf::Vector2u windowSize = Renderer::getInstance()->getWindowSizeu();
 
-    Character player;
-    player.addBehavior(new KeyboardControl(350.0f));
-    player.addBehavior(new WrapScreen);
+    GameObject* dog = new GameObject("dog");
+    dog->addBehavior(new KeyboardControl(300.0f));
+    dog->addBehavior(new FlipSprite);
 
-    // create 50 red pikmin
-    std::list<GameObject*> redPikmin;
-    for (int i = 0; i < 50; i++)
-    {
-        GameObject* newRedPikmin = new GameObject("pikmin_red");
-        newRedPikmin->getAgent()->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
-        newRedPikmin->getAgent()->setVelocity(getRandomVector(1.0f));
-        redPikmin.push_back(newRedPikmin);
-    }
-    for (auto iter = redPikmin.begin(); iter != redPikmin.end(); iter++)
-    {
-        (*iter)->addBehavior(new Flock(&redPikmin, 300.0f));
-        (*iter)->addBehavior(new WrapScreen);
-    }
+    std::list<GameObject*> gameObjects[5];
 
-    // create 50 blue pikmin
-    std::list<GameObject*> bluePikmin;
-    for (int i = 0; i < 50; i++)
+    // create 50 of each type of pikmin
+    for (int i = 0; i < 5; i++)
     {
-        GameObject* newBluePikmin = new GameObject("pikmin_blue");
-        newBluePikmin->getAgent()->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
-        newBluePikmin->getAgent()->setVelocity(getRandomVector(1.0f));
-        bluePikmin.push_back(newBluePikmin);
-    }
-    for (auto iter = bluePikmin.begin(); iter != bluePikmin.end(); iter++)
-    {
-        (*iter)->addBehavior(new Flock(&bluePikmin, 300.0f));
-        (*iter)->addBehavior(new WrapScreen);
-    }
-
-    // create 50 yellow pikmin
-    std::list<GameObject*> yellowPikmin;
-    for (int i = 0; i < 50; i++)
-    {
-        GameObject* newYellowPikmin = new GameObject("pikmin_yellow");
-        newYellowPikmin->getAgent()->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
-        newYellowPikmin->getAgent()->setVelocity(getRandomVector(1.0f));
-        yellowPikmin.push_back(newYellowPikmin);
-    }
-    for (auto iter = yellowPikmin.begin(); iter != yellowPikmin.end(); iter++)
-    {
-        (*iter)->addBehavior(new Flock(&yellowPikmin, 300.0f));
-        (*iter)->addBehavior(new WrapScreen);
-    }
-
-    // create 50 rock pikmin
-    std::list<GameObject*> rockPikmin;
-    for (int i = 0; i < 50; i++)
-    {
-        GameObject* newRockPikmin = new GameObject("pikmin_rock");
-        newRockPikmin->getAgent()->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
-        newRockPikmin->getAgent()->setVelocity(getRandomVector(1.0f));
-        rockPikmin.push_back(newRockPikmin);
-    }
-    for (auto iter = rockPikmin.begin(); iter != rockPikmin.end(); iter++)
-    {
-        (*iter)->addBehavior(new Flock(&rockPikmin, 300.0f));
-        (*iter)->addBehavior(new WrapScreen);
-    }
-
-    // create 50 winged pikmin
-    std::list<GameObject*> wingedPikmin;
-    for (int i = 0; i < 50; i++)
-    {
-        GameObject* newWingedPikmin = new GameObject("pikmin_winged");
-        newWingedPikmin->getAgent()->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
-        newWingedPikmin->getAgent()->setVelocity(getRandomVector(1.0f));
-        wingedPikmin.push_back(newWingedPikmin);
-    }
-    for (auto iter = wingedPikmin.begin(); iter != wingedPikmin.end(); iter++)
-    {
-        (*iter)->addBehavior(new Flock(&wingedPikmin, 300.0f));
-        (*iter)->addBehavior(new WrapScreen);
+        for (int j = 0; j < 50; j++)
+        {
+            GameObject* newGameObject = new GameObject("fish" + std::to_string(i + 1));
+            newGameObject->getAgent()->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
+            newGameObject->getAgent()->setVelocity(getRandomVector(1.0f));
+            gameObjects[i].push_back(newGameObject);
+        }
+        for (std::list<GameObject*>::iterator iter = gameObjects[i].begin(); iter != gameObjects[i].end(); iter++)
+        {
+            (*iter)->addBehavior(new FlipSprite);
+            (*iter)->addBehavior(new WrapScreen);
+            (*iter)->addBehavior(new Flee(dog), 0.5f);
+            (*iter)->addBehavior(new Flock(&gameObjects[i]));
+        }
     }
 
     while (Renderer::getInstance()->getWindow()->isOpen())
@@ -112,42 +58,17 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
         InputManager::getInstance()->update();
         TIMEMANAGER->update();
         Renderer::getInstance()->clearWindow();
-        player.update();
-        player.draw();
+        dog->update();
+        dog->draw();
 
-        // update and draw red pikmin
-        for (auto iter = std::next(redPikmin.begin()); iter != redPikmin.end(); iter++)
+        // update and draw pikmin
+        for (int i = 0; i < 5; i++)
         {
-            (*iter)->update();
-            (*iter)->draw();
-        }
-
-        // update and draw blue pikmin
-        for (auto iter = std::next(bluePikmin.begin()); iter != bluePikmin.end(); iter++)
-        {
-            (*iter)->update();
-            (*iter)->draw();
-        }
-
-        // update and draw yellow pikmin
-        for (auto iter = std::next(yellowPikmin.begin()); iter != yellowPikmin.end(); iter++)
-        {
-            (*iter)->update();
-            (*iter)->draw();
-        }
-
-        // update and draw rock pikmin
-        for (auto iter = std::next(rockPikmin.begin()); iter != rockPikmin.end(); iter++)
-        {
-            (*iter)->update();
-            (*iter)->draw();
-        }
-
-        // update and draw winged pikmin
-        for (auto iter = std::next(wingedPikmin.begin()); iter != wingedPikmin.end(); iter++)
-        {
-            (*iter)->update();
-            (*iter)->draw();
+            for (std::list<GameObject*>::iterator iter = gameObjects[i].begin(); iter != gameObjects[i].end(); iter++)
+            {
+                (*iter)->update();
+                (*iter)->draw();
+            }
         }
 
         Renderer::getInstance()->updateWindow();

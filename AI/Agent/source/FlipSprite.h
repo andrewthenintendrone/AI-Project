@@ -1,12 +1,12 @@
 #pragma once
 #include "IBehavior.h"
 
-class WrapScreen : public IBehavior
+class FlipSprite : public IBehavior
 {
 public:
-    WrapScreen();
 
     virtual sf::Vector2f update();
+
 private:
-    sf::Vector2f m_windowSize;
+
 };

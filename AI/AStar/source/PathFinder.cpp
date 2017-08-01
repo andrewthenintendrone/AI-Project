@@ -182,7 +182,7 @@ void PathFinder::followPath()
 
 void PathFinder::updateSprite()
 {
-    if (distanceCheck(m_velocity / TIMEMANAGER->deltaTime, 0.0f))
+    if (distanceCheck(m_velocity / TIMEMANAGER->deltaTime(), 0.0f))
     {
         m_movementState = MOVESTATE::IDLE;
     }

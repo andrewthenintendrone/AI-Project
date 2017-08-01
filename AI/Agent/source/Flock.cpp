@@ -1,7 +1,6 @@
 #include "Flock.h"
 #include "Agent.h"
 #include "ObjectPool.h"
-#include "GameObject.h"
 #include "VectorMaths.h"
 #include "Renderer.h"
 #include "TimeManager.h"
@@ -14,12 +13,6 @@ Flock::Flock(std::list<GameObject*>* flock, float maximumVelocity)
 
 sf::Vector2f Flock::update()
 {
-    /*if (m_myAgent->getPosition().x > windowSize.x || m_myAgent->getPosition().x < 0 || m_myAgent->getPosition().y > windowSize.y || m_myAgent->getPosition().y < 0)
-    {
-        m_myAgent->setPosition(sf::Vector2f((float)(rand() % windowSize.x), (float)(rand() % windowSize.y)));
-        m_myAgent->setVelocity(getRandomVector(1.0f));
-    }*/
-
     sf::Vector2f alignment = computeAlignment();
     alignment = normalize(alignment, m_alignmentWeight * m_maximumVelocity);
     sf::Vector2f cohesion = computeCohesion(m_cohesionRadius);

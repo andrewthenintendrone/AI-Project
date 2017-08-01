@@ -4,11 +4,11 @@
 
 class Wall;
 
-class Avoid : public IBehavior
+class AvoidWalls : public IBehavior
 {
 public:
-    Avoid(std::list<Wall*>& walls, float maximimumVelocity = 500, float feelerDistance = 10);
-    ~Avoid();
+    AvoidWalls(std::list<Wall*>& walls, float maximimumVelocity = 500, float feelerDistance = 10);
+    ~AvoidWalls();
 
     virtual sf::Vector2f update();
 private:

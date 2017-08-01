@@ -1,22 +1,22 @@
-#include "Avoid.h"
+#include "AvoidWalls.h"
 #include "VectorMaths.h"
 #include "Agent.h"
 #include "Wall.h"
 #include "Renderer.h"
 
-Avoid::Avoid(std::list<Wall*>& walls, float maximumVelocity, float feelerDistance)
+AvoidWalls::AvoidWalls(std::list<Wall*>& walls, float maximumVelocity, float feelerDistance)
 {
     m_walls = walls;
     m_maximumVelocity = maximumVelocity;
     m_feelerDistance = feelerDistance;
 }
 
-Avoid::~Avoid()
+AvoidWalls::~AvoidWalls()
 {
 
 }
 
-sf::Vector2f Avoid::update()
+sf::Vector2f AvoidWalls::update()
 {
     sf::Vector2f ray = m_myAgent->getPosition() + normalize(m_myAgent->getVelocity(), m_feelerDistance);
 

@@ -81,13 +81,16 @@
     <ClCompile Include="source\Wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Avoid.cpp">
-      <Filter>Source Files\behaviours</Filter>
-    </ClCompile>
     <ClCompile Include="source\SingleFile.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
     <ClCompile Include="source\WrapScreen.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FlipSprite.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AvoidWalls.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,9 +155,6 @@
     <ClInclude Include="source\Wall.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Avoid.h">
-      <Filter>Source Files\behaviours</Filter>
-    </ClInclude>
     <ClInclude Include="source\Behaviors.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
@@ -162,6 +162,12 @@
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
     <ClInclude Include="source\WrapScreen.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FlipSprite.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AvoidWalls.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>

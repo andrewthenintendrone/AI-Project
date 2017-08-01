@@ -27,9 +27,10 @@ Agent::~Agent()
 
 #pragma region access behaviors
 
-void Agent::addBehaviour(IBehavior* newBehaviour)
+void Agent::addBehaviour(IBehavior* newBehaviour, float newWeight)
 {
     newBehaviour->m_myAgent = this;
+    newBehaviour->m_weight = newWeight;
     m_behaviours.push_back(newBehaviour);
 }
 

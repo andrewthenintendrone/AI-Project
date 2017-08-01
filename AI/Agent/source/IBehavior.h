@@ -10,5 +10,7 @@ public:
     virtual ~IBehavior() = 0;
 
     virtual sf::Vector2f update() = 0;
+
     Agent* m_myAgent = nullptr;
+    float m_weight = 0.0f;
 };

@@ -3,23 +3,25 @@
 #include "GameObject.h"
 #include "VectorMaths.h"
 
-// sets target in constructor
-Flee::Flee(GameObject* newTarget)
+Flee::Flee(GameObject* newTarget, float detectionRadius, float maxVelocity)
 {
     m_target = newTarget;
-}
-
-Flee::Flee(GameObject* newTarget, float maxVelocity)
-{
-    m_target = newTarget;
+    m_detectionRadius = detectionRadius;
     m_maxVelocity = maxVelocity;
 }
 
 // moves towards target
 sf::Vector2f Flee::update()
 {
-    sf::Vector2f velocity = normalize(m_myAgent->getPosition() - m_target->getAgent()->getPosition(), m_maxVelocity);
-    sf::Vector2f force = velocity - m_myAgent->getVelocity();
+    if (distanceCheck(m_target->getAgent()->getPosition(), m_myAgent->getPosition(), m_detectionRadius))
+    {
+        sf::Vector2f velocity = normalize(m_myAgent->getPosition() - m_target->getAgent()->getPosition(), m_maxVelocity);
+        sf::Vector2f force = velocity - m_myAgent->getVelocity();
 
-    return force;
+        return force;
+    }
+    else
+    {
+        return sf::Vector2f(0, 0);
+    }
 }

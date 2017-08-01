@@ -14,7 +14,7 @@ public:
     ~Agent();
 
     // access behaviors
-    void addBehaviour (IBehavior* newBehavior);
+    void addBehaviour (IBehavior* newBehavior, float newWeight = 1.0f);
     void removeBehavior();
 
     // access velocity
@@ -40,6 +40,7 @@ protected:
     GameObject* m_parentPointer;
 
     std::list<IBehavior*> m_behaviours;
+    std::list<float> m_weights;
 
     sf::Vector2f m_position;
     sf::Vector2f m_velocity;

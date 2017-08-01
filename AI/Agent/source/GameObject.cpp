@@ -99,7 +99,7 @@ void GameObject::draw()
 }
 
 // adds a new behavior to this GameObjects Agent
-void GameObject::addBehavior(IBehavior* newBehavior)
+void GameObject::addBehavior(IBehavior* newBehavior, float newWeight)
 {
-    m_agent->addBehaviour(newBehavior);
+    m_agent->addBehaviour(newBehavior, newWeight);
 }
