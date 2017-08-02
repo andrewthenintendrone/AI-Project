@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 #include "Grid.h"
+#pragma comment(linker, "/STACK:20000000")
 
 // returns path to the executable
 std::string getPath()

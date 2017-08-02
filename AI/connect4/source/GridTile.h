@@ -1,7 +1,6 @@
 #pragma once
 #include "SFML\Graphics.hpp"
-
-enum class TILESTATE { EMPTY, RED, YELLOW };
+#include "Position.h"
 
 class GridTile
 {
@@ -13,17 +12,11 @@ public:
     void setPosition(float newX, float newY);
 
     sf::RectangleShape getRectangleGraphic();
-
     sf::Vector2f getPosition();
 
-    TILESTATE getState();
-    void setState(TILESTATE newState);
-
-    void update();
-    void draw();
+    void draw(TILESTATE currentTileState);
 
 private:
-    TILESTATE m_tileState = TILESTATE::EMPTY;
     sf::RectangleShape m_rectangleGraphic;
     sf::CircleShape m_circleGraphic;
 };

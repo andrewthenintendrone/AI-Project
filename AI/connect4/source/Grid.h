@@ -1,14 +1,12 @@
 #pragma once
 #include "GridTile.h"
-#include "AI.h"
-
-const int width = 7;
-const int height = 6;
+#include "Position.h"
 
 class Grid
 {
 public:
     Grid();
+    Grid(Grid* otherGrid);
 
     void playerTurn();
     void aiTurn();
@@ -16,18 +14,10 @@ public:
     void update();
     void draw();
 
-    bool checkWin();
-
-    bool canPlay(int column);
-    void play(int column);
-
-    void swapTurns();
-
 private:
+    Position m_position;
     GridTile m_gridTiles[width][height];
-    bool m_playersTurn = true;
 
     sf::Font m_font;
     sf::Text m_winText;
-    AI m_AI;
 };

@@ -10,7 +10,7 @@ GridTile::GridTile()
 
     // set up circle
     m_circleGraphic.setRadius(45.0f);
-    m_circleGraphic.setPointCount(100.0f);
+    m_circleGraphic.setPointCount(100);
     m_circleGraphic.setFillColor(sf::Color(128, 128, 128));
     m_circleGraphic.setOrigin(m_circleGraphic.getLocalBounds().width / 2, m_circleGraphic.getLocalBounds().height / 2);
 }
@@ -37,20 +37,10 @@ sf::Vector2f GridTile::getPosition()
     return m_rectangleGraphic.getPosition();
 }
 
-TILESTATE GridTile::getState()
+void GridTile::draw(TILESTATE currentTileState)
 {
-    return m_tileState;
-}
-
-void GridTile::setState(TILESTATE newState)
-{
-    m_tileState = newState;
-}
-
-void GridTile::update()
-{
-    // check state of tile
-    switch (m_tileState)
+    // update color based on current tile state
+    switch (currentTileState)
     {
     case TILESTATE::EMPTY:
         m_circleGraphic.setFillColor(sf::Color(128, 128, 128));
@@ -62,13 +52,9 @@ void GridTile::update()
         m_circleGraphic.setFillColor(sf::Color(255, 255, 0));
         break;
     default:
-        m_circleGraphic.setFillColor(sf::Color(128, 128, 128));
         break;
     }
-}
 
-void GridTile::draw()
-{
     Renderer::getInstance()->Draw(&m_rectangleGraphic);
     Renderer::getInstance()->Draw(&m_circleGraphic);
 }

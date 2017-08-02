@@ -96,19 +96,19 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\AI.cpp" />
     <ClCompile Include="source\Grid.cpp" />
     <ClCompile Include="source\GridTile.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
+    <ClCompile Include="source\Position.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\AI.h" />
     <ClInclude Include="source\Grid.h" />
     <ClInclude Include="source\GridTile.h" />
     <ClInclude Include="source\InputManager.h" />
+    <ClInclude Include="source\Position.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\TimeManager.h" />
   </ItemGroup>
