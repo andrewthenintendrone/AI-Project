@@ -62,14 +62,7 @@ void Grid::playerTurn()
 // calculates a good move and play it
 void Grid::aiTurn()
 {
-    int randomColumn = rand() % Position::WIDTH;
-
-    do
-    {
-        randomColumn = rand() % Position::WIDTH;
-    } while (!m_position.canPlay(randomColumn));
-
-    m_position.play(randomColumn);
+    m_position.play(AI::pickGoodMove(m_position));
 }
 
 // handles game flow

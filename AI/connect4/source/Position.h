@@ -9,6 +9,7 @@ public:
     static const int HEIGHT = 6;
 
     Position();
+    Position(Position& P);
 
     bool canPlay(int column) const;
     void play(int column);

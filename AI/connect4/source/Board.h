@@ -1,6 +1,7 @@
 #pragma once
 #include "GridTile.h"
 #include "Position.h"
+#include "AI.h"
 
 class Grid
 {

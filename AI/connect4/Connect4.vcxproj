@@ -96,6 +96,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\AI.cpp" />
     <ClCompile Include="source\Board.cpp" />
     <ClCompile Include="source\GridTile.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\AI.h" />
     <ClInclude Include="source\Board.h" />
     <ClInclude Include="source\GridTile.h" />
     <ClInclude Include="source\InputManager.h" />

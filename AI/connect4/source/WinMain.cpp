@@ -2,6 +2,9 @@
 #include "Renderer.h"
 #include "InputManager.h"
 #include "Board.h"
+#include <stdio.h>
+#include <cstdlib>
+#include <time.h>
 
 // returns path to the executable
 std::string getPath()
@@ -16,6 +19,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 {
     // create window
     Renderer::getInstance()->createWindow(1280, 720);
+
+    // seed rng
+    srand(time(NULL));
 
     Grid grid;
 
