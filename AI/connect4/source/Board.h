@@ -16,7 +16,7 @@ public:
 
 private:
     Position m_position;
-    GridTile m_gridTiles[width][height];
+    GridTile m_gridTiles[Position::WIDTH][Position::HEIGHT];
 
     sf::Font m_font;
     sf::Text m_winText;

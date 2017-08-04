@@ -1,26 +1,22 @@
 #pragma once
 
-const int width = 7;
-const int height = 6;
-static int layers = 0;
-
 enum class TILESTATE { EMPTY, RED, YELLOW };
 
 class Position
 {
 public:
-    Position();
-    Position(Position* otherPosition);
+    static const int WIDTH = 7;
+    static const int HEIGHT = 6;
 
-    bool canPlay(int column);
+    Position();
+
+    bool canPlay(int column) const;
     void play(int column);
 
-    bool isWinningMove(int column);
-    bool checkWin();
-    void unPlay(int column);
+    bool isWinningMove(int column) const;
 
-    int negaMax(Position position);
-
-    TILESTATE m_tiles[width][height];
+    TILESTATE m_grid[WIDTH][HEIGHT];
+    int m_heights[WIDTH];
     unsigned int m_numMoves = 0;
+    bool m_won = false;
 };

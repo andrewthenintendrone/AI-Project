@@ -1,4 +1,4 @@
-#include "Grid.h"
+#include "Board.h"
 #include "Renderer.h"
 #include "InputManager.h"
 
@@ -9,11 +9,11 @@ Grid::Grid()
     // set up grid
     sf::Vector2f screenCenter = Renderer::getInstance()->getWindowSizef() / 2.0f;
 
-    for (int x = 0; x < width; x++)
+    for (int x = 0; x < Position::WIDTH; x++)
     {
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < Position::HEIGHT; y++)
         {
-            m_gridTiles[x][y].setPosition(screenCenter.x - (50 * (width - 1)) + (x * 100), screenCenter.y - (50 * (height - 1)) + (y * 100));
+            m_gridTiles[x][y].setPosition(screenCenter.x + (50 * (Position::WIDTH - 1)) - (x * 100), screenCenter.y + (50 * (Position::HEIGHT - 1)) - (y * 100));
         }
     }
 
@@ -24,9 +24,9 @@ Grid::Grid()
 
 Grid::Grid(Grid* otherGrid)
 {
-    for (int x = 0; x < width; x++)
+    for (int x = 0; x < Position::WIDTH; x++)
     {
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < Position::WIDTH; y++)
         {
             m_gridTiles[x][y] = otherGrid->m_gridTiles[x][y];
         }
@@ -40,9 +40,9 @@ void Grid::playerTurn()
     if (InputManager::getInstance()->getLeftClick())
     {
         // check all grid squares
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < Position::WIDTH; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < Position::HEIGHT; y++)
             {
                 // if one has been clicked
                 if (InputManager::getInstance()->getHovering(&m_gridTiles[x][y].getRectangleGraphic()))
@@ -51,8 +51,6 @@ void Grid::playerTurn()
                     if (m_position.canPlay(x))
                     {
                         m_position.play(x);
-                        // players turn is over
-                        m_position.m_numMoves++;
                     }
                     return;
                 }
@@ -64,13 +62,20 @@ void Grid::playerTurn()
 // calculates a good move and play it
 void Grid::aiTurn()
 {
-    m_position.play(m_position.negaMax(m_position));
+    int randomColumn = rand() % Position::WIDTH;
+
+    do
+    {
+        randomColumn = rand() % Position::WIDTH;
+    } while (!m_position.canPlay(randomColumn));
+
+    m_position.play(randomColumn);
 }
 
 // handles game flow
 void Grid::update()
 {
-    if (m_position.checkWin())
+    if (m_position.m_won == true)
     {
         m_winText.setString(std::string("player " + std::string(m_position.m_numMoves % 2 == 0 ? "2" : "1") + " wins!"));
         m_winText.setCharacterSize(40);
@@ -94,11 +99,11 @@ void Grid::update()
 // draws grid tiles
 void Grid::draw()
 {
-    for (int x = 0; x < width; x++)
+    for (int x = 0; x < Position::WIDTH; x++)
     {
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < Position::HEIGHT; y++)
         {
-            m_gridTiles[x][y].draw(m_position.m_tiles[x][y]);
+            m_gridTiles[x][y].draw(m_position.m_grid[x][y]);
         }
     }
 }

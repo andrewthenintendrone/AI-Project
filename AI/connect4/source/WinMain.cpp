@@ -1,9 +1,7 @@
 #include <Windows.h>
 #include "Renderer.h"
 #include "InputManager.h"
-#include "TimeManager.h"
-#include "Grid.h"
-#pragma comment(linker, "/STACK:20000000")
+#include "Board.h"
 
 // returns path to the executable
 std::string getPath()
@@ -20,12 +18,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     Renderer::getInstance()->createWindow(1280, 720);
 
     Grid grid;
-    sf::Clock timer;
 
     while (Renderer::getInstance()->getWindow()->isOpen())
     {
         InputManager::getInstance()->update();
-        TimeManager::getInstance()->update();
 
         Renderer::getInstance()->clearWindow();
         grid.update();
