@@ -93,8 +93,8 @@ void DrawCharacterSprite::updateSprite()
     }
 
     // move to part of the sprite sheet based on movement state
-    currentSpriteCoordinate.y = (int)m_movementState * (pathFinderSpriteSize.y * 5);
-    currentSpriteCoordinate.y += ((int)m_movementDirection > 4 ? (int)m_movementDirection - 4 : (int)m_movementDirection) * pathFinderSpriteSize.y;
+    currentSpriteCoordinate.y = static_cast<int>(m_movementState) * (pathFinderSpriteSize.y * 5);
+    currentSpriteCoordinate.y += (static_cast<int>(m_movementDirection) > 4 ? static_cast<int>(m_movementDirection) - 4 : static_cast<int>(m_movementDirection)) * pathFinderSpriteSize.y;
 
     if ((int)m_movementDirection < 5)
     {

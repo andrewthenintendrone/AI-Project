@@ -13,7 +13,7 @@ const sf::Vector2i pathFinderSpriteSize(40, 56);
 // constructor loads the sprite sheet and sets the origin to the feet
 PathFinder::PathFinder()
 {
-    m_texture.loadFromFile(getPath() + "\\resources\\graphics\\sheet.png");
+    m_texture.loadFromFile(getPath() + "\\resources\\graphics\\Character.png");
     m_sprite.setTexture(m_texture);
 
     m_sprite.setOrigin(sf::Vector2f(19, 46));
@@ -309,7 +309,7 @@ void PathFinder::updateSprite()
 
     // move to part of the sprite sheet based on movement state
     currentSpriteCoordinate.y = static_cast<int>(m_movementState) * (pathFinderSpriteSize.y * 5);
-    currentSpriteCoordinate.y += (static_cast<int>(m_movementDirection) > 4 ? static_cast<int>(m_movementDirection) - 4 : static_cast<int>(m_movementDirection) * pathFinderSpriteSize.y);
+    currentSpriteCoordinate.y += (static_cast<int>(m_movementDirection) > 4 ? static_cast<int>(m_movementDirection) - 4 : static_cast<int>(m_movementDirection)) * pathFinderSpriteSize.y;
 
     // for movement directions less than 5 display the sprite as normal
     if (static_cast<int>(m_movementDirection) < 5)
