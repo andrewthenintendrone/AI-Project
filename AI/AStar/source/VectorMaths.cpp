@@ -73,12 +73,14 @@ float angleBetweenVectors(sf::Vector2f lhs, sf::Vector2f rhs)
     return angle < 0.0f ? angle + 360.0f : angle;
 }
 
+// returns the angle of the vector
 float vectorAngle(sf::Vector2f& vector)
 {
     float angle = std::atan2f(vector.y, vector.x) / (float)M_PI * 180.0f;
     return angle < 0.0f ? angle + 360.0f : angle;
 }
 
+// returns a random vector of a specified length
 sf::Vector2f getRandomVector(float length)
 {
     float randomAngle = ((float)rand() / RAND_MAX) * (float)M_PI * 2.0f;

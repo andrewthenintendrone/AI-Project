@@ -4,6 +4,7 @@
 
 std::string getPath();
 
+// default constructor sets up
 UI::UI()
 {
     // setup size and position
@@ -33,23 +34,27 @@ UI::UI()
     m_linkSprite.setScale(adjustedIconSize, adjustedIconSize);
     m_linkSprite.setOrigin(m_linkSprite.getLocalBounds().width / 2.0f, m_linkSprite.getLocalBounds().height / 2.0f);
 
+    // set UI position to the right of the screen
     setPosition(sf::Vector2f(windowSize.x - barWidth, 0));
 }
 
+// update function
 void UI::update()
 {
     updateUIState();
 }
 
+// draw function
 void UI::draw()
 {
-
+    // draw the bar and all the sprites
     Renderer::getInstance()->Draw(&m_rightBar);
     Renderer::getInstance()->Draw(&m_addSprite);
     Renderer::getInstance()->Draw(&m_removeSprite);
     Renderer::getInstance()->Draw(&m_linkSprite);
 }
 
+// sets the position of the UI
 void UI::setPosition(sf::Vector2f newPosition)
 {
     sf::Vector2u screenSize = Renderer::getInstance()->getWindow()->getSize();
@@ -67,40 +72,45 @@ void UI::setPosition(sf::Vector2f newPosition)
     m_linkSprite.setPosition((float)m_rightBar.getPosition().x + (barWidth / 2), (float)windowSize.y * 3 / 4);
 }
 
+// returns the current UI mode
 UIMODE UI::getUImode()
 {
     return m_currentMode;
 }
 
+// updates the current UI state
 void UI::updateUIState()
 {
-    // we are hovering over the add button
+    // the user is hovering over the add button
     if (InputManager::getInstance()->getHovering(&m_addSprite))
     {
         if (InputManager::getInstance()->getLeftClick())
         {
+            // update icon colors and set state to adding
             m_currentMode = UIMODE::ADDING;
             m_addSprite.setColor(sf::Color::Green);
             m_removeSprite.setColor(sf::Color::White);
             m_linkSprite.setColor(sf::Color::White);
         }
     }
-    // we are hovering over the remove button
+    // the user is hovering over the remove button
     else if (InputManager::getInstance()->getHovering(&m_removeSprite))
     {
         if (InputManager::getInstance()->getLeftClick())
         {
+            // update icon colors and set state to removing
             m_currentMode = UIMODE::REMOVING;
             m_removeSprite.setColor(sf::Color::Red);
             m_addSprite.setColor(sf::Color::White);
             m_linkSprite.setColor(sf::Color::White);
         }
     }
-    // we are hovering over the link button
+    // the user is hovering over the link button
     else if (InputManager::getInstance()->getHovering(&m_linkSprite))
     {
         if (InputManager::getInstance()->getLeftClick())
         {
+            // update icon colors and set state to linking
             m_currentMode = UIMODE::LINKING;
             m_linkSprite.setColor(sf::Color::Yellow);
             m_addSprite.setColor(sf::Color::White);
@@ -108,8 +118,10 @@ void UI::updateUIState()
         }
     }
 
+    // right click resets the state to idle
     if (InputManager::getInstance()->getRightClick())
     {
+        // update icon colors and set state to idle
         m_currentMode = UIMODE::IDLE;
         m_addSprite.setColor(sf::Color::White);
         m_removeSprite.setColor(sf::Color::White);

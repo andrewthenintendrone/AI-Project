@@ -21,9 +21,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
     Renderer::getInstance()->createWindow(1280, 720);
 
     // seed rng
-    srand(time(NULL));
+    srand(unsigned (time(NULL)));
 
-    Grid grid;
+    // create board
+    Board grid;
 
     while (Renderer::getInstance()->getWindow()->isOpen())
     {

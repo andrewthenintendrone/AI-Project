@@ -9,6 +9,7 @@ enum class MOVEDIRECTION { DOWN, LEFT, DOWNLEFT, UPLEFT, UP, RIGHT, DOWNRIGHT, U
 class PathFinder
 {
 public:
+
     PathFinder();
     ~PathFinder();
 
@@ -19,6 +20,7 @@ public:
     void stopPathFinding();
 
     std::list<PathNode*> m_bestPath;
+
 private:
     // graphics
     sf::Texture m_texture;

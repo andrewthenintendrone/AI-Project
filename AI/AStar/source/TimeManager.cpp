@@ -1,5 +1,6 @@
 #include "TimeManager.h"
 
+// there is only ever one TimeManager
 TimeManager* TimeManager::getInstance()
 {
     static TimeManager instance;
@@ -7,13 +8,13 @@ TimeManager* TimeManager::getInstance()
     return &instance;
 }
 
-// returns deltaTime
+// returns current deltaTime
 float TimeManager::deltaTime()
 {
     return m_deltaTime;
 }
 
-// updates m_deltaTime
+// updates deltaTime
 void TimeManager::update()
 {
     m_deltaTime = m_clock.getElapsedTime().asSeconds();

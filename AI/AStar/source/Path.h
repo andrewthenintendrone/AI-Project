@@ -15,6 +15,12 @@ public:
     void draw();
 
     void processInteraction();
+
+    void addMode();
+    void removeMode();
+    void linkMode();
+    void idleMode();
+
     void addNode(sf::Vector2f position);
     void linkNodes(PathNode* firstNode, PathNode* secondNode);
     void linkNodes();
@@ -30,4 +36,8 @@ private:
     UI m_ui;
 
     PathFinder m_pathFinder;
+
+    const sf::Color GREEN = sf::Color(0, 255, 0);
+    const sf::Color RED = sf::Color(255, 0, 0);
+    const sf::Color PURPLE = sf::Color(128, 0, 255);
 };

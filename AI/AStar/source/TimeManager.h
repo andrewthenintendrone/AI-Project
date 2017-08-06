@@ -7,11 +7,14 @@
 class TimeManager
 {
 public:
+
     static TimeManager* getInstance();
 
     float deltaTime();
     void update();
+
 private:
+
     sf::Clock m_clock;
     float m_deltaTime;
 };

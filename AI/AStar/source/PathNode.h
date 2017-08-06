@@ -8,9 +8,9 @@ class Edge;
 class PathNode
 {
 public:
+
     PathNode(sf::Vector2f newPosition);
     ~PathNode();
-
 
     void addEdge(Edge* newEdge);
     void removeSingleEdge(Edge* edgeToRemove);
@@ -45,12 +45,14 @@ private:
     // graphic
     sf::CircleShape m_graphic;
 
-    // pathFinding
+    // list of attached edges
     std::list<Edge*> m_edges;
 
+    // G, H, and F scores set to the default value of infinity
     float Gscore = std::numeric_limits<float>::infinity();
     float Hscore = std::numeric_limits<float>::infinity();
     float Fscore = std::numeric_limits<float>::infinity();
 
+    // pointer to the previous node
     PathNode* m_prevNode = nullptr;
 };

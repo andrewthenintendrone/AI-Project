@@ -3,11 +3,10 @@
 #include "Position.h"
 #include "AI.h"
 
-class Grid
+class Board
 {
 public:
-    Grid();
-    Grid(Grid* otherGrid);
+    Board();
 
     void playerTurn();
     void aiTurn();

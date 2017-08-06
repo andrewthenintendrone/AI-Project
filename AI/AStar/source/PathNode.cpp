@@ -130,8 +130,15 @@ std::list<Edge*>* PathNode::getEdges()
 
 void PathNode::reset()
 {
+    // reset all pathfinding
     Gscore = std::numeric_limits<float>::infinity();
     Hscore = std::numeric_limits<float>::infinity();
     Fscore = std::numeric_limits<float>::infinity();
     m_prevNode = nullptr;
+
+    // reset all edges 
+    for (auto iter = m_edges.begin(); iter != m_edges.end(); iter++)
+    {
+        (*iter)->setColor(Edge::YELLOW());
+    }
 }

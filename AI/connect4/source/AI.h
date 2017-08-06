@@ -1,8 +1,7 @@
 #pragma once
 #include "Position.h"
 
-class AI
+namespace AI
 {
-public:
-    static int pickGoodMove(Position& P);
-};
+    int pickGoodMove(Position& P);
+}
