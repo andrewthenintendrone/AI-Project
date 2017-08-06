@@ -1,56 +1,42 @@
-#include "Character.h"
+#include "DrawCharacterSprite.h"
 #include "Renderer.h"
 #include "VectorMaths.h"
 #include <algorithm>
+#include "Agent.h"
+#include "GameObject.h"
 
 std::string getPath();
 
 const sf::Vector2i pathFinderSpriteSize(40, 56);
 
-Character::Character()
+DrawCharacterSprite::DrawCharacterSprite()
 {
     m_texture.loadFromFile(getPath() + "\\resources\\graphics\\Character.png");
     m_sprite.setTexture(m_texture);
 
-    m_sprite.setOrigin(sf::Vector2f(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f));
-
-    m_font.loadFromFile(getPath() + "\\resources\\font\\calibri.ttf");
-    m_text.setFont(m_font);
-    m_text.setFillColor(sf::Color::White);
-    m_text.setCharacterSize(40);
-    m_text.setPosition(150, 150);
+    m_sprite.setOrigin(sf::Vector2f(19, 46));
 }
 
-Character::~Character()
+sf::Vector2f DrawCharacterSprite::update()
 {
-
-}
-
-void Character::update()
-{
-    m_agent->update();
-    m_sprite.setPosition(m_agent->getPosition());
     updateSprite();
-}
-
-void Character::draw()
-{
     Renderer::getInstance()->Draw(&m_sprite);
-    //Renderer::getInstance()->Draw(&m_text);
+
+    return (sf::Vector2f(0, 0));
 }
 
-void Character::updateSprite()
+void DrawCharacterSprite::updateSprite()
 {
     // turn based on velocity
-    sf::Vector2f velocity = m_agent->getVelocity();
+    sf::Vector2f velocity = m_myAgent->getVelocity();
 
-    if (magnitude(velocity) == 0.0f)
+    if (distanceCheck(velocity, 0.0f))
     {
         m_movementState = MOVESTATE::IDLE;
     }
     else
     {
-        if (magnitude(velocity) < 200.0f)
+        if (distanceCheck(velocity, m_slowRadius))
         {
             m_movementState = MOVESTATE::WALK;
         }
@@ -60,7 +46,6 @@ void Character::updateSprite()
         }
 
         float movementAngle = vectorAngle(velocity);
-        m_text.setString("angle = " + std::to_string(movementAngle));
 
         if (movementAngle <= 22.5f || movementAngle > 337.5f)
         {
@@ -121,5 +106,7 @@ void Character::updateSprite()
     }
     m_sprite.setTextureRect(sf::IntRect(currentSpriteCoordinate, pathFinderSpriteSize));
 
-    m_sprite.setOrigin(sf::Vector2f(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f));
+    //m_sprite.setOrigin(sf::Vector2f(m_sprite.getGlobalBounds().width / 2.0f, m_sprite.getGlobalBounds().height / 2.0f));
+
+    m_sprite.setPosition(m_myAgent->getPosition());
 }

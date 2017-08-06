@@ -11,12 +11,19 @@ InputManager* InputManager::getInstance()
 // update function
 void InputManager::update()
 {
-    // poll the current SFML event
     sf::Event event;
+
+    // without this line the window can randomly close
+    event.type = static_cast<sf::Event::EventType>(1);
+
     Renderer::getInstance()->getWindow()->pollEvent(event);
 
     // window will close if the close button is clicked or the user presses the escape key
-    if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape || event.type == sf::Event::Closed)
+    if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
+    {
+        Renderer::getInstance()->closeWindow();
+    }
+    else if(event.type == sf::Event::Closed)
     {
         Renderer::getInstance()->closeWindow();
     }

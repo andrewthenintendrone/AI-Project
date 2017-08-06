@@ -47,11 +47,13 @@
     <OutDir>$(ProjectDir)\bin\</OutDir>
     <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_DEBUG</TargetName>
+    <IncludePath>$(SolutionDir)\shared\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)\bin\</OutDir>
     <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\shared\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,21 +98,23 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\shared\InputManager.cpp" />
+    <ClCompile Include="..\shared\Renderer.cpp" />
+    <ClCompile Include="..\shared\TimeManager.cpp" />
     <ClCompile Include="source\AI.cpp" />
     <ClCompile Include="source\Board.cpp" />
     <ClCompile Include="source\GridTile.cpp" />
-    <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\Position.cpp" />
-    <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\InputManager.h" />
+    <ClInclude Include="..\shared\Renderer.h" />
+    <ClInclude Include="..\shared\TimeManager.h" />
     <ClInclude Include="source\AI.h" />
     <ClInclude Include="source\Board.h" />
     <ClInclude Include="source\GridTile.h" />
-    <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\Position.h" />
-    <ClInclude Include="source\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

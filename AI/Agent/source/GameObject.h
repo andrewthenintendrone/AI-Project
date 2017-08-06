@@ -6,25 +6,34 @@
 class GameObject
 {
 public:
+
+    // construtors / destructors
     GameObject();
     GameObject(std::string fileName);
     ~GameObject();
 
-    GameObject* setSprite(std::string fileName);
+    // access to sprite
     sf::Sprite* getSprite();
+    GameObject* setSprite(std::string fileName);
 
-    GameObject* setText(std::string& newText, sf::Font& newFont);
-    sf::Text* getText();
 
+    // access to Agent
     Agent* getAgent();
 
+    // update and draw functions
     void update();
     void draw();
 
+    // access to behaviours
     void addBehavior(IBehavior* newBehavior, float newWeight = 1.0f);
+    void removeBehavior();
+
 protected:
+
+    // graphics
     sf::Texture* m_texture = nullptr;
     sf::Sprite* m_sprite = nullptr;
-    sf::Text* m_text = nullptr;
+
+    // Agent
     Agent* m_agent = nullptr;
 };

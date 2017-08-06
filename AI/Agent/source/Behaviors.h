@@ -4,6 +4,7 @@
 #include "Arrive.h"
 #include "AvoidWalls.h"
 #include "CopyMousePosition.h"
+#include "DrawCharacterSprite.h"
 #include "Evade.h"
 #include "Flee.h"
 #include "FlipSprite.h"

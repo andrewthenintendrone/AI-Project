@@ -79,22 +79,6 @@ void Agent::setPosition(sf::Vector2f newPosition)
 
 #pragma endregion
 
-#pragma region access rotation
-
-// get rotation
-float Agent::getRotation()
-{
-    return m_rotation;
-}
-
-// set rotation
-void Agent::setRotation(float newRotation)
-{
-    m_rotation = newRotation;
-}
-
-#pragma endregion
-
 // get parent pointer
 GameObject* Agent::getParentPointer()
 {

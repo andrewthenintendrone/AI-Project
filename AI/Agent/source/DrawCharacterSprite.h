@@ -1,21 +1,20 @@
 #pragma once
-#include "GameObject.h"
-#include "SFML\Graphics.hpp"
-#include <list>
+#include "IBehavior.h"
 
 enum class MOVESTATE { IDLE, WALK, RUN };
 enum class MOVEDIRECTION { DOWN, LEFT, DOWNLEFT, UPLEFT, UP, RIGHT, DOWNRIGHT, UPRIGHT };
 
-class Character : public GameObject
+class DrawCharacterSprite : public IBehavior
 {
-public:
-    Character();
-    ~Character();
 
-    void update();
-    void draw();
+public:
+
+    DrawCharacterSprite();
+
+    sf::Vector2f update();
 
 private:
+
     // graphics
     sf::Texture m_texture;
     sf::Sprite m_sprite;
@@ -24,8 +23,7 @@ private:
     sf::Vector2i currentSpriteCoordinate;
     int m_animationFrameRate = 10;
     sf::Clock m_clock;
+    float m_slowRadius = 200.0f;
 
     void updateSprite();
-    sf::Font m_font;
-    sf::Text m_text;
 };

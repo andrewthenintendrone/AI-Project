@@ -47,11 +47,13 @@
     <OutDir>$(ProjectDir)\bin\</OutDir>
     <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_DEBUG</TargetName>
+    <IncludePath>$(SolutionDir)\shared\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)\bin\</OutDir>
     <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\shared\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,12 +98,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\AStar\source\InputManager.cpp" />
+    <ClCompile Include="..\shared\InputManager.cpp" />
+    <ClCompile Include="..\shared\Renderer.cpp" />
+    <ClCompile Include="..\shared\TimeManager.cpp" />
+    <ClCompile Include="..\shared\VectorMaths.cpp" />
     <ClCompile Include="source\Agent.cpp" />
     <ClCompile Include="source\Arrive.cpp" />
     <ClCompile Include="source\AvoidWalls.cpp" />
-    <ClCompile Include="source\Character.cpp" />
     <ClCompile Include="source\CopyMousePosition.cpp" />
+    <ClCompile Include="source\DrawCharacterSprite.cpp" />
     <ClCompile Include="source\Evade.cpp" />
     <ClCompile Include="source\Flee.cpp" />
     <ClCompile Include="source\FlipSprite.cpp" />
@@ -110,26 +115,25 @@
     <ClCompile Include="source\IBehaviour.cpp" />
     <ClCompile Include="source\KeyboardControl.cpp" />
     <ClCompile Include="source\SeekMouse.cpp" />
-    <ClCompile Include="source\ObjectPool.cpp" />
     <ClCompile Include="source\Pursue.cpp" />
-    <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\Seek.cpp" />
     <ClCompile Include="source\SingleFile.cpp" />
-    <ClCompile Include="source\TimeManager.cpp" />
-    <ClCompile Include="source\VectorMaths.cpp" />
     <ClCompile Include="source\Wall.cpp" />
     <ClCompile Include="source\Wander.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
     <ClCompile Include="source\WrapScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\AStar\source\InputManager.h" />
+    <ClInclude Include="..\shared\InputManager.h" />
+    <ClInclude Include="..\shared\Renderer.h" />
+    <ClInclude Include="..\shared\TimeManager.h" />
+    <ClInclude Include="..\shared\VectorMaths.h" />
     <ClInclude Include="source\Agent.h" />
     <ClInclude Include="source\Arrive.h" />
     <ClInclude Include="source\AvoidWalls.h" />
     <ClInclude Include="source\Behaviors.h" />
-    <ClInclude Include="source\Character.h" />
     <ClInclude Include="source\CopyMousePosition.h" />
+    <ClInclude Include="source\DrawCharacterSprite.h" />
     <ClInclude Include="source\Evade.h" />
     <ClInclude Include="source\Flee.h" />
     <ClInclude Include="source\FlipSprite.h" />
@@ -138,13 +142,9 @@
     <ClInclude Include="source\IBehavior.h" />
     <ClInclude Include="source\KeyboardControl.h" />
     <ClInclude Include="source\SeekMouse.h" />
-    <ClInclude Include="source\ObjectPool.h" />
     <ClInclude Include="source\Pursue.h" />
-    <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Seek.h" />
     <ClInclude Include="source\SingleFile.h" />
-    <ClInclude Include="source\TimeManager.h" />
-    <ClInclude Include="source\VectorMaths.h" />
     <ClInclude Include="source\Wall.h" />
     <ClInclude Include="source\Wander.h" />
     <ClInclude Include="source\WrapScreen.h" />

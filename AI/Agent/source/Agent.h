@@ -9,6 +9,7 @@ class IBehavior;
 class Agent
 {
 public:
+
     // constructor / destructor
     Agent(GameObject* parent);
     ~Agent();
@@ -26,27 +27,26 @@ public:
     sf::Vector2f getPosition();
     void setPosition(sf::Vector2f newPosition);
 
-    // access rotation
-    float getRotation();
-    void setRotation(float newRotation);
-
     // access parent pointer
     GameObject* getParentPointer();
 
+    // update function
     void update();
 
 protected:
 
+    // reference to the GameObject it is attached to
     GameObject* m_parentPointer;
 
+    // list of behaviours
     std::list<IBehavior*> m_behaviours;
-    std::list<float> m_weights;
 
+    // position and velocity
     sf::Vector2f m_position;
     sf::Vector2f m_velocity;
 
+    // maximum speed
     float m_maxSpeed = 500.0f;
-    float m_rotation = 0.0f;
 
     void sense();
     void think();

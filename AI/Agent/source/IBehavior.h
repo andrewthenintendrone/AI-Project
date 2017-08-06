@@ -3,9 +3,16 @@
 
 class Agent;
 
+// generic behaviour class
+// a bevhavior includes
+// a reference to the Agent it is part of
+// an update function that returns a force
+// a weighting that is used when multiple forces are being combined
+
 class IBehavior
 {
 public:
+
     IBehavior();
     virtual ~IBehavior() = 0;
 

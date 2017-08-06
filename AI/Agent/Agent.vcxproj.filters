@@ -30,24 +30,6 @@
     <ClCompile Include="source\IBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\ObjectPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\TimeManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\AStar\source\InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\VectorMaths.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Flee.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
@@ -93,6 +75,21 @@
     <ClCompile Include="source\AvoidWalls.cpp">
       <Filter>Source Files\behaviours</Filter>
     </ClCompile>
+    <ClCompile Include="..\shared\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\TimeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\VectorMaths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DrawCharacterSprite.cpp">
+      <Filter>Source Files\behaviours</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h">
@@ -102,24 +99,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IBehavior.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\ObjectPool.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\TimeManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Character.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\AStar\source\InputManager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Renderer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\VectorMaths.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\CopyMousePosition.h">
@@ -168,6 +147,21 @@
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
     <ClInclude Include="source\AvoidWalls.h">
+      <Filter>Source Files\behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\InputManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\Renderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\TimeManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\VectorMaths.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\DrawCharacterSprite.h">
       <Filter>Source Files\behaviours</Filter>
     </ClInclude>
   </ItemGroup>

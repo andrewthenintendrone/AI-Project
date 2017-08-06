@@ -48,11 +48,13 @@
     <OutDir>$(ProjectDir)\bin\</OutDir>
     <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_DEBUG</TargetName>
+    <IncludePath>$(SolutionDir)\shared\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)\bin\</OutDir>
     <IntDir>$(ProjectDir)\build\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\shared\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -97,27 +99,27 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\shared\InputManager.cpp" />
+    <ClCompile Include="..\shared\Renderer.cpp" />
+    <ClCompile Include="..\shared\TimeManager.cpp" />
+    <ClCompile Include="..\shared\VectorMaths.cpp" />
     <ClCompile Include="source\Edge.cpp" />
-    <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\Path.cpp" />
     <ClCompile Include="source\PathFinder.cpp" />
     <ClCompile Include="source\PathNode.cpp" />
-    <ClCompile Include="source\Renderer.cpp" />
-    <ClCompile Include="source\TimeManager.cpp" />
     <ClCompile Include="source\UI.cpp" />
-    <ClCompile Include="source\VectorMaths.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\InputManager.h" />
+    <ClInclude Include="..\shared\Renderer.h" />
+    <ClInclude Include="..\shared\TimeManager.h" />
+    <ClInclude Include="..\shared\VectorMaths.h" />
     <ClInclude Include="source\Edge.h" />
-    <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\Path.h" />
     <ClInclude Include="source\PathFinder.h" />
     <ClInclude Include="source\PathNode.h" />
-    <ClInclude Include="source\Renderer.h" />
-    <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\UI.h" />
-    <ClInclude Include="source\VectorMaths.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

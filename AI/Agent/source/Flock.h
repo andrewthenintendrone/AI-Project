@@ -3,7 +3,6 @@
 #include "IBehavior.h"
 #include "SFML\Graphics.hpp"
 #include "GameObject.h"
-#include "Character.h"
 
 class Flock : public IBehavior
 {

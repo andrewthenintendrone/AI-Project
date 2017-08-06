@@ -21,5 +21,6 @@ public:
     void updateWindow();
 
 private:
+
     sf::RenderWindow window;
 };

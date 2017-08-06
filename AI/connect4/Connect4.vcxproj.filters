@@ -21,12 +21,6 @@
     <ClCompile Include="source\GridTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,15 +30,18 @@
     <ClCompile Include="source\AI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\shared\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\TimeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\GridTile.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Renderer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\InputManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Position.h">
@@ -54,6 +51,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="source\AI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\InputManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\Renderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\TimeManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

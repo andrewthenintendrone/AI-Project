@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include "Renderer.h"
 #include "InputManager.h"
+#include "TimeManager.h"
 #include "Board.h"
 #include <stdio.h>
 #include <cstdlib>
@@ -19,6 +20,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 {
     // create window
     Renderer::getInstance()->createWindow(1280, 720);
+    Renderer::getInstance()->getWindow()->clear();
+    Renderer::getInstance()->getWindow()->display();
 
     // seed rng
     srand(unsigned (time(NULL)));
@@ -28,6 +31,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR cmdLine
 
     while (Renderer::getInstance()->getWindow()->isOpen())
     {
+        TIMEMANAGER->update();
         InputManager::getInstance()->update();
 
         Renderer::getInstance()->clearWindow();
